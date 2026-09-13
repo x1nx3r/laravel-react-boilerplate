@@ -11,6 +11,7 @@ import {
 import type { FormEventHandler } from 'react';
 import { useState } from 'react';
 
+import { Trans, useTranslation } from 'react-i18next';
 import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { Pagination } from '@/components/common/pagination';
 import StatusMessage from '@/components/common/status-message';
@@ -79,6 +80,7 @@ function RoleFormDialog({
 }) {
     const isEdit = !!role;
     const isProtected = isEdit && role?.name === 'superadmin';
+    const { t } = useTranslation();
 
     const { data, setData, post, put, processing, errors, reset } = useForm({
         name: role?.name ?? '',
@@ -129,25 +131,27 @@ function RoleFormDialog({
                 <form onSubmit={submit}>
                     <DialogHeader>
                         <DialogTitle>
-                            {isEdit ? 'Edit role' : 'Create role'}
+                            {isEdit
+                                ? t('roles.edit_dialog')
+                                : t('roles.create_dialog')}
                         </DialogTitle>
                         <DialogDescription>
                             {isEdit
-                                ? 'Update the role name and its permissions.'
-                                : 'Enter a role name and pick its permissions.'}
+                                ? t('roles.edit_description')
+                                : t('roles.create_description')}
                         </DialogDescription>
                     </DialogHeader>
 
                     <div className="grid gap-6 py-4">
                         <div className="grid gap-2">
-                            <Label htmlFor="role-name">Name</Label>
+                            <Label htmlFor="role-name">{t('roles.name')}</Label>
                             <Input
                                 id="role-name"
                                 value={data.name}
                                 onChange={(e) =>
                                     setData('name', e.target.value)
                                 }
-                                placeholder="e.g. manager"
+                                placeholder={t('roles.name_placeholder')}
                                 disabled={isProtected}
                             />
                             {errors.name && (
@@ -158,7 +162,7 @@ function RoleFormDialog({
                         </div>
 
                         <div className="space-y-4">
-                            <Label>Permissions</Label>
+                            <Label>{t('roles.permissions')}</Label>
                             {errors.permissions && (
                                 <p className="text-sm text-destructive">
                                     {errors.permissions}
@@ -211,7 +215,9 @@ function RoleFormDialog({
                             {processing && (
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             )}
-                            {isEdit ? 'Save changes' : 'Create role'}
+                            {isEdit
+                                ? t('common.save_changes')
+                                : t('roles.create')}
                         </Button>
                     </DialogFooter>
                 </form>
@@ -231,6 +237,7 @@ export default function RolesIndex({
     const [roleToDelete, setRoleToDelete] = useState<RoleWithCounts | null>(
         null,
     );
+    const { t } = useTranslation();
     const { flash } = usePage().props;
 
     const handleSearch: FormEventHandler = (e) => {
@@ -255,9 +262,14 @@ export default function RolesIndex({
 
     return (
         <AppLayout
-            breadcrumbs={[{ title: 'Roles', href: RoleController.index().url }]}
+            breadcrumbs={[
+                {
+                    title: t('roles.breadcrumb'),
+                    href: RoleController.index().url,
+                },
+            ]}
         >
-            <Head title="Role management" />
+            <Head title={t('roles.title')} />
 
             <div className="space-y-4">
                 {flash.success && (
@@ -276,10 +288,12 @@ export default function RolesIndex({
                 )}
 
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold tracking-tight">Roles</h1>
+                    <h1 className="text-2xl font-bold tracking-tight">
+                        {t('roles.title')}
+                    </h1>
                     <Button onClick={() => setIsCreating(true)}>
                         <Plus className="mr-2 h-4 w-4" />
-                        Create role
+                        {t('roles.create')}
                     </Button>
                 </div>
 
@@ -291,7 +305,7 @@ export default function RolesIndex({
                         <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
                             type="search"
-                            placeholder="Search roles..."
+                            placeholder={t('roles.search_placeholder')}
                             className="pl-8"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
@@ -322,7 +336,9 @@ export default function RolesIndex({
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[30%]">Name</TableHead>
+                                <TableHead className="w-[30%]">
+                                    {t('roles.table.name')}
+                                </TableHead>
                                 <TableHead className="w-[45%]">
                                     Permissions
                                 </TableHead>
@@ -341,7 +357,7 @@ export default function RolesIndex({
                                         colSpan={4}
                                         className="h-24 text-center text-muted-foreground"
                                     >
-                                        No roles found.
+                                        {t('roles.no_results')}
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -356,7 +372,7 @@ export default function RolesIndex({
                                         <TableCell className="py-3 align-top">
                                             {role.name === 'superadmin' ? (
                                                 <Badge className="bg-primary/10 text-primary hover:bg-primary/20">
-                                                    Full access
+                                                    {t('roles.full_access')}
                                                 </Badge>
                                             ) : (
                                                 <div className="flex flex-wrap gap-1.5">
@@ -378,7 +394,9 @@ export default function RolesIndex({
                                                         )
                                                     ) : (
                                                         <span className="text-xs text-muted-foreground italic">
-                                                            No permissions
+                                                            {t(
+                                                                'roles.no_permissions',
+                                                            )}
                                                         </span>
                                                     )}
                                                 </div>
@@ -399,8 +417,10 @@ export default function RolesIndex({
                                                     title={
                                                         role.name ===
                                                         'superadmin'
-                                                            ? 'The superadmin role is immutable'
-                                                            : 'Edit'
+                                                            ? t(
+                                                                  'roles.immutable',
+                                                              )
+                                                            : t('common.edit')
                                                     }
                                                 >
                                                     <Pencil className="h-4 w-4" />
@@ -417,11 +437,17 @@ export default function RolesIndex({
                                                     title={
                                                         role.name ===
                                                         'superadmin'
-                                                            ? 'The superadmin role cannot be deleted'
+                                                            ? t(
+                                                                  'roles.immutable_delete',
+                                                              )
                                                             : role.users_count >
                                                                 0
-                                                              ? 'Roles with assigned users cannot be deleted'
-                                                              : 'Delete'
+                                                              ? t(
+                                                                    'roles.in_use_delete',
+                                                                )
+                                                              : t(
+                                                                    'common.delete',
+                                                                )
                                                     }
                                                     onClick={() =>
                                                         setRoleToDelete(role)
@@ -460,15 +486,21 @@ export default function RolesIndex({
             >
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Delete role</AlertDialogTitle>
+                        <AlertDialogTitle>
+                            {t('roles.delete_title')}
+                        </AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to delete the role{' '}
-                            <strong>{roleToDelete?.name}</strong>? This action
-                            cannot be undone.
+                            <Trans
+                                i18nKey="roles.delete_description"
+                                values={{ name: roleToDelete?.name }}
+                                components={{ strong: <strong /> }}
+                            />
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>
+                            {t('common.cancel')}
+                        </AlertDialogCancel>
                         <AlertDialogAction
                             variant="destructive"
                             onClick={confirmDelete}

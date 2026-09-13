@@ -43,7 +43,7 @@ class RoleController extends Controller
             $role->syncPermissions($request->permissions);
         }
 
-        return back()->with('success', 'Role created.');
+        return back()->with('success', __('app.roles.created'));
     }
 
     public function update(RoleRequest $request, Role $role): RedirectResponse
@@ -56,7 +56,7 @@ class RoleController extends Controller
             $role->syncPermissions($request->permissions);
         }
 
-        return back()->with('success', 'Role updated.');
+        return back()->with('success', __('app.roles.updated'));
     }
 
     public function destroy(Role $role): RedirectResponse
@@ -64,11 +64,11 @@ class RoleController extends Controller
         $this->authorize('delete', $role);
 
         if ($role->users()->count() > 0) {
-            return back()->with('error', 'Roles with assigned users cannot be deleted.');
+            return back()->with('error', __('app.roles.in_use'));
         }
 
         $role->delete();
 
-        return back()->with('success', 'Role deleted.');
+        return back()->with('success', __('app.roles.deleted'));
     }
 }

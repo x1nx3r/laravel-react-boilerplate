@@ -2,6 +2,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Loader2, Upload } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
 import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,7 @@ interface UserFormProps {
 export function UserForm({ user, roles }: UserFormProps) {
     const isEdit = !!user;
     const isSelf = usePage().props.auth.user.id === user?.id;
+    const { t } = useTranslation();
 
     const { data, setData, post, put, processing, errors } = useForm({
         name: user?.name ?? '',
@@ -71,14 +73,14 @@ export function UserForm({ user, roles }: UserFormProps) {
         <form onSubmit={submit} className="space-y-6">
             <Card>
                 <CardHeader>
-                    <CardTitle>Informasi Akun & Akses</CardTitle>
+                    <CardTitle>{t('users.form.account_section')}</CardTitle>
                     <CardDescription>
-                        Detail kredensial dan hak akses pengguna di sistem.
+                        {t('users.form.account_description')}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="name">Nama Lengkap</Label>
+                        <Label htmlFor="name">{t('users.form.name')}</Label>
                         <Input
                             id="name"
                             value={data.name}
@@ -90,7 +92,7 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('users.form.email')}</Label>
                         <Input
                             id="email"
                             type="email"
@@ -104,10 +106,10 @@ export function UserForm({ user, roles }: UserFormProps) {
 
                     <div className="space-y-2">
                         <Label htmlFor="password">
-                            Kata Sandi{' '}
+                            {t('users.form.password')}{' '}
                             {isEdit && (
                                 <span className="text-muted-foreground">
-                                    (kosongkan untuk tetap)
+                                    {t('users.form.password_keep')}
                                 </span>
                             )}
                         </Label>
@@ -127,7 +129,7 @@ export function UserForm({ user, roles }: UserFormProps) {
 
                     <div className="space-y-2">
                         <Label htmlFor="password_confirmation">
-                            Konfirmasi Kata Sandi
+                            {t('users.form.password_confirmation')}
                         </Label>
                         <Input
                             id="password_confirmation"
@@ -143,14 +145,18 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="role">Peran</Label>
+                        <Label htmlFor="role">{t('users.form.role')}</Label>
                         <Select
                             value={data.role}
                             onValueChange={(value) => setData('role', value)}
                             disabled={isSelf}
                         >
                             <SelectTrigger>
-                                <SelectValue placeholder="Pilih peran" />
+                                <SelectValue
+                                    placeholder={t(
+                                        'users.form.role_placeholder',
+                                    )}
+                                />
                             </SelectTrigger>
                             <SelectContent>
                                 {roles.map((role) => (
@@ -173,7 +179,7 @@ export function UserForm({ user, roles }: UserFormProps) {
                             disabled={isSelf}
                         />
                         <Label htmlFor="is_active" className="font-normal">
-                            Aktif (dapat masuk sistem)
+                            {t('users.form.active')}
                         </Label>
                         <InputError message={errors.is_active} />
                     </div>
@@ -182,38 +188,44 @@ export function UserForm({ user, roles }: UserFormProps) {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>Data Kepegawaian</CardTitle>
+                    <CardTitle>{t('users.form.employee_section')}</CardTitle>
                     <CardDescription>
-                        Informasi terkait status administratif karyawan.
+                        {t('users.form.employee_description')}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="employee_id">ID Karyawan</Label>
+                        <Label htmlFor="employee_id">
+                            {t('users.form.employee_id')}
+                        </Label>
                         <Input
                             id="employee_id"
                             value={data.employee_id}
                             onChange={(e) =>
                                 setData('employee_id', e.target.value)
                             }
-                            placeholder="EMP-00123"
+                            placeholder={t(
+                                'users.form.employee_id_placeholder',
+                            )}
                         />
                         <InputError message={errors.employee_id} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="nik">NIK (KTP)</Label>
+                        <Label htmlFor="nik">{t('users.form.nik')}</Label>
                         <Input
                             id="nik"
                             value={data.nik}
                             onChange={(e) => setData('nik', e.target.value)}
-                            placeholder="16 digit NIK"
+                            placeholder={t('users.form.nik_placeholder')}
                         />
                         <InputError message={errors.nik} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="employee_status">Status Kontrak</Label>
+                        <Label htmlFor="employee_status">
+                            {t('users.form.employee_status')}
+                        </Label>
                         <Select
                             value={data.employee_status}
                             onValueChange={(value) =>
@@ -221,31 +233,43 @@ export function UserForm({ user, roles }: UserFormProps) {
                             }
                         >
                             <SelectTrigger>
-                                <SelectValue placeholder="Pilih status" />
+                                <SelectValue
+                                    placeholder={t(
+                                        'users.form.employee_status_placeholder',
+                                    )}
+                                />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="kontrak">Kontrak</SelectItem>
-                                <SelectItem value="tetap">Tetap</SelectItem>
+                                <SelectItem value="kontrak">
+                                    {t('users.form.kontrak')}
+                                </SelectItem>
+                                <SelectItem value="tetap">
+                                    {t('users.form.tetap')}
+                                </SelectItem>
                             </SelectContent>
                         </Select>
                         <InputError message={errors.employee_status} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="department">Departemen</Label>
+                        <Label htmlFor="department">
+                            {t('users.form.department')}
+                        </Label>
                         <Input
                             id="department"
                             value={data.department}
                             onChange={(e) =>
                                 setData('department', e.target.value)
                             }
-                            placeholder="Nama divisi"
+                            placeholder={t('users.form.department_placeholder')}
                         />
                         <InputError message={errors.department} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="join_date">Tanggal Bergabung</Label>
+                        <Label htmlFor="join_date">
+                            {t('users.form.join_date')}
+                        </Label>
                         <Input
                             id="join_date"
                             type="date"
@@ -258,7 +282,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="end_date">Tanggal Berakhir</Label>
+                        <Label htmlFor="end_date">
+                            {t('users.form.end_date')}
+                        </Label>
                         <Input
                             id="end_date"
                             type="date"
@@ -274,14 +300,16 @@ export function UserForm({ user, roles }: UserFormProps) {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>Informasi Pribadi</CardTitle>
+                    <CardTitle>{t('users.form.personal_section')}</CardTitle>
                     <CardDescription>
-                        Data pendukung dan informasi kontak pribadi.
+                        {t('users.form.personal_description')}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="birth_place">Tempat Lahir</Label>
+                        <Label htmlFor="birth_place">
+                            {t('users.form.birth_place')}
+                        </Label>
                         <Input
                             id="birth_place"
                             value={data.birth_place}
@@ -293,7 +321,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="birth_date">Tanggal Lahir</Label>
+                        <Label htmlFor="birth_date">
+                            {t('users.form.birth_date')}
+                        </Label>
                         <Input
                             id="birth_date"
                             type="date"
@@ -306,17 +336,25 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="gender">Jenis Kelamin</Label>
+                        <Label htmlFor="gender">{t('users.form.gender')}</Label>
                         <Select
                             value={data.gender}
                             onValueChange={(value) => setData('gender', value)}
                         >
                             <SelectTrigger>
-                                <SelectValue placeholder="Pilih jenis kelamin" />
+                                <SelectValue
+                                    placeholder={t(
+                                        'users.form.gender_placeholder',
+                                    )}
+                                />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="L">Laki-laki</SelectItem>
-                                <SelectItem value="P">Perempuan</SelectItem>
+                                <SelectItem value="L">
+                                    {t('users.form.male')}
+                                </SelectItem>
+                                <SelectItem value="P">
+                                    {t('users.form.female')}
+                                </SelectItem>
                             </SelectContent>
                         </Select>
                         <InputError message={errors.gender} />
@@ -332,7 +370,7 @@ export function UserForm({ user, roles }: UserFormProps) {
                             onChange={(e) =>
                                 setData('phone_number', e.target.value)
                             }
-                            placeholder="08..."
+                            placeholder={t('users.form.phone_placeholder')}
                         />
                         <InputError message={errors.phone_number} />
                     </div>
@@ -366,7 +404,7 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2 sm:col-span-2">
-                        <Label htmlFor="major">Jurusan</Label>
+                        <Label htmlFor="major">{t('users.form.major')}</Label>
                         <Input
                             id="major"
                             value={data.major}
@@ -376,7 +414,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2 sm:col-span-2">
-                        <Label htmlFor="address">Alamat Domisili</Label>
+                        <Label htmlFor="address">
+                            {t('users.form.address')}
+                        </Label>
                         <Input
                             id="address"
                             value={data.address}
@@ -392,11 +432,10 @@ export function UserForm({ user, roles }: UserFormProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Upload className="h-5 w-5" />
-                            Dokumen Pendukung
+                            {t('users.form.documents_section')}
                         </CardTitle>
                         <CardDescription>
-                            Unggah scan KTP, Ijazah, CV, atau dokumen lainnya
-                            (Maks. 10MB per file).
+                            {t('users.form.documents_description')}
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -418,7 +457,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                         <InputError message={errors.documents} />
                         {data.documents.length > 0 && (
                             <p className="rounded-md bg-muted p-2 text-sm text-muted-foreground">
-                                {data.documents.length} file dipilih.
+                                {t('users.form.files_selected', {
+                                    count: data.documents.length,
+                                })}
                             </p>
                         )}
                     </CardContent>
@@ -427,20 +468,23 @@ export function UserForm({ user, roles }: UserFormProps) {
 
             {isSelf && (
                 <p className="text-sm text-muted-foreground">
-                    Anda tidak dapat mengubah peran atau menonaktifkan akun
-                    sendiri.
+                    {t('users.form.self_note')}
                 </p>
             )}
 
             <div className="flex justify-end gap-2">
                 <Button variant="outline" type="button" asChild>
-                    <Link href={UserController.index().url}>Batal</Link>
+                    <Link href={UserController.index().url}>
+                        {t('common.cancel')}
+                    </Link>
                 </Button>
                 <Button type="submit" disabled={processing}>
                     {processing && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     )}
-                    {isEdit ? 'Simpan Perubahan' : 'Buat Pengguna'}
+                    {isEdit
+                        ? t('users.form.submit_edit')
+                        : t('users.form.submit_create')}
                 </Button>
             </div>
         </form>

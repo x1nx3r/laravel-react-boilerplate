@@ -2,6 +2,7 @@ import { router, useForm } from '@inertiajs/react';
 import { Download, FileText, Loader2, Trash2, Upload } from 'lucide-react';
 import { useRef, useState } from 'react';
 
+import { Trans, useTranslation } from 'react-i18next';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
 import {
     AlertDialog,
@@ -32,6 +33,7 @@ interface UserDocumentsProps {
 }
 
 export function UserDocuments({ user }: UserDocumentsProps) {
+    const { t } = useTranslation();
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const [documentToDelete, setDocumentToDelete] =
         useState<UserDocument | null>(null);
@@ -164,7 +166,9 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                                     size="icon"
                                                     className="h-8 w-8 text-primary hover:bg-primary/10 hover:text-primary"
                                                     asChild
-                                                    title="Download document"
+                                                    title={t(
+                                                        'users.documents.download_title',
+                                                    )}
                                                 >
                                                     <a
                                                         href={doc.url}
@@ -184,7 +188,9 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                                     onClick={() =>
                                                         setDocumentToDelete(doc)
                                                     }
-                                                    title="Delete document"
+                                                    title={t(
+                                                        'users.documents.delete_title',
+                                                    )}
                                                 >
                                                     <Trash2 className="h-4 w-4" />
                                                 </Button>
@@ -201,7 +207,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                 No documents yet.
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                                Uploaded documents will appear here.
+                                {t('users.documents.empty_description')}
                             </p>
                         </div>
                     )}
@@ -214,17 +220,25 @@ export function UserDocuments({ user }: UserDocumentsProps) {
             >
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Delete document</AlertDialogTitle>
+                        <AlertDialogTitle>
+                            {t('users.documents.delete_title')}
+                        </AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to delete{' '}
-                            <strong>{documentToDelete?.original_name}</strong>?
-                            This action cannot be undone.
+                            <Trans
+                                i18nKey="users.documents.delete_description"
+                                values={{
+                                    name: documentToDelete?.original_name,
+                                }}
+                                components={{ strong: <strong /> }}
+                            />
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>
+                            {t('common.cancel')}
+                        </AlertDialogCancel>
                         <AlertDialogAction onClick={confirmDeleteDocument}>
-                            Delete
+                            {t('common.delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
@@ -243,14 +257,18 @@ export function UserDocuments({ user }: UserDocumentsProps) {
             >
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                        <DialogTitle>Upload document</DialogTitle>
+                        <DialogTitle>
+                            {t('users.documents.upload_title')}
+                        </DialogTitle>
                         <DialogDescription>
-                            Pick a file and optionally categorize it.
+                            {t('users.documents.upload_description')}
                         </DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleUpload} className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="documents">File</Label>
+                            <Label htmlFor="documents">
+                                {t('users.documents.file')}
+                            </Label>
                             <Input
                                 ref={fileInputRef}
                                 id="documents"
@@ -266,10 +284,14 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                             )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="category">Category</Label>
+                            <Label htmlFor="category">
+                                {t('users.documents.category')}
+                            </Label>
                             <Input
                                 id="category"
-                                placeholder="e.g. KTP, Ijazah"
+                                placeholder={t(
+                                    'users.documents.category_placeholder',
+                                )}
                                 value={uploadForm.data.category}
                                 onChange={(e) =>
                                     uploadForm.setData(
@@ -285,7 +307,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                 variant="outline"
                                 onClick={() => setIsUploadModalOpen(false)}
                             >
-                                Cancel
+                                {t('common.cancel')}
                             </Button>
                             <Button
                                 type="submit"

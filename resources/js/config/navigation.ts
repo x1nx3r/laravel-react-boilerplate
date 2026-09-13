@@ -5,12 +5,13 @@ import UserController from '@/actions/App/Http/Controllers/Admin/UserController'
 import type { NavItem } from '@/types';
 
 /**
- * Navigation items visible to ALL authenticated users.
- * No permissions required.
+ * Navigation titles are translation keys (resolved by NavMain via t()).
+ * Items support optional `permissions`, `roles` and `excludeRoles`
+ * arrays — see AppSidebar's filterByPermissions for the gating behavior.
  */
 export const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'nav.dashboard',
         href: '/',
         icon: LayoutGrid,
     },
@@ -22,18 +23,18 @@ export const mainNavItems: NavItem[] = [
  */
 export const adminNavItems: NavItem[] = [
     {
-        title: 'Administration',
+        title: 'nav.administration',
         href: '#',
         icon: ShieldCheck,
         permissions: ['view_admin'],
         children: [
             {
-                title: 'Users',
+                title: 'nav.users',
                 href: UserController.index().url,
                 permissions: ['manage_users'],
             },
             {
-                title: 'Roles',
+                title: 'nav.roles',
                 href: RoleController.index().url,
                 permissions: ['manage_roles'],
             },

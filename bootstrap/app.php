@@ -3,6 +3,7 @@
 use App\Http\Middleware\EnsureUserIsApproved;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\HandleLocale;
 use App\Http\Middleware\TrustCloudflare;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -23,9 +24,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(TrustCloudflare::class);
 
-        $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
+        $middleware->encryptCookies(
+            except: ['appearance', 'locale', 'sidebar_state'],
+        );
 
         $middleware->web(append: [
+            HandleLocale::class,
             EnsureUserIsApproved::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,

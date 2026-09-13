@@ -1,12 +1,17 @@
 import { Link, router } from '@inertiajs/react';
-import { LogOut, Settings } from 'lucide-react';
+import { Check, Languages, LogOut, Settings } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
 } from '@/components/ui/dropdown-menu';
 import { UserInfo } from '@/components/user/user-info';
+import { useLocale } from '@/hooks/use-locale';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
@@ -17,6 +22,8 @@ type Props = {
 };
 
 export function UserMenuContent({ user }: Props) {
+    const { t } = useTranslation();
+    const [locale, setLocale] = useLocale();
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -33,6 +40,34 @@ export function UserMenuContent({ user }: Props) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                        <Languages className="mr-2" />
+                        {t('menu.language')}
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent>
+                        <DropdownMenuItem onClick={() => setLocale('id')}>
+                            <Check
+                                className={
+                                    locale === 'id'
+                                        ? 'mr-2 opacity-100'
+                                        : 'mr-2 opacity-0'
+                                }
+                            />
+                            Bahasa Indonesia
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLocale('en')}>
+                            <Check
+                                className={
+                                    locale === 'en'
+                                        ? 'mr-2 opacity-100'
+                                        : 'mr-2 opacity-0'
+                                }
+                            />
+                            English
+                        </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                </DropdownMenuSub>
                 <DropdownMenuItem asChild>
                     <Link
                         className="block w-full cursor-pointer"
@@ -41,7 +76,7 @@ export function UserMenuContent({ user }: Props) {
                         onClick={cleanup}
                     >
                         <Settings className="mr-2" />
-                        Pengaturan
+                        {t('menu.settings')}
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -55,7 +90,7 @@ export function UserMenuContent({ user }: Props) {
                     data-test="logout-button"
                 >
                     <LogOut className="mr-2" />
-                    Keluar
+                    {t('menu.logout')}
                 </Link>
             </DropdownMenuItem>
         </>

@@ -52,13 +52,13 @@ class FortifyServiceProvider extends ServiceProvider
 
             if ($user->status === User::STATUS_PENDING) {
                 throw ValidationException::withMessages([
-                    Fortify::username() => __('Your account is awaiting verification by HR.'),
+                    Fortify::username() => __('app.account.pending'),
                 ]);
             }
 
             if (! $user->is_active) {
                 throw ValidationException::withMessages([
-                    Fortify::username() => __('Your account has been deactivated.'),
+                    Fortify::username() => __('app.account.deactivated'),
                 ]);
             }
 

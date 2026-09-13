@@ -2,6 +2,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { Loader2 } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
 import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ import {
 import { store } from '@/routes/register';
 
 export default function Register() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
@@ -61,9 +63,11 @@ export default function Register() {
                     >
                         <AppLogoIcon className="size-9 fill-current text-black dark:text-white" />
                     </Link>
-                    <h1 className="text-xl font-medium">Buat Akun Baru</h1>
+                    <h1 className="text-xl font-medium">
+                        {t('auth.register.title')}
+                    </h1>
                     <p className="text-sm text-muted-foreground">
-                        Lengkapi data berikut untuk mendaftar
+                        {t('auth.register.subtitle')}
                     </p>
                 </div>
 
@@ -74,7 +78,9 @@ export default function Register() {
                         <form onSubmit={submit} className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="name">Nama Lengkap</Label>
+                                    <Label htmlFor="name">
+                                        {t('auth.register.name')}
+                                    </Label>
                                     <Input
                                         id="name"
                                         value={data.name}
@@ -88,7 +94,9 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="email">Email</Label>
+                                    <Label htmlFor="email">
+                                        {t('auth.register.email')}
+                                    </Label>
                                     <Input
                                         id="email"
                                         type="email"
@@ -103,7 +111,9 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="password">Kata Sandi</Label>
+                                    <Label htmlFor="password">
+                                        {t('auth.register.password')}
+                                    </Label>
                                     <Input
                                         id="password"
                                         type="password"
@@ -120,7 +130,9 @@ export default function Register() {
 
                                 <div className="space-y-2">
                                     <Label htmlFor="password_confirmation">
-                                        Konfirmasi Kata Sandi
+                                        {t(
+                                            'auth.register.password_confirmation',
+                                        )}
                                     </Label>
                                     <Input
                                         id="password_confirmation"
@@ -143,7 +155,7 @@ export default function Register() {
 
                             <div className="space-y-4 rounded-lg border bg-muted/20 p-4">
                                 <CardTitle className="text-base">
-                                    Data Kepegawaian
+                                    {t('auth.register.employee_section')}
                                 </CardTitle>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="space-y-2">
@@ -159,7 +171,9 @@ export default function Register() {
                                                     e.target.value,
                                                 )
                                             }
-                                            placeholder="EMP-00123"
+                                            placeholder={t(
+                                                'auth.register.employee_id_placeholder',
+                                            )}
                                         />
                                         <InputError
                                             message={errors.employee_id}
@@ -167,14 +181,18 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="nik">NIK (KTP)</Label>
+                                        <Label htmlFor="nik">
+                                            {t('auth.register.nik')}
+                                        </Label>
                                         <Input
                                             id="nik"
                                             value={data.nik}
                                             onChange={(e) =>
                                                 setData('nik', e.target.value)
                                             }
-                                            placeholder="16 digit NIK"
+                                            placeholder={t(
+                                                'auth.register.nik_placeholder',
+                                            )}
                                         />
                                         <InputError message={errors.nik} />
                                     </div>
@@ -193,7 +211,11 @@ export default function Register() {
                                             }
                                         >
                                             <SelectTrigger>
-                                                <SelectValue placeholder="Pilih status" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        'auth.register.employee_status_placeholder',
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="kontrak">
@@ -222,7 +244,9 @@ export default function Register() {
                                                     e.target.value,
                                                 )
                                             }
-                                            placeholder="Nama divisi"
+                                            placeholder={t(
+                                                'auth.register.department_placeholder',
+                                            )}
                                         />
                                         <InputError
                                             message={errors.department}
@@ -324,7 +348,11 @@ export default function Register() {
                                             }
                                         >
                                             <SelectTrigger>
-                                                <SelectValue placeholder="Pilih jenis kelamin" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        'auth.register.gender_placeholder',
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="L">
@@ -351,7 +379,9 @@ export default function Register() {
                                                     e.target.value,
                                                 )
                                             }
-                                            placeholder="08..."
+                                            placeholder={t(
+                                                'auth.register.phone_placeholder',
+                                            )}
                                         />
                                         <InputError
                                             message={errors.phone_number}
@@ -399,7 +429,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2 sm:col-span-2">
-                                        <Label htmlFor="major">Jurusan</Label>
+                                        <Label htmlFor="major">
+                                            {t('auth.register.major')}
+                                        </Label>
                                         <Input
                                             id="major"
                                             value={data.major}
@@ -431,11 +463,10 @@ export default function Register() {
 
                             <div className="space-y-4 rounded-lg border border-dashed p-4">
                                 <CardTitle className="text-base">
-                                    Dokumen Pendukung
+                                    {t('auth.register.documents_section')}
                                 </CardTitle>
                                 <CardDescription>
-                                    Unggah scan KTP, Ijazah, CV, atau dokumen
-                                    lainnya (Maks. 10MB per file).
+                                    {t('auth.register.documents_description')}
                                 </CardDescription>
                                 <Input
                                     id="documents"
@@ -455,7 +486,9 @@ export default function Register() {
                                 <InputError message={errors.documents} />
                                 {data.documents.length > 0 && (
                                     <p className="rounded-md bg-muted p-2 text-sm text-muted-foreground">
-                                        {data.documents.length} file dipilih.
+                                        {t('auth.register.files_selected', {
+                                            count: data.documents.length,
+                                        })}
                                     </p>
                                 )}
                             </div>
@@ -473,12 +506,12 @@ export default function Register() {
                 </Card>
 
                 <p className="text-center text-sm text-muted-foreground">
-                    Sudah punya akun?{' '}
+                    {t('auth.register.have_account')}{' '}
                     <Link
                         href="/login"
                         className="font-medium text-foreground underline"
                     >
-                        Masuk
+                        {t('auth.register.login_link')}
                     </Link>
                 </p>
             </div>

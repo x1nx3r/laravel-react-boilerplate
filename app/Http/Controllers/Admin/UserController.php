@@ -86,7 +86,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with('success', 'User created.');
+            ->with('success', __('app.users.created'));
     }
 
     public function edit(User $user): Response
@@ -107,7 +107,7 @@ class UserController extends Controller
         $roleChanged = ! $user->hasRole($request->role);
 
         if ($isSelf && ($roleChanged || ! $request->boolean('is_active'))) {
-            return back()->with('error', 'You cannot change your own role or deactivate your own account.');
+            return back()->with('error', __('app.account.self_role_change'));
         }
 
         $user->update([
@@ -125,7 +125,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with('success', 'User updated.');
+            ->with('success', __('app.users.updated'));
     }
 
     public function verify(Request $request, User $user): RedirectResponse
@@ -134,7 +134,7 @@ class UserController extends Controller
 
         $user->update(['status' => User::STATUS_ACTIVE]);
 
-        return back()->with('success', 'User verified and activated.');
+        return back()->with('success', __('app.users.verified'));
     }
 
     public function destroy(Request $request, User $user): RedirectResponse
@@ -142,14 +142,14 @@ class UserController extends Controller
         $this->authorize('delete', $user);
 
         if ($request->user()->is($user)) {
-            return back()->with('error', 'You cannot delete your own account.');
+            return back()->with('error', __('app.account.self_delete'));
         }
 
         $user->delete();
 
         return redirect()
             ->route('admin.users.index')
-            ->with('success', 'User deleted.');
+            ->with('success', __('app.users.deleted'));
     }
 
     public function storeDocument(Request $request, User $user): RedirectResponse
@@ -164,7 +164,7 @@ class UserController extends Controller
 
         $this->saveUserDocuments($user, $request->file('documents'), $request->category);
 
-        return back()->with('success', 'Document uploaded.');
+        return back()->with('success', __('app.users.document_uploaded'));
     }
 
     public function showDocument(Request $request, User $user, UserDocument $document)
@@ -196,7 +196,7 @@ class UserController extends Controller
         Storage::disk('local')->delete($document->path);
         $document->delete();
 
-        return back()->with('success', 'Document deleted.');
+        return back()->with('success', __('app.users.document_deleted'));
     }
 
     /**

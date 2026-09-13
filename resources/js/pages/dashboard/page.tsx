@@ -1,5 +1,6 @@
 import { Head, usePage } from '@inertiajs/react';
 import { Rocket } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 import Heading from '@/components/common/heading';
 import {
     Card,
@@ -11,53 +12,48 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/',
-    },
-];
-
 export default function Dashboard() {
+    const { t } = useTranslation();
     const { name } = usePage().props;
+
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: t('dashboard.title'),
+            href: '/',
+        },
+    ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
+            <Head title={t('dashboard.title')} />
 
             <div className="space-y-6">
                 <Heading
                     variant="small"
-                    title={`Welcome to ${name}`}
-                    description="Your application skeleton is ready."
+                    title={t('dashboard.welcome_title', { name })}
+                    description={t('dashboard.welcome_description')}
                 />
 
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Rocket className="size-4 text-primary" />
-                            Scaffolded and ready
+                            {t('dashboard.card_title')}
                         </CardTitle>
                         <CardDescription>
-                            Auth, settings, the layout shell and CI are wired
-                            up. Replace this page with your first module.
+                            {t('dashboard.card_description')}
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm text-muted-foreground">
-                            Add routes in{' '}
-                            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-                                routes/web.php
-                            </code>
-                            , pages under{' '}
-                            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-                                resources/js/pages
-                            </code>{' '}
-                            and navigation entries in{' '}
-                            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-                                resources/js/config/navigation.ts
-                            </code>
-                            .
+                            <Trans
+                                i18nKey="dashboard.card_body"
+                                components={[
+                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
+                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
+                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
+                                ]}
+                            />
                         </p>
                     </CardContent>
                 </Card>

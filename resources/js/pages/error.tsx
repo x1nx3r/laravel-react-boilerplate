@@ -5,24 +5,19 @@ import {
     ServerCrash,
     Construction,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 
 export default function ErrorPage({ status }: { status: number }) {
-    const title =
-        {
-            503: 'Sedang Dalam Perbaikan',
-            500: 'Terjadi Kesalahan Server',
-            404: 'Halaman Tidak Ditemukan',
-            403: 'Akses Ditolak',
-        }[status] || 'Terjadi Kesalahan';
+    const { t } = useTranslation();
 
-    const description =
-        {
-            503: 'Maaf, kami sedang melakukan pemeliharaan rutin. Silakan coba lagi nanti.',
-            500: 'Oops, sesuatu gik salah di server kami.',
-            404: 'Maaf, halaman yang Anda cari tidak dapat ditemukan.',
-            403: 'Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.',
-        }[status] || 'Maaf, terjadi kesalahan yang tidak terduga.';
+    const title = t(`errors.${status}.title`, {
+        defaultValue: t('errors.generic.title'),
+    });
+
+    const description = t(`errors.${status}.description`, {
+        defaultValue: t('errors.generic.description'),
+    });
 
     const Icon =
         {
@@ -49,7 +44,7 @@ export default function ErrorPage({ status }: { status: number }) {
 
                 <div className="flex gap-4">
                     <Button asChild size="lg">
-                        <Link href="/">Kembali ke Beranda</Link>
+                        <Link href="/">{t('errors.back_home')}</Link>
                     </Button>
                 </div>
             </div>

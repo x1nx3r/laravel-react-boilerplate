@@ -1,6 +1,6 @@
-// Components
 import { Form, Head } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import InputError from '@/components/common/input-error';
 import TextLink from '@/components/common/text-link';
 import { Button } from '@/components/ui/button';
@@ -11,12 +11,14 @@ import { login } from '@/routes';
 import { email } from '@/routes/password';
 
 export default function ForgotPassword({ status }: { status?: string }) {
+    const { t } = useTranslation();
+
     return (
         <AuthLayout
-            title="Lupa kata sandi"
-            description="Masukkan email Anda untuk menerima tautan atur ulang kata sandi"
+            title={t('auth.forgot.title')}
+            description={t('auth.forgot.description')}
         >
-            <Head title="Lupa kata sandi" />
+            <Head title={t('auth.forgot.title')} />
 
             {status && (
                 <div className="mb-4 text-center text-sm font-medium text-orange-600">
@@ -29,14 +31,18 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     {({ processing, errors }) => (
                         <>
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Alamat Email</Label>
+                                <Label htmlFor="email">
+                                    {t('auth.forgot.email')}
+                                </Label>
                                 <Input
                                     id="email"
                                     type="email"
                                     name="email"
                                     autoComplete="off"
                                     autoFocus
-                                    placeholder="email@contoh.com"
+                                    placeholder={t(
+                                        'auth.forgot.email_placeholder',
+                                    )}
                                 />
 
                                 <InputError message={errors.email} />
@@ -51,7 +57,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     {processing && (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
                                     )}
-                                    Kirim tautan atur ulang kata sandi
+                                    {t('auth.forgot.submit')}
                                 </Button>
                             </div>
                         </>
@@ -59,8 +65,10 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </Form>
 
                 <div className="space-x-1 text-center text-sm text-muted-foreground">
-                    <span>Atau, kembali ke</span>
-                    <TextLink href={login()}>halaman masuk</TextLink>
+                    <span>{t('auth.forgot.back_prefix')}</span>
+                    <TextLink href={login()}>
+                        {t('auth.forgot.back_link')}
+                    </TextLink>
                 </div>
             </div>
         </AuthLayout>

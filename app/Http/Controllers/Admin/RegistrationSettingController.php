@@ -20,6 +20,6 @@ class RegistrationSettingController extends Controller
 
         Setting::setRequireRegistrationApproval($request->boolean('require_approval'));
 
-        return back()->with('success', 'Registration setting updated.');
+        return back()->with('success', __('app.registration.updated'));
     }
 }

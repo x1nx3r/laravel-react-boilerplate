@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { UserForm } from '../user-form';
@@ -9,16 +9,20 @@ interface CreateProps {
 }
 
 export default function Create({ roles }: CreateProps) {
+    const { t } = useTranslation();
+
     return (
         <AppLayout
             breadcrumbs={[
-                { title: 'Users', href: '/admin/users' },
-                { title: 'Create', href: '/admin/users/create' },
+                { title: t('users.breadcrumb'), href: '/admin/users' },
+                { title: t('users.create'), href: '/admin/users/create' },
             ]}
         >
-            <Head title="Create user" />
+            <Head title={t('users.create')} />
 
-            <h1 className="text-2xl font-bold tracking-tight">Create user</h1>
+            <h1 className="text-2xl font-bold tracking-tight">
+                {t('users.create')}
+            </h1>
 
             <Card>
                 <CardContent className="pt-6">

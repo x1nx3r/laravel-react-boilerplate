@@ -1,0 +1,311 @@
+{
+    "common": {
+        "search": "Search...",
+        "search_submit": "Search",
+        "filter": "Filter",
+        "clear_filters": "Clear filters",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "actions": "Actions",
+        "saved": "Saved",
+        "save_changes": "Save changes",
+        "menu": "Menu",
+        "home": "Home",
+        "processing": "Processing..."
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "administration": "Administration",
+        "users": "Users",
+        "roles": "Roles"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "welcome_title": "Welcome to {{name}}",
+        "welcome_description": "Your application skeleton is ready.",
+        "card_title": "Scaffolded and ready",
+        "card_description": "Auth, settings, the layout shell and CI are wired up. Replace this page with your first module.",
+        "card_body": "Add routes in <0>routes/web.php</0>, pages under <1>resources/js/pages</1> and navigation entries in <2>resources/js/config/navigation.ts</2>."
+    },
+    "auth": {
+        "login": {
+            "title": "Sign in",
+            "heading": "Sign in to your account",
+            "description": "Enter your email and password below to sign in",
+            "email": "Email / Username",
+            "email_placeholder": "Enter your email or username",
+            "password": "Password",
+            "password_placeholder": "Enter your password",
+            "remember": "Remember me",
+            "submit": "Sign in",
+            "no_account": "Don't have an account?",
+            "register": "Sign up"
+        },
+        "register": {
+            "title": "Create a new account",
+            "subtitle": "Fill in the following data to sign up",
+            "name": "Full name",
+            "email": "Email",
+            "password": "Password",
+            "password_confirmation": "Confirm password",
+            "employee_section": "Employee data",
+            "employee_id": "Employee ID",
+            "employee_id_placeholder": "EMP-00123",
+            "nik": "National ID (NIK)",
+            "nik_placeholder": "16-digit NIK",
+            "employee_status": "Contract status",
+            "employee_status_placeholder": "Select status",
+            "kontrak": "Contract",
+            "tetap": "Permanent",
+            "department": "Department",
+            "department_placeholder": "Division name",
+            "join_date": "Join date",
+            "end_date": "End date",
+            "personal_section": "Personal information",
+            "birth_place": "Place of birth",
+            "birth_date": "Date of birth",
+            "gender": "Gender",
+            "gender_placeholder": "Select gender",
+            "male": "Male",
+            "female": "Female",
+            "phone_number": "Phone / WhatsApp number",
+            "phone_placeholder": "08...",
+            "bank_account_number": "Bank account number",
+            "education_institution": "Education institution",
+            "major": "Major",
+            "address": "Home address",
+            "documents_section": "Supporting documents",
+            "documents_description": "Upload scans of your ID card, diploma, CV, or other documents (max 10MB per file).",
+            "files_selected": "{{count}} file(s) selected.",
+            "submit": "Sign up",
+            "have_account": "Already have an account?",
+            "login_link": "Sign in"
+        },
+        "forgot": {
+            "title": "Forgot password",
+            "description": "Enter your email to receive a password reset link",
+            "email": "Email address",
+            "email_placeholder": "email@example.com",
+            "submit": "Send password reset link",
+            "back_prefix": "Or, go back to",
+            "back_link": "the sign-in page"
+        },
+        "reset": {
+            "title": "Reset password",
+            "description": "Please enter your new password below",
+            "email": "Email",
+            "password": "Password",
+            "password_confirmation": "Confirm password",
+            "submit": "Reset password"
+        },
+        "confirm": {
+            "title": "Confirm your password",
+            "description": "This is a secure area of the application. Please confirm your password before continuing.",
+            "password": "Password",
+            "submit": "Confirm password"
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "description": "Manage your profile and account settings",
+        "tabs": {
+            "profile": "Profile",
+            "password": "Password",
+            "appearance": "Appearance"
+        },
+        "profile": {
+            "breadcrumb": "Profile settings",
+            "title": "Profile information",
+            "description": "Update your name and email address",
+            "name": "Name",
+            "name_placeholder": "Full name",
+            "email": "Email address",
+            "email_placeholder": "Email address",
+            "save": "Save"
+        },
+        "password": {
+            "breadcrumb": "Password settings",
+            "title": "Update password",
+            "description": "Ensure your account is using a long, random password to stay secure",
+            "current": "Current password",
+            "new": "New password",
+            "confirm": "Confirm password",
+            "save": "Save password"
+        },
+        "appearance": {
+            "breadcrumb": "Appearance settings",
+            "title": "Appearance settings",
+            "description": "Update your account's appearance settings",
+            "theme": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System",
+            "language": "Language",
+            "language_description": "Switch the interface language"
+        }
+    },
+    "errors": {
+        "403": {
+            "title": "Access Denied",
+            "description": "Sorry, you do not have permission to access this page."
+        },
+        "404": {
+            "title": "Page Not Found",
+            "description": "Sorry, the page you are looking for could not be found."
+        },
+        "500": {
+            "title": "Server Error",
+            "description": "Oops, something went wrong on our server."
+        },
+        "503": {
+            "title": "Under Maintenance",
+            "description": "Sorry, we are doing some routine maintenance. Please try again later."
+        },
+        "generic": {
+            "title": "Something Went Wrong",
+            "description": "Sorry, an unexpected error occurred."
+        },
+        "back_home": "Back to Home"
+    },
+    "users": {
+        "title": "Users",
+        "create": "Create user",
+        "edit_title": "Edit user",
+        "breadcrumb": "Users",
+        "search_placeholder": "Search name or email...",
+        "require_approval": "Require registration approval",
+        "filters": {
+            "role_all": "All roles",
+            "approval_all": "All approvals",
+            "pending": "Pending",
+            "verified": "Verified",
+            "state_all": "All states",
+            "active": "Active",
+            "inactive": "Inactive",
+            "department_all": "All departments",
+            "contract_all": "All contracts",
+            "kontrak": "Contract",
+            "tetap": "Permanent"
+        },
+        "table": {
+            "name": "Name",
+            "employee": "Employee",
+            "roles": "Roles",
+            "state": "State",
+            "actions": "Actions",
+            "no_role": "No role"
+        },
+        "badges": {
+            "pending": "Pending",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "verify": "Verify",
+        "verify_title": "Verify and activate this account",
+        "edit_locked": "Only superadmins can edit superadmin accounts",
+        "delete_self": "You cannot delete your own account",
+        "delete_title": "Delete user",
+        "delete_description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone.",
+        "no_results": "No users found.",
+        "self_note": "You cannot change your own role or deactivate your own account.",
+        "form": {
+            "account_section": "Account & access information",
+            "account_description": "Credentials and access details for this user.",
+            "name": "Full name",
+            "email": "Email",
+            "password": "Password",
+            "password_keep": "(leave blank to keep)",
+            "password_confirmation": "Confirm password",
+            "role": "Role",
+            "role_placeholder": "Select a role",
+            "active": "Active (can log in)",
+            "employee_section": "Employee data",
+            "employee_description": "Information related to the employee's administrative status.",
+            "employee_id": "Employee ID",
+            "employee_id_placeholder": "EMP-00123",
+            "nik": "National ID (NIK)",
+            "nik_placeholder": "16-digit NIK",
+            "employee_status": "Contract status",
+            "employee_status_placeholder": "Select status",
+            "kontrak": "Contract",
+            "tetap": "Permanent",
+            "department": "Department",
+            "department_placeholder": "Division name",
+            "join_date": "Join date",
+            "end_date": "End date",
+            "personal_section": "Personal information",
+            "personal_description": "Supporting data and personal contact information.",
+            "birth_place": "Place of birth",
+            "birth_date": "Date of birth",
+            "gender": "Gender",
+            "gender_placeholder": "Select gender",
+            "male": "Male",
+            "female": "Female",
+            "phone_number": "Phone / WhatsApp number",
+            "phone_placeholder": "08...",
+            "bank_account_number": "Bank account number",
+            "education_institution": "Education institution",
+            "major": "Major",
+            "address": "Home address",
+            "documents_section": "Supporting documents",
+            "documents_description": "Upload scans of ID card, diploma, CV, or other documents (max 10MB per file).",
+            "files_selected": "{{count}} file(s) selected.",
+            "submit_create": "Create user",
+            "submit_edit": "Save changes"
+        },
+        "documents": {
+            "title": "Supporting documents",
+            "upload": "Upload",
+            "upload_title": "Upload document",
+            "upload_description": "Pick a file and optionally categorize it.",
+            "file": "File",
+            "category": "Category",
+            "category_placeholder": "e.g. ID card, diploma",
+            "empty_title": "No documents yet.",
+            "empty_description": "Uploaded documents will appear here.",
+            "download_title": "Download document",
+            "delete_title": "Delete document",
+            "delete_description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone."
+        }
+    },
+    "roles": {
+        "title": "Roles",
+        "breadcrumb": "Roles",
+        "create": "Create role",
+        "create_dialog": "Create role",
+        "edit_dialog": "Edit role",
+        "create_description": "Enter a role name and pick its permissions.",
+        "edit_description": "Update the role name and its permissions.",
+        "name": "Name",
+        "name_placeholder": "e.g. manager",
+        "permissions": "Permissions",
+        "search_placeholder": "Search roles...",
+        "table": {
+            "name": "Name",
+            "permissions": "Permissions",
+            "users": "Users",
+            "actions": "Actions"
+        },
+        "full_access": "Full access",
+        "no_permissions": "No permissions",
+        "immutable": "The superadmin role is immutable",
+        "immutable_delete": "The superadmin role cannot be deleted",
+        "in_use_delete": "Roles with assigned users cannot be deleted",
+        "delete_title": "Delete role",
+        "delete_description": "Are you sure you want to delete the role <strong>{{name}}</strong>? This action cannot be undone.",
+        "no_results": "No roles found."
+    },
+    "pagination": {
+        "showing": "Showing {{from}} to {{to}} of {{total}} results",
+        "first": "Go to first page",
+        "prev": "Go to previous page",
+        "next": "Go to next page",
+        "last": "Go to last page"
+    },
+    "menu": {
+        "settings": "Settings",
+        "logout": "Log out",
+        "language": "Language"
+    }
+}

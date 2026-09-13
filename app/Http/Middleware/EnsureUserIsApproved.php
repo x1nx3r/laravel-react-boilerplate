@@ -21,8 +21,8 @@ class EnsureUserIsApproved
 
         if ($user && ($user->status === User::STATUS_PENDING || ! $user->is_active)) {
             $message = $user->status === User::STATUS_PENDING
-                ? 'Your account is awaiting verification by HR.'
-                : 'Your account has been deactivated.';
+                ? __('app.account.pending')
+                : __('app.account.deactivated');
 
             Auth::guard('web')->logout();
             $request->session()->invalidate();

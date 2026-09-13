@@ -8,6 +8,7 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 - **RBAC demo**: three seeded roles (`superadmin`, `hr`, `user`), permission-gated routes and sidebar, users + roles management UI, protected superadmin accounts
 - **Registration with approval gate**: public self-registration with full HR profile + document uploads; toggleable "require approval" mode (pending accounts can't be used until HR verifies them)
 - **Frontend**: Inertia 2 + React 19 + TypeScript, React Compiler, Vite 7 (SSR-ready), Tailwind 4 + shadcn/ui, [Wayfinder](https://github.com/laravel/wayfinder) typed routing
+- **i18n**: Indonesian (default) + English — react-i18next on the frontend, Laravel `lang/` files for backend messages, cookie-based locale with a user-menu switcher
 - **Layout shell**: sidebar + header layouts, light/dark/system appearance (cookie + middleware), permission-aware navigation
 - **Tooling**: Pint, ESLint 9, Prettier, PHPUnit (SQLite `:memory:`), GitHub Actions lint workflow
 - **Seeders**: three demo accounts, one per role (all with password `password`)
@@ -34,6 +35,14 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 - HR verifies pending accounts from the Users page (Pending badge → Verify)
 - Registered users always get the `user` role — role assignment happens only in provisioning
 - Documents upload to the local disk under `storage/app/user-documents/{ulid}` with auto-generated thumbnails for images; download/stream endpoints are permission-gated
+
+## i18n
+
+- Frontend strings live in `resources/js/i18n/locales/{en,id}.json`, consumed via `useTranslation()` — section-scoped keys (`auth.login.title`, `users.form.name`)
+- Backend strings live in `lang/{en,id}/` (`app.php` for custom flash messages, core Laravel files for validation/auth/passwords)
+- The `locale` cookie is the single source of truth: `HandleLocale` middleware resolves it (cookie → browser language → `APP_LOCALE`) and shares it as the `locale` Inertia prop
+- Switch language from the user menu (any page) or the Appearance settings page — both use the `useLocale()` hook
+- Adding a locale: add the JSON file, register it in `HandleLocale::LOCALES`, `use-locale.ts`, and add `lang/<locale>/` files
 
 ## Requirements
 

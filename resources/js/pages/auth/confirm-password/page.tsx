@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,23 +9,27 @@ import AuthLayout from '@/layouts/auth-layout';
 import { store } from '@/routes/password/confirm';
 
 export default function ConfirmPassword() {
+    const { t } = useTranslation();
+
     return (
         <AuthLayout
-            title="Konfirmasi kata sandi Anda"
-            description="Ini adalah area aman aplikasi. Harap konfirmasi kata sandi Anda sebelum melanjutkan."
+            title={t('auth.confirm.title')}
+            description={t('auth.confirm.description')}
         >
-            <Head title="Konfirmasi kata sandi" />
+            <Head title={t('auth.confirm.title')} />
 
             <Form {...store.form()} resetOnSuccess={['password']}>
                 {({ processing, errors }) => (
                     <div className="space-y-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="password">Kata Sandi</Label>
+                            <Label htmlFor="password">
+                                {t('auth.confirm.password')}
+                            </Label>
                             <Input
                                 id="password"
                                 type="password"
                                 name="password"
-                                placeholder="Kata Sandi"
+                                placeholder={t('auth.confirm.password')}
                                 autoComplete="current-password"
                                 autoFocus
                             />
@@ -39,7 +44,7 @@ export default function ConfirmPassword() {
                                 data-test="confirm-password-button"
                             >
                                 {processing && <Spinner />}
-                                Konfirmasi kata sandi
+                                {t('auth.confirm.submit')}
                             </Button>
                         </div>
                     </div>

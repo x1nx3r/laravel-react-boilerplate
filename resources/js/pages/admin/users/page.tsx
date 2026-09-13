@@ -3,6 +3,7 @@ import { Check, Pencil, Plus, Search, X } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 import { useState } from 'react';
 
+import { Trans, useTranslation } from 'react-i18next';
 import RegistrationSettingController from '@/actions/App/Http/Controllers/Admin/RegistrationSettingController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
 import { Pagination } from '@/components/common/pagination';
@@ -62,6 +63,7 @@ export default function UsersIndex({
     requireRegistrationApproval,
     filters,
 }: UsersIndexProps) {
+    const { t } = useTranslation();
     const { auth, flash } = usePage().props;
     const [search, setSearch] = useState(filters.search ?? '');
     const [role, setRole] = useState(filters.role ?? 'all');
@@ -140,9 +142,14 @@ export default function UsersIndex({
 
     return (
         <AppLayout
-            breadcrumbs={[{ title: 'Users', href: UserController.index().url }]}
+            breadcrumbs={[
+                {
+                    title: t('users.breadcrumb'),
+                    href: UserController.index().url,
+                },
+            ]}
         >
-            <Head title="User management" />
+            <Head title={t('users.title')} />
 
             <div className="space-y-4">
                 {flash.success && (
@@ -161,7 +168,9 @@ export default function UsersIndex({
                 )}
 
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                    <h1 className="text-2xl font-bold tracking-tight">Users</h1>
+                    <h1 className="text-2xl font-bold tracking-tight">
+                        {t('users.title')}
+                    </h1>
                     <div className="flex flex-wrap items-center gap-3">
                         <div className="flex items-center gap-2 rounded-md border p-2">
                             <Checkbox
@@ -175,7 +184,7 @@ export default function UsersIndex({
                                 htmlFor="require-approval"
                                 className="text-sm font-normal"
                             >
-                                Require registration approval
+                                {t('users.require_approval')}
                             </Label>
                         </div>
                         <Button asChild>
@@ -195,7 +204,7 @@ export default function UsersIndex({
                         <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
                             type="search"
-                            placeholder="Search name or email..."
+                            placeholder={t('users.search_placeholder')}
                             className="pl-8"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
@@ -206,7 +215,9 @@ export default function UsersIndex({
                             <SelectValue placeholder="Role" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All roles</SelectItem>
+                            <SelectItem value="all">
+                                {t('users.filters.role_all')}
+                            </SelectItem>
                             {roles.map((r) => (
                                 <SelectItem key={r} value={r}>
                                     {r}
@@ -222,9 +233,15 @@ export default function UsersIndex({
                             <SelectValue placeholder="Approval" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All approvals</SelectItem>
-                            <SelectItem value="pending">Pending</SelectItem>
-                            <SelectItem value="active">Verified</SelectItem>
+                            <SelectItem value="all">
+                                {t('users.filters.approval_all')}
+                            </SelectItem>
+                            <SelectItem value="pending">
+                                {t('users.filters.pending')}
+                            </SelectItem>
+                            <SelectItem value="active">
+                                {t('users.filters.verified')}
+                            </SelectItem>
                         </SelectContent>
                     </Select>
                     <Select
@@ -235,9 +252,15 @@ export default function UsersIndex({
                             <SelectValue placeholder="Status" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All states</SelectItem>
-                            <SelectItem value="1">Active</SelectItem>
-                            <SelectItem value="0">Inactive</SelectItem>
+                            <SelectItem value="all">
+                                {t('users.filters.state_all')}
+                            </SelectItem>
+                            <SelectItem value="1">
+                                {t('users.filters.active')}
+                            </SelectItem>
+                            <SelectItem value="0">
+                                {t('users.filters.inactive')}
+                            </SelectItem>
                         </SelectContent>
                     </Select>
                     <Select value={department} onValueChange={setDepartment}>
@@ -245,7 +268,9 @@ export default function UsersIndex({
                             <SelectValue placeholder="Department" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All departments</SelectItem>
+                            <SelectItem value="all">
+                                {t('users.filters.department_all')}
+                            </SelectItem>
                             {departments.map((d) => (
                                 <SelectItem key={d} value={d}>
                                     {d}
@@ -261,9 +286,15 @@ export default function UsersIndex({
                             <SelectValue placeholder="Contract" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All contracts</SelectItem>
-                            <SelectItem value="kontrak">Kontrak</SelectItem>
-                            <SelectItem value="tetap">Tetap</SelectItem>
+                            <SelectItem value="all">
+                                {t('users.filters.contract_all')}
+                            </SelectItem>
+                            <SelectItem value="kontrak">
+                                {t('users.filters.kontrak')}
+                            </SelectItem>
+                            <SelectItem value="tetap">
+                                {t('users.filters.tetap')}
+                            </SelectItem>
                         </SelectContent>
                     </Select>
                     <div className="flex items-center gap-2">
@@ -275,7 +306,7 @@ export default function UsersIndex({
                             variant="ghost"
                             size="icon"
                             onClick={clearFilters}
-                            title="Clear filters"
+                            title={t('common.clear_filters')}
                         >
                             <X className="h-4 w-4" />
                         </Button>
@@ -286,12 +317,14 @@ export default function UsersIndex({
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Employee</TableHead>
-                                <TableHead>Roles</TableHead>
-                                <TableHead>State</TableHead>
+                                <TableHead>{t('users.table.name')}</TableHead>
+                                <TableHead>
+                                    {t('users.table.employee')}
+                                </TableHead>
+                                <TableHead>{t('users.table.roles')}</TableHead>
+                                <TableHead>{t('users.table.state')}</TableHead>
                                 <TableHead className="text-right">
-                                    Actions
+                                    {t('users.table.actions')}
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
@@ -302,7 +335,7 @@ export default function UsersIndex({
                                         colSpan={5}
                                         className="h-24 text-center text-muted-foreground"
                                     >
-                                        No users found.
+                                        {t('users.no_results')}
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -347,15 +380,21 @@ export default function UsersIndex({
                                             <div className="flex flex-wrap items-center gap-1">
                                                 {user.status === 'pending' ? (
                                                     <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-950 dark:text-amber-300">
-                                                        Pending
+                                                        {t(
+                                                            'users.badges.pending',
+                                                        )}
                                                     </Badge>
                                                 ) : user.is_active ? (
                                                     <Badge className="bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-950 dark:text-green-300">
-                                                        Active
+                                                        {t(
+                                                            'users.badges.active',
+                                                        )}
                                                     </Badge>
                                                 ) : (
                                                     <Badge variant="secondary">
-                                                        Inactive
+                                                        {t(
+                                                            'users.badges.inactive',
+                                                        )}
                                                     </Badge>
                                                 )}
                                                 {user.status === 'pending' &&
@@ -370,7 +409,7 @@ export default function UsersIndex({
                                                             title="Verify and activate this account"
                                                         >
                                                             <Check className="mr-1 h-3 w-3" />
-                                                            Verify
+                                                            {t('users.verify')}
                                                         </Button>
                                                     )}
                                             </div>
@@ -385,8 +424,10 @@ export default function UsersIndex({
                                                     disabled={!canManage(user)}
                                                     title={
                                                         canManage(user)
-                                                            ? 'Edit'
-                                                            : 'Only superadmins can edit superadmin accounts'
+                                                            ? t('common.edit')
+                                                            : t(
+                                                                  'users.edit_locked',
+                                                              )
                                                     }
                                                 >
                                                     {canManage(user) ? (
@@ -416,8 +457,10 @@ export default function UsersIndex({
                                                     }
                                                     title={
                                                         auth.user.id === user.id
-                                                            ? 'You cannot delete your own account'
-                                                            : 'Delete'
+                                                            ? t(
+                                                                  'users.delete_self',
+                                                              )
+                                                            : t('common.delete')
                                                     }
                                                     onClick={() =>
                                                         setUserToDelete(user)
@@ -443,20 +486,26 @@ export default function UsersIndex({
             >
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Delete user</AlertDialogTitle>
+                        <AlertDialogTitle>
+                            {t('users.delete_title')}
+                        </AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to delete{' '}
-                            <strong>{userToDelete?.name}</strong>? This action
-                            cannot be undone.
+                            <Trans
+                                i18nKey="users.delete_description"
+                                values={{ name: userToDelete?.name }}
+                                components={{ strong: <strong /> }}
+                            />
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>
+                            {t('common.cancel')}
+                        </AlertDialogCancel>
                         <AlertDialogAction
                             variant="destructive"
                             onClick={confirmDelete}
                         >
-                            Delete
+                            {t('common.delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

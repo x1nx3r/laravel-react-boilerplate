@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
     Collapsible,
     CollapsibleContent,
@@ -19,11 +20,12 @@ import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { NavItem } from '@/types';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
+    const { t } = useTranslation();
     const { isCurrentUrl } = useCurrentUrl();
 
     return (
         <SidebarGroup className="px-2 py-0">
-            <SidebarGroupLabel>Menu</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('common.menu')}</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) =>
                     item.children && item.children.length > 0 ? (
@@ -38,13 +40,13 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                             <SidebarMenuItem>
                                 <CollapsibleTrigger asChild>
                                     <SidebarMenuButton
-                                        tooltip={item.title}
+                                        tooltip={t(item.title)}
                                         isActive={item.children.some((child) =>
                                             isCurrentUrl(child.href),
                                         )}
                                     >
                                         {item.icon && <item.icon />}
-                                        <span>{item.title}</span>
+                                        <span>{t(item.title)}</span>
                                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                     </SidebarMenuButton>
                                 </CollapsibleTrigger>
@@ -65,7 +67,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                                                         prefetch
                                                     >
                                                         <span>
-                                                            {child.title}
+                                                            {t(child.title)}
                                                         </span>
                                                     </Link>
                                                 </SidebarMenuSubButton>
@@ -80,11 +82,11 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                             <SidebarMenuButton
                                 asChild
                                 isActive={isCurrentUrl(item.href)}
-                                tooltip={{ children: item.title }}
+                                tooltip={{ children: t(item.title) }}
                             >
                                 <Link href={item.href} prefetch>
                                     {item.icon && <item.icon />}
-                                    <span>{item.title}</span>
+                                    <span>{t(item.title)}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>

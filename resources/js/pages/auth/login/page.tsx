@@ -1,5 +1,6 @@
 import { Form, Head } from '@inertiajs/react';
 import { LogIn } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import InputError from '@/components/common/input-error';
 import PasswordInput from '@/components/common/password-input';
 import StatusMessage from '@/components/common/status-message';
@@ -19,12 +20,14 @@ type Props = {
 };
 
 export default function Login({ status, canRegister }: Props) {
+    const { t } = useTranslation();
+
     return (
         <AuthEnhancedSplitLayout
-            title="Masuk ke Akun Anda"
-            description="Masukkan email dan kata sandi Anda di bawah ini untuk masuk"
+            title={t('auth.login.heading')}
+            description={t('auth.login.description')}
         >
-            <Head title="Masuk" />
+            <Head title={t('auth.login.title')} />
 
             {status && <StatusMessage message={status} type="info" autoHide />}
 
@@ -44,7 +47,9 @@ export default function Login({ status, canRegister }: Props) {
 
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email / Username</Label>
+                                <Label htmlFor="email">
+                                    {t('auth.login.email')}
+                                </Label>
                                 <Input
                                     id="email"
                                     type="text"
@@ -53,20 +58,26 @@ export default function Login({ status, canRegister }: Props) {
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="email"
-                                    placeholder="Masukkan email atau username"
+                                    placeholder={t(
+                                        'auth.login.email_placeholder',
+                                    )}
                                 />
                                 <InputError message={errors.email} />
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password">Kata Sandi</Label>
+                                <Label htmlFor="password">
+                                    {t('auth.login.password')}
+                                </Label>
                                 <PasswordInput
                                     id="password"
                                     name="password"
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Masukkan kata sandi"
+                                    placeholder={t(
+                                        'auth.login.password_placeholder',
+                                    )}
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -77,7 +88,9 @@ export default function Login({ status, canRegister }: Props) {
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Ingat saya</Label>
+                                <Label htmlFor="remember">
+                                    {t('auth.login.remember')}
+                                </Label>
                             </div>
 
                             <Button
@@ -90,25 +103,25 @@ export default function Login({ status, canRegister }: Props) {
                                 {processing ? (
                                     <>
                                         <Spinner />
-                                        Memproses...
+                                        {t('common.processing')}
                                     </>
                                 ) : (
                                     <>
                                         <LogIn className="mr-2 h-4 w-4" />
-                                        Masuk
+                                        {t('auth.login.submit')}
                                     </>
                                 )}
                             </Button>
 
                             {canRegister && (
                                 <p className="text-center text-sm text-muted-foreground">
-                                    Belum punya akun?{' '}
+                                    {t('auth.login.no_account')}{' '}
                                     <TextLink
                                         href="/register"
                                         className="font-medium"
                                         tabIndex={6}
                                     >
-                                        Daftar
+                                        {t('auth.login.register')}
                                     </TextLink>
                                 </p>
                             )}

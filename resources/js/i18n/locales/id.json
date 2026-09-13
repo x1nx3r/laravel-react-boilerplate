@@ -1,0 +1,311 @@
+{
+    "common": {
+        "search": "Cari...",
+        "search_submit": "Cari",
+        "filter": "Filter",
+        "clear_filters": "Hapus filter",
+        "cancel": "Batal",
+        "delete": "Hapus",
+        "edit": "Edit",
+        "actions": "Aksi",
+        "saved": "Tersimpan",
+        "save_changes": "Simpan Perubahan",
+        "menu": "Menu",
+        "home": "Beranda",
+        "processing": "Memproses..."
+    },
+    "nav": {
+        "dashboard": "Beranda",
+        "administration": "Administrasi",
+        "users": "Pengguna",
+        "roles": "Peran"
+    },
+    "dashboard": {
+        "title": "Beranda",
+        "welcome_title": "Selamat datang di {{name}}",
+        "welcome_description": "Kerangka aplikasi Anda sudah siap.",
+        "card_title": "Siap digunakan",
+        "card_description": "Auth, pengaturan, layout shell, dan CI sudah terpasang. Ganti halaman ini dengan modul pertama Anda.",
+        "card_body": "Tambahkan rute di <0>routes/web.php</0>, halaman di <1>resources/js/pages</1>, dan navigasi di <2>resources/js/config/navigation.ts</2>."
+    },
+    "auth": {
+        "login": {
+            "title": "Masuk",
+            "heading": "Masuk ke Akun Anda",
+            "description": "Masukkan email dan kata sandi Anda di bawah ini untuk masuk",
+            "email": "Email / Username",
+            "email_placeholder": "Masukkan email atau username",
+            "password": "Kata Sandi",
+            "password_placeholder": "Masukkan kata sandi",
+            "remember": "Ingat saya",
+            "submit": "Masuk",
+            "no_account": "Belum punya akun?",
+            "register": "Daftar"
+        },
+        "register": {
+            "title": "Buat Akun Baru",
+            "subtitle": "Lengkapi data berikut untuk mendaftar",
+            "name": "Nama Lengkap",
+            "email": "Email",
+            "password": "Kata Sandi",
+            "password_confirmation": "Konfirmasi Kata Sandi",
+            "employee_section": "Data Kepegawaian",
+            "employee_id": "ID Karyawan",
+            "employee_id_placeholder": "EMP-00123",
+            "nik": "NIK (KTP)",
+            "nik_placeholder": "16 digit NIK",
+            "employee_status": "Status Kontrak",
+            "employee_status_placeholder": "Pilih status",
+            "kontrak": "Kontrak",
+            "tetap": "Tetap",
+            "department": "Departemen",
+            "department_placeholder": "Nama divisi",
+            "join_date": "Tanggal Bergabung",
+            "end_date": "Tanggal Berakhir",
+            "personal_section": "Informasi Pribadi",
+            "birth_place": "Tempat Lahir",
+            "birth_date": "Tanggal Lahir",
+            "gender": "Jenis Kelamin",
+            "gender_placeholder": "Pilih jenis kelamin",
+            "male": "Laki-laki",
+            "female": "Perempuan",
+            "phone_number": "Nomor HP / WhatsApp",
+            "phone_placeholder": "08...",
+            "bank_account_number": "Nomor Rekening",
+            "education_institution": "Asal Pendidikan",
+            "major": "Jurusan",
+            "address": "Alamat Domisili",
+            "documents_section": "Dokumen Pendukung",
+            "documents_description": "Unggah scan KTP, Ijazah, CV, atau dokumen lainnya (Maks. 10MB per file).",
+            "files_selected": "{{count}} file dipilih.",
+            "submit": "Daftar",
+            "have_account": "Sudah punya akun?",
+            "login_link": "Masuk"
+        },
+        "forgot": {
+            "title": "Lupa kata sandi",
+            "description": "Masukkan email Anda untuk menerima tautan atur ulang kata sandi",
+            "email": "Alamat Email",
+            "email_placeholder": "email@contoh.com",
+            "submit": "Kirim tautan atur ulang kata sandi",
+            "back_prefix": "Atau, kembali ke",
+            "back_link": "halaman masuk"
+        },
+        "reset": {
+            "title": "Atur ulang kata sandi",
+            "description": "Silakan masukkan kata sandi baru Anda di bawah ini",
+            "email": "Email",
+            "password": "Kata Sandi",
+            "password_confirmation": "Konfirmasi kata sandi",
+            "submit": "Atur ulang kata sandi"
+        },
+        "confirm": {
+            "title": "Konfirmasi kata sandi Anda",
+            "description": "Ini adalah area aman aplikasi. Harap konfirmasi kata sandi Anda sebelum melanjutkan.",
+            "password": "Kata Sandi",
+            "submit": "Konfirmasi kata sandi"
+        }
+    },
+    "settings": {
+        "title": "Pengaturan",
+        "description": "Kelola profil dan pengaturan akun Anda",
+        "tabs": {
+            "profile": "Profil",
+            "password": "Kata Sandi",
+            "appearance": "Tampilan"
+        },
+        "profile": {
+            "breadcrumb": "Pengaturan Profil",
+            "title": "Informasi Profil",
+            "description": "Perbarui nama dan alamat email Anda",
+            "name": "Nama",
+            "name_placeholder": "Nama lengkap",
+            "email": "Alamat Email",
+            "email_placeholder": "Alamat email",
+            "save": "Simpan"
+        },
+        "password": {
+            "breadcrumb": "Pengaturan Kata Sandi",
+            "title": "Perbarui Kata Sandi",
+            "description": "Pastikan akun Anda menggunakan kata sandi yang panjang dan acak agar tetap aman",
+            "current": "Kata Sandi Saat Ini",
+            "new": "Kata Sandi Baru",
+            "confirm": "Konfirmasi Kata Sandi",
+            "save": "Simpan Kata Sandi"
+        },
+        "appearance": {
+            "breadcrumb": "Pengaturan Tampilan",
+            "title": "Pengaturan Tampilan",
+            "description": "Perbarui pengaturan tampilan akun Anda",
+            "theme": "Tema",
+            "light": "Terang",
+            "dark": "Gelap",
+            "system": "Sistem",
+            "language": "Bahasa",
+            "language_description": "Ganti bahasa antarmuka aplikasi"
+        }
+    },
+    "errors": {
+        "403": {
+            "title": "Akses Ditolak",
+            "description": "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini."
+        },
+        "404": {
+            "title": "Halaman Tidak Ditemukan",
+            "description": "Maaf, halaman yang Anda cari tidak dapat ditemukan."
+        },
+        "500": {
+            "title": "Terjadi Kesalahan Server",
+            "description": "Oops, sesuatu salah di server kami."
+        },
+        "503": {
+            "title": "Sedang Dalam Perbaikan",
+            "description": "Maaf, kami sedang melakukan pemeliharaan rutin. Silakan coba lagi nanti."
+        },
+        "generic": {
+            "title": "Terjadi Kesalahan",
+            "description": "Maaf, terjadi kesalahan yang tidak terduga."
+        },
+        "back_home": "Kembali ke Beranda"
+    },
+    "users": {
+        "title": "Pengguna",
+        "create": "Buat Pengguna",
+        "edit_title": "Edit Pengguna",
+        "breadcrumb": "Pengguna",
+        "search_placeholder": "Cari nama atau email...",
+        "require_approval": "Wajib verifikasi pendaftaran",
+        "filters": {
+            "role_all": "Semua peran",
+            "approval_all": "Semua status verifikasi",
+            "pending": "Menunggu Verifikasi",
+            "verified": "Terverifikasi",
+            "state_all": "Semua status akun",
+            "active": "Aktif",
+            "inactive": "Nonaktif",
+            "department_all": "Semua departemen",
+            "contract_all": "Semua kontrak",
+            "kontrak": "Kontrak",
+            "tetap": "Tetap"
+        },
+        "table": {
+            "name": "Nama",
+            "employee": "Karyawan",
+            "roles": "Peran",
+            "state": "Status",
+            "actions": "Aksi",
+            "no_role": "Tanpa peran"
+        },
+        "badges": {
+            "pending": "Menunggu Verifikasi",
+            "active": "Aktif",
+            "inactive": "Nonaktif"
+        },
+        "verify": "Verifikasi",
+        "verify_title": "Verifikasi dan aktifkan akun ini",
+        "edit_locked": "Hanya superadmin yang dapat mengedit akun superadmin",
+        "delete_self": "Anda tidak dapat menghapus akun sendiri",
+        "delete_title": "Hapus Pengguna",
+        "delete_description": "Apakah Anda yakin ingin menghapus <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan.",
+        "no_results": "Tidak ada pengguna ditemukan.",
+        "self_note": "Anda tidak dapat mengubah peran atau menonaktifkan akun sendiri.",
+        "form": {
+            "account_section": "Informasi Akun & Akses",
+            "account_description": "Detail kredensial dan hak akses pengguna di sistem.",
+            "name": "Nama Lengkap",
+            "email": "Email",
+            "password": "Kata Sandi",
+            "password_keep": "(kosongkan untuk tetap)",
+            "password_confirmation": "Konfirmasi Kata Sandi",
+            "role": "Peran",
+            "role_placeholder": "Pilih peran",
+            "active": "Aktif (dapat masuk sistem)",
+            "employee_section": "Data Kepegawaian",
+            "employee_description": "Informasi terkait status administratif karyawan.",
+            "employee_id": "ID Karyawan",
+            "employee_id_placeholder": "EMP-00123",
+            "nik": "NIK (KTP)",
+            "nik_placeholder": "16 digit NIK",
+            "employee_status": "Status Kontrak",
+            "employee_status_placeholder": "Pilih status",
+            "kontrak": "Kontrak",
+            "tetap": "Tetap",
+            "department": "Departemen",
+            "department_placeholder": "Nama divisi",
+            "join_date": "Tanggal Bergabung",
+            "end_date": "Tanggal Berakhir",
+            "personal_section": "Informasi Pribadi",
+            "personal_description": "Data pendukung dan informasi kontak pribadi.",
+            "birth_place": "Tempat Lahir",
+            "birth_date": "Tanggal Lahir",
+            "gender": "Jenis Kelamin",
+            "gender_placeholder": "Pilih jenis kelamin",
+            "male": "Laki-laki",
+            "female": "Perempuan",
+            "phone_number": "Nomor HP / WhatsApp",
+            "phone_placeholder": "08...",
+            "bank_account_number": "Nomor Rekening",
+            "education_institution": "Asal Pendidikan",
+            "major": "Jurusan",
+            "address": "Alamat Domisili",
+            "documents_section": "Dokumen Pendukung",
+            "documents_description": "Unggah scan KTP, Ijazah, CV, atau dokumen lainnya (Maks. 10MB per file).",
+            "files_selected": "{{count}} file dipilih.",
+            "submit_create": "Buat Pengguna",
+            "submit_edit": "Simpan Perubahan"
+        },
+        "documents": {
+            "title": "Dokumen Pendukung",
+            "upload": "Unggah",
+            "upload_title": "Unggah Dokumen",
+            "upload_description": "Pilih dokumen dan tentukan kategorinya.",
+            "file": "Dokumen",
+            "category": "Kategori",
+            "category_placeholder": "Contoh: KTP, Ijazah",
+            "empty_title": "Belum ada dokumen.",
+            "empty_description": "Dokumen yang diunggah akan tampil di sini.",
+            "download_title": "Unduh Dokumen",
+            "delete_title": "Hapus Dokumen",
+            "delete_description": "Apakah Anda yakin ingin menghapus <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan."
+        }
+    },
+    "roles": {
+        "title": "Peran",
+        "breadcrumb": "Peran",
+        "create": "Buat Peran",
+        "create_dialog": "Tambah Peran",
+        "edit_dialog": "Edit Peran",
+        "create_description": "Masukkan nama peran dan pilih hak aksesnya.",
+        "edit_description": "Perbarui nama peran dan hak aksesnya.",
+        "name": "Nama Peran",
+        "name_placeholder": "Contoh: manager",
+        "permissions": "Hak Akses",
+        "search_placeholder": "Cari peran...",
+        "table": {
+            "name": "Nama Peran",
+            "permissions": "Hak Akses",
+            "users": "Pengguna",
+            "actions": "Aksi"
+        },
+        "full_access": "Akses Penuh",
+        "no_permissions": "Tidak ada akses",
+        "immutable": "Peran superadmin tidak dapat diubah",
+        "immutable_delete": "Peran superadmin tidak dapat dihapus",
+        "in_use_delete": "Peran yang masih memiliki pengguna tidak dapat dihapus",
+        "delete_title": "Hapus Peran",
+        "delete_description": "Apakah Anda yakin ingin menghapus peran <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan.",
+        "no_results": "Tidak ada peran ditemukan."
+    },
+    "pagination": {
+        "showing": "Menampilkan {{from}} sampai {{to}} dari {{total}} hasil",
+        "first": "Ke halaman pertama",
+        "prev": "Ke halaman sebelumnya",
+        "next": "Ke halaman selanjutnya",
+        "last": "Ke halaman terakhir"
+    },
+    "menu": {
+        "settings": "Pengaturan",
+        "logout": "Keluar",
+        "language": "Bahasa"
+    }
+}
