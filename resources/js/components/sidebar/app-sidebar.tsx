@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { mainNavItems } from '@/config/navigation';
+import { adminNavItems, mainNavItems } from '@/config/navigation';
 import type { NavItem } from '@/types';
 
 /**
@@ -65,11 +65,10 @@ export function AppSidebar() {
     const userPermissions: string[] = (auth.permissions as string[]) ?? [];
     const userRoles: string[] = (auth.roles as string[]) ?? [];
 
-    const visibleNavItems: NavItem[] = filterByPermissions(
-        mainNavItems,
-        userPermissions,
-        userRoles,
-    );
+    const visibleNavItems: NavItem[] = [
+        ...filterByPermissions(mainNavItems, userPermissions, userRoles),
+        ...filterByPermissions(adminNavItems, userPermissions, userRoles),
+    ];
 
     return (
         <Sidebar collapsible="icon" variant="inset">

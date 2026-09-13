@@ -35,3 +35,8 @@ resources/js/routes/
 resources/js/wayfinder/
 
 dump.rdb
+
+# SQLite database files
+*.sqlite
+*.sqlite-journal
+laravel_boilerplate

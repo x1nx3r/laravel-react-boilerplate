@@ -5,10 +5,25 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 ## What's inside
 
 - **Backend**: Laravel 12 (PHP ^8.2), Fortify auth (login, password reset, confirm password, 2FA-ready) with custom Inertia views, [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission) for roles/permissions, ULID users
+- **RBAC demo**: three seeded roles (`superadmin`, `hr`, `user`), permission-gated routes and sidebar, users + roles management UI, protected superadmin accounts
 - **Frontend**: Inertia 2 + React 19 + TypeScript, React Compiler, Vite 7 (SSR-ready), Tailwind 4 + shadcn/ui, [Wayfinder](https://github.com/laravel/wayfinder) typed routing
 - **Layout shell**: sidebar + header layouts, light/dark/system appearance (cookie + middleware), permission-aware navigation
 - **Tooling**: Pint, ESLint 9, Prettier, PHPUnit (SQLite `:memory:`), GitHub Actions lint workflow
-- **Seeders**: `admin@example.com` / `password` with an `admin` role
+- **Seeders**: three demo accounts, one per role (all with password `password`)
+
+| Account | Email | Role | Permissions |
+|---|---|---|---|
+| Super Admin | `superadmin@example.com` | `superadmin` | `view_admin`, `manage_users`, `manage_roles` |
+| HR Staff | `hr@example.com` | `hr` | `view_admin`, `manage_users` |
+| Regular User | `user@example.com` | `user` | none (self-service only) |
+
+## RBAC wiring
+
+- Role/permission definitions live in `app/Support/Rbac.php` — add a role or permission there, then re-seed
+- Coarse gate: `permission:view_admin` middleware on the `admin` route group (`routes/web.php`)
+- Fine gate: `UserPolicy` / `RolePolicy` per action (e.g. HR can manage users but never superadmin accounts; the `superadmin` role is immutable)
+- Sidebar gating: `permissions` / `roles` / `excludeRoles` arrays on nav items (`resources/js/config/navigation.ts`), applied by `filterByPermissions`
+- Privilege escalation is blocked at validation level: actors without `manage_roles` cannot assign the `superadmin` role
 
 ## Requirements
 
