@@ -12,15 +12,13 @@ import { Spinner } from '@/components/ui/spinner';
 import AuthEnhancedSplitLayout from '@/layouts/auth/auth-enhanced-split-layout';
 
 import { store } from '@/routes/login';
-import { request } from '@/routes/password';
 
 type Props = {
     status?: string;
-    canResetPassword: boolean;
     canRegister: boolean;
 };
 
-export default function Login({ status, canResetPassword }: Props) {
+export default function Login({ status, canRegister }: Props) {
     return (
         <AuthEnhancedSplitLayout
             title="Masuk ke Akun Anda"
@@ -61,18 +59,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             </div>
 
                             <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Kata Sandi</Label>
-                                    {canResetPassword && (
-                                        <TextLink
-                                            href={request()}
-                                            className="ml-auto text-sm"
-                                            tabIndex={5}
-                                        >
-                                            Lupa kata sandi?
-                                        </TextLink>
-                                    )}
-                                </div>
+                                <Label htmlFor="password">Kata Sandi</Label>
                                 <PasswordInput
                                     id="password"
                                     name="password"
@@ -112,6 +99,19 @@ export default function Login({ status, canResetPassword }: Props) {
                                     </>
                                 )}
                             </Button>
+
+                            {canRegister && (
+                                <p className="text-center text-sm text-muted-foreground">
+                                    Belum punya akun?{' '}
+                                    <TextLink
+                                        href="/register"
+                                        className="font-medium"
+                                        tabIndex={6}
+                                    >
+                                        Daftar
+                                    </TextLink>
+                                </p>
+                            )}
                         </div>
                     </>
                 )}
