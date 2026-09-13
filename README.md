@@ -6,6 +6,7 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 
 - **Backend**: Laravel 12 (PHP ^8.2), Fortify auth (login, password reset, confirm password, 2FA-ready) with custom Inertia views, [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission) for roles/permissions, ULID users
 - **RBAC demo**: three seeded roles (`superadmin`, `hr`, `user`), permission-gated routes and sidebar, users + roles management UI, protected superadmin accounts
+- **Registration with approval gate**: public self-registration with full HR profile + document uploads; toggleable "require approval" mode (pending accounts can't be used until HR verifies them)
 - **Frontend**: Inertia 2 + React 19 + TypeScript, React Compiler, Vite 7 (SSR-ready), Tailwind 4 + shadcn/ui, [Wayfinder](https://github.com/laravel/wayfinder) typed routing
 - **Layout shell**: sidebar + header layouts, light/dark/system appearance (cookie + middleware), permission-aware navigation
 - **Tooling**: Pint, ESLint 9, Prettier, PHPUnit (SQLite `:memory:`), GitHub Actions lint workflow
@@ -24,6 +25,15 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 - Fine gate: `UserPolicy` / `RolePolicy` per action (e.g. HR can manage users but never superadmin accounts; the `superadmin` role is immutable)
 - Sidebar gating: `permissions` / `roles` / `excludeRoles` arrays on nav items (`resources/js/config/navigation.ts`), applied by `filterByPermissions`
 - Privilege escalation is blocked at validation level: actors without `manage_roles` cannot assign the `superadmin` role
+
+## Registration flow
+
+- Toggle "Require registration approval" on the Users page (persisted in the `settings` table, gated by `manage_users`)
+- **Off**: registration creates an `active` account that can log in immediately
+- **On**: registration creates a `pending` account; Fortify's post-registration auto-login is neutralized by `EnsureUserIsApproved` middleware, which bounces the session to the login screen with a clear message; subsequent login attempts show a field error
+- HR verifies pending accounts from the Users page (Pending badge → Verify)
+- Registered users always get the `user` role — role assignment happens only in provisioning
+- Documents upload to the local disk under `storage/app/user-documents/{ulid}` with auto-generated thumbnails for images; download/stream endpoints are permission-gated
 
 ## Requirements
 

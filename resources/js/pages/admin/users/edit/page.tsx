@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import { Card, CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import type { User } from '@/types';
+import { UserDocuments } from '../components/user-documents';
 import { UserForm } from '../user-form';
 
 interface EditProps {
@@ -27,6 +28,8 @@ export default function Edit({ user, roles }: EditProps) {
                     <UserForm user={user} roles={roles} />
                 </CardContent>
             </Card>
+
+            <UserDocuments user={user} />
         </AppLayout>
     );
 }

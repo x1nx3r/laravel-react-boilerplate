@@ -32,4 +32,10 @@ class UserPolicy
     {
         return $this->update($user, $model);
     }
+
+    public function verify(User $user, User $model): bool
+    {
+        return $this->update($user, $model)
+            && $model->status === User::STATUS_PENDING;
+    }
 }

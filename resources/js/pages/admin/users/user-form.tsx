@@ -1,9 +1,17 @@
 import { Link, useForm, usePage } from '@inertiajs/react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Upload } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
+import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -32,6 +40,21 @@ export function UserForm({ user, roles }: UserFormProps) {
         password_confirmation: '',
         role: user?.roles?.[0]?.name ?? 'user',
         is_active: user?.is_active ?? true,
+        employee_id: user?.employee_id ?? '',
+        nik: user?.nik ?? '',
+        birth_place: user?.birth_place ?? '',
+        birth_date: user?.birth_date ?? '',
+        address: user?.address ?? '',
+        employee_status: user?.employee_status ?? '',
+        department: user?.department ?? '',
+        gender: user?.gender ?? '',
+        join_date: user?.join_date ?? '',
+        end_date: user?.end_date ?? '',
+        major: user?.major ?? '',
+        education_institution: user?.education_institution ?? '',
+        phone_number: user?.phone_number ?? '',
+        bank_account_number: user?.bank_account_number ?? '',
+        documents: [] as File[],
     });
 
     const submit: FormEventHandler = (e) => {
@@ -40,153 +63,384 @@ export function UserForm({ user, roles }: UserFormProps) {
         if (isEdit && user) {
             put(UserController.update({ user: user.id }).url);
         } else {
-            post(UserController.store().url);
+            post(UserController.store().url, { forceFormData: true });
         }
     };
 
     return (
         <form onSubmit={submit} className="space-y-6">
-            <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                        id="name"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                        autoComplete="name"
-                    />
-                    {errors.name && (
-                        <p className="text-sm text-destructive">
-                            {errors.name}
-                        </p>
-                    )}
-                </div>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Informasi Akun & Akses</CardTitle>
+                    <CardDescription>
+                        Detail kredensial dan hak akses pengguna di sistem.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                        <Label htmlFor="name">Nama Lengkap</Label>
+                        <Input
+                            id="name"
+                            value={data.name}
+                            onChange={(e) => setData('name', e.target.value)}
+                            required
+                            autoComplete="name"
+                        />
+                        <InputError message={errors.name} />
+                    </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                        autoComplete="email"
-                    />
-                    {errors.email && (
-                        <p className="text-sm text-destructive">
-                            {errors.email}
-                        </p>
-                    )}
-                </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
+                            required
+                            autoComplete="email"
+                        />
+                        <InputError message={errors.email} />
+                    </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="password">
-                        Password{' '}
-                        {isEdit && (
-                            <span className="text-muted-foreground">
-                                (leave blank to keep)
-                            </span>
+                    <div className="space-y-2">
+                        <Label htmlFor="password">
+                            Kata Sandi{' '}
+                            {isEdit && (
+                                <span className="text-muted-foreground">
+                                    (kosongkan untuk tetap)
+                                </span>
+                            )}
+                        </Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            value={data.password}
+                            onChange={(e) =>
+                                setData('password', e.target.value)
+                            }
+                            required={!isEdit}
+                            minLength={isEdit ? undefined : 8}
+                            autoComplete="new-password"
+                        />
+                        <InputError message={errors.password} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="password_confirmation">
+                            Konfirmasi Kata Sandi
+                        </Label>
+                        <Input
+                            id="password_confirmation"
+                            type="password"
+                            value={data.password_confirmation}
+                            onChange={(e) =>
+                                setData('password_confirmation', e.target.value)
+                            }
+                            required={!!data.password}
+                            autoComplete="new-password"
+                        />
+                        <InputError message={errors.password_confirmation} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="role">Peran</Label>
+                        <Select
+                            value={data.role}
+                            onValueChange={(value) => setData('role', value)}
+                            disabled={isSelf}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Pilih peran" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {roles.map((role) => (
+                                    <SelectItem key={role} value={role}>
+                                        {role}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        <InputError message={errors.role} />
+                    </div>
+
+                    <div className="flex items-center space-x-2 pt-6">
+                        <Checkbox
+                            id="is_active"
+                            checked={data.is_active}
+                            onCheckedChange={(checked) =>
+                                setData('is_active', !!checked)
+                            }
+                            disabled={isSelf}
+                        />
+                        <Label htmlFor="is_active" className="font-normal">
+                            Aktif (dapat masuk sistem)
+                        </Label>
+                        <InputError message={errors.is_active} />
+                    </div>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>Data Kepegawaian</CardTitle>
+                    <CardDescription>
+                        Informasi terkait status administratif karyawan.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                        <Label htmlFor="employee_id">ID Karyawan</Label>
+                        <Input
+                            id="employee_id"
+                            value={data.employee_id}
+                            onChange={(e) =>
+                                setData('employee_id', e.target.value)
+                            }
+                            placeholder="EMP-00123"
+                        />
+                        <InputError message={errors.employee_id} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="nik">NIK (KTP)</Label>
+                        <Input
+                            id="nik"
+                            value={data.nik}
+                            onChange={(e) => setData('nik', e.target.value)}
+                            placeholder="16 digit NIK"
+                        />
+                        <InputError message={errors.nik} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="employee_status">Status Kontrak</Label>
+                        <Select
+                            value={data.employee_status}
+                            onValueChange={(value) =>
+                                setData('employee_status', value)
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Pilih status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="kontrak">Kontrak</SelectItem>
+                                <SelectItem value="tetap">Tetap</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <InputError message={errors.employee_status} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="department">Departemen</Label>
+                        <Input
+                            id="department"
+                            value={data.department}
+                            onChange={(e) =>
+                                setData('department', e.target.value)
+                            }
+                            placeholder="Nama divisi"
+                        />
+                        <InputError message={errors.department} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="join_date">Tanggal Bergabung</Label>
+                        <Input
+                            id="join_date"
+                            type="date"
+                            value={data.join_date}
+                            onChange={(e) =>
+                                setData('join_date', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.join_date} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="end_date">Tanggal Berakhir</Label>
+                        <Input
+                            id="end_date"
+                            type="date"
+                            value={data.end_date}
+                            onChange={(e) =>
+                                setData('end_date', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.end_date} />
+                    </div>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>Informasi Pribadi</CardTitle>
+                    <CardDescription>
+                        Data pendukung dan informasi kontak pribadi.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                        <Label htmlFor="birth_place">Tempat Lahir</Label>
+                        <Input
+                            id="birth_place"
+                            value={data.birth_place}
+                            onChange={(e) =>
+                                setData('birth_place', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.birth_place} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="birth_date">Tanggal Lahir</Label>
+                        <Input
+                            id="birth_date"
+                            type="date"
+                            value={data.birth_date}
+                            onChange={(e) =>
+                                setData('birth_date', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.birth_date} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="gender">Jenis Kelamin</Label>
+                        <Select
+                            value={data.gender}
+                            onValueChange={(value) => setData('gender', value)}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Pilih jenis kelamin" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="L">Laki-laki</SelectItem>
+                                <SelectItem value="P">Perempuan</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <InputError message={errors.gender} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="phone_number">
+                            Nomor HP / WhatsApp
+                        </Label>
+                        <Input
+                            id="phone_number"
+                            value={data.phone_number}
+                            onChange={(e) =>
+                                setData('phone_number', e.target.value)
+                            }
+                            placeholder="08..."
+                        />
+                        <InputError message={errors.phone_number} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="bank_account_number">
+                            Nomor Rekening
+                        </Label>
+                        <Input
+                            id="bank_account_number"
+                            value={data.bank_account_number}
+                            onChange={(e) =>
+                                setData('bank_account_number', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.bank_account_number} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="education_institution">
+                            Asal Pendidikan
+                        </Label>
+                        <Input
+                            id="education_institution"
+                            value={data.education_institution}
+                            onChange={(e) =>
+                                setData('education_institution', e.target.value)
+                            }
+                        />
+                        <InputError message={errors.education_institution} />
+                    </div>
+
+                    <div className="space-y-2 sm:col-span-2">
+                        <Label htmlFor="major">Jurusan</Label>
+                        <Input
+                            id="major"
+                            value={data.major}
+                            onChange={(e) => setData('major', e.target.value)}
+                        />
+                        <InputError message={errors.major} />
+                    </div>
+
+                    <div className="space-y-2 sm:col-span-2">
+                        <Label htmlFor="address">Alamat Domisili</Label>
+                        <Input
+                            id="address"
+                            value={data.address}
+                            onChange={(e) => setData('address', e.target.value)}
+                        />
+                        <InputError message={errors.address} />
+                    </div>
+                </CardContent>
+            </Card>
+
+            {!isEdit && (
+                <Card className="border-dashed">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <Upload className="h-5 w-5" />
+                            Dokumen Pendukung
+                        </CardTitle>
+                        <CardDescription>
+                            Unggah scan KTP, Ijazah, CV, atau dokumen lainnya
+                            (Maks. 10MB per file).
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <Input
+                            id="documents"
+                            type="file"
+                            multiple
+                            accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
+                            onChange={(e) => {
+                                if (e.target.files) {
+                                    setData(
+                                        'documents',
+                                        Array.from(e.target.files),
+                                    );
+                                }
+                            }}
+                            className="cursor-pointer"
+                        />
+                        <InputError message={errors.documents} />
+                        {data.documents.length > 0 && (
+                            <p className="rounded-md bg-muted p-2 text-sm text-muted-foreground">
+                                {data.documents.length} file dipilih.
+                            </p>
                         )}
-                    </Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
-                        required={!isEdit}
-                        minLength={isEdit ? undefined : 8}
-                        autoComplete={isEdit ? 'new-password' : 'new-password'}
-                    />
-                    {errors.password && (
-                        <p className="text-sm text-destructive">
-                            {errors.password}
-                        </p>
-                    )}
-                </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor="password_confirmation">
-                        Confirm password
-                    </Label>
-                    <Input
-                        id="password_confirmation"
-                        type="password"
-                        value={data.password_confirmation}
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
-                        required={!!data.password}
-                        autoComplete="new-password"
-                    />
-                    {errors.password_confirmation && (
-                        <p className="text-sm text-destructive">
-                            {errors.password_confirmation}
-                        </p>
-                    )}
-                </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor="role">Role</Label>
-                    <Select
-                        value={data.role}
-                        onValueChange={(value) => setData('role', value)}
-                        disabled={isSelf}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select a role" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {roles.map((role) => (
-                                <SelectItem key={role} value={role}>
-                                    {role}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    {errors.role && (
-                        <p className="text-sm text-destructive">
-                            {errors.role}
-                        </p>
-                    )}
-                </div>
-
-                <div className="flex items-center space-x-2 pt-6">
-                    <Checkbox
-                        id="is_active"
-                        checked={data.is_active}
-                        onCheckedChange={(checked) =>
-                            setData('is_active', !!checked)
-                        }
-                        disabled={isSelf}
-                    />
-                    <Label htmlFor="is_active" className="font-normal">
-                        Active (can log in)
-                    </Label>
-                    {errors.is_active && (
-                        <p className="text-sm text-destructive">
-                            {errors.is_active}
-                        </p>
-                    )}
-                </div>
-            </div>
+                    </CardContent>
+                </Card>
+            )}
 
             {isSelf && (
                 <p className="text-sm text-muted-foreground">
-                    You cannot change your own role or deactivate your own
-                    account.
+                    Anda tidak dapat mengubah peran atau menonaktifkan akun
+                    sendiri.
                 </p>
             )}
 
             <div className="flex justify-end gap-2">
                 <Button variant="outline" type="button" asChild>
-                    <Link href={UserController.index().url}>Cancel</Link>
+                    <Link href={UserController.index().url}>Batal</Link>
                 </Button>
                 <Button type="submit" disabled={processing}>
                     {processing && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     )}
-                    {isEdit ? 'Save changes' : 'Create user'}
+                    {isEdit ? 'Simpan Perubahan' : 'Buat Pengguna'}
                 </Button>
             </div>
         </form>

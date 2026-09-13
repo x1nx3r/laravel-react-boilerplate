@@ -1,8 +1,9 @@
 import { Head, router, usePage } from '@inertiajs/react';
-import { Pencil, Plus, Search, X } from 'lucide-react';
+import { Check, Pencil, Plus, Search, X } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 import { useState } from 'react';
 
+import RegistrationSettingController from '@/actions/App/Http/Controllers/Admin/RegistrationSettingController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
 import { Pagination } from '@/components/common/pagination';
 import StatusMessage from '@/components/common/status-message';
@@ -18,7 +19,9 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
     Select,
     SelectContent,
@@ -40,19 +43,42 @@ import type { PaginatedData, User } from '@/types';
 interface UsersIndexProps {
     users: PaginatedData<User>;
     roles: string[];
+    departments: string[];
+    requireRegistrationApproval: boolean;
     filters: {
         search?: string;
         role?: string;
+        status?: string;
         is_active?: string;
+        department?: string;
+        employee_status?: string;
     };
 }
 
-export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
+export default function UsersIndex({
+    users,
+    roles,
+    departments,
+    requireRegistrationApproval,
+    filters,
+}: UsersIndexProps) {
     const { auth, flash } = usePage().props;
     const [search, setSearch] = useState(filters.search ?? '');
     const [role, setRole] = useState(filters.role ?? 'all');
-    const [status, setStatus] = useState(filters.is_active ?? 'all');
+    const [approvalStatus, setApprovalStatus] = useState(
+        filters.status ?? 'all',
+    );
+    const [accountStatus, setAccountStatus] = useState(
+        filters.is_active ?? 'all',
+    );
+    const [department, setDepartment] = useState(filters.department ?? 'all');
+    const [employeeStatus, setEmployeeStatus] = useState(
+        filters.employee_status ?? 'all',
+    );
     const [userToDelete, setUserToDelete] = useState<User | null>(null);
+    const [requireApproval, setRequireApproval] = useState(
+        requireRegistrationApproval,
+    );
 
     const isSuperadmin = (auth.roles ?? []).includes('superadmin');
 
@@ -63,7 +89,11 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
             {
                 search: search || undefined,
                 role: role === 'all' ? undefined : role,
-                is_active: status === 'all' ? undefined : status,
+                status: approvalStatus === 'all' ? undefined : approvalStatus,
+                is_active: accountStatus === 'all' ? undefined : accountStatus,
+                department: department === 'all' ? undefined : department,
+                employee_status:
+                    employeeStatus === 'all' ? undefined : employeeStatus,
             },
             { preserveState: true, preserveScroll: true },
         );
@@ -72,12 +102,30 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
     const clearFilters = () => {
         setSearch('');
         setRole('all');
-        setStatus('all');
+        setApprovalStatus('all');
+        setAccountStatus('all');
+        setDepartment('all');
+        setEmployeeStatus('all');
         router.get(UserController.index().url, {}, { preserveState: true });
+    };
+
+    const toggleApproval = (value: boolean) => {
+        setRequireApproval(value);
+        router.put(
+            RegistrationSettingController.update().url,
+            { require_approval: value },
+            { preserveState: true, preserveScroll: true },
+        );
     };
 
     const canManage = (target: User) =>
         isSuperadmin || !target.roles?.some((r) => r.name === 'superadmin');
+
+    const verifyUser = (target: User) => {
+        router.put(UserController.verify({ user: target.id }).url, {
+            preserveScroll: true,
+        });
+    };
 
     const confirmDelete = () => {
         if (userToDelete) {
@@ -112,21 +160,38 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                     />
                 )}
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <h1 className="text-2xl font-bold tracking-tight">Users</h1>
-                    <Button asChild>
-                        <a href={UserController.create().url}>
-                            <Plus className="mr-2 h-4 w-4" />
-                            Create user
-                        </a>
-                    </Button>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex items-center gap-2 rounded-md border p-2">
+                            <Checkbox
+                                id="require-approval"
+                                checked={requireApproval}
+                                onCheckedChange={(checked) =>
+                                    toggleApproval(checked === true)
+                                }
+                            />
+                            <Label
+                                htmlFor="require-approval"
+                                className="text-sm font-normal"
+                            >
+                                Require registration approval
+                            </Label>
+                        </div>
+                        <Button asChild>
+                            <a href={UserController.create().url}>
+                                <Plus className="mr-2 h-4 w-4" />
+                                Create user
+                            </a>
+                        </Button>
+                    </div>
                 </div>
 
                 <form
                     onSubmit={applyFilters}
-                    className="flex flex-col gap-2 md:flex-row md:items-center"
+                    className="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-center"
                 >
-                    <div className="relative w-full md:w-64">
+                    <div className="relative w-full md:w-56">
                         <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
                             type="search"
@@ -137,7 +202,7 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                         />
                     </div>
                     <Select value={role} onValueChange={setRole}>
-                        <SelectTrigger className="md:w-44">
+                        <SelectTrigger className="md:w-36">
                             <SelectValue placeholder="Role" />
                         </SelectTrigger>
                         <SelectContent>
@@ -149,14 +214,56 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                             ))}
                         </SelectContent>
                     </Select>
-                    <Select value={status} onValueChange={setStatus}>
+                    <Select
+                        value={approvalStatus}
+                        onValueChange={setApprovalStatus}
+                    >
                         <SelectTrigger className="md:w-40">
+                            <SelectValue placeholder="Approval" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All approvals</SelectItem>
+                            <SelectItem value="pending">Pending</SelectItem>
+                            <SelectItem value="active">Verified</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <Select
+                        value={accountStatus}
+                        onValueChange={setAccountStatus}
+                    >
+                        <SelectTrigger className="md:w-36">
                             <SelectValue placeholder="Status" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All statuses</SelectItem>
+                            <SelectItem value="all">All states</SelectItem>
                             <SelectItem value="1">Active</SelectItem>
                             <SelectItem value="0">Inactive</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <Select value={department} onValueChange={setDepartment}>
+                        <SelectTrigger className="md:w-40">
+                            <SelectValue placeholder="Department" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All departments</SelectItem>
+                            {departments.map((d) => (
+                                <SelectItem key={d} value={d}>
+                                    {d}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <Select
+                        value={employeeStatus}
+                        onValueChange={setEmployeeStatus}
+                    >
+                        <SelectTrigger className="md:w-36">
+                            <SelectValue placeholder="Contract" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All contracts</SelectItem>
+                            <SelectItem value="kontrak">Kontrak</SelectItem>
+                            <SelectItem value="tetap">Tetap</SelectItem>
                         </SelectContent>
                     </Select>
                     <div className="flex items-center gap-2">
@@ -175,13 +282,14 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                     </div>
                 </form>
 
-                <div className="rounded-md border">
+                <div className="overflow-x-auto rounded-md border">
                     <Table>
                         <TableHeader>
                             <TableRow>
                                 <TableHead>Name</TableHead>
+                                <TableHead>Employee</TableHead>
                                 <TableHead>Roles</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead>State</TableHead>
                                 <TableHead className="text-right">
                                     Actions
                                 </TableHead>
@@ -191,7 +299,7 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                             {users.data.length === 0 ? (
                                 <TableRow>
                                     <TableCell
-                                        colSpan={4}
+                                        colSpan={5}
                                         className="h-24 text-center text-muted-foreground"
                                     >
                                         No users found.
@@ -206,6 +314,14 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                                             </div>
                                             <div className="text-xs text-muted-foreground">
                                                 {user.email}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="text-sm">
+                                                {user.employee_id ?? '—'}
+                                            </div>
+                                            <div className="text-xs text-muted-foreground capitalize">
+                                                {user.department ?? '—'}
                                             </div>
                                         </TableCell>
                                         <TableCell>
@@ -228,15 +344,36 @@ export default function UsersIndex({ users, roles, filters }: UsersIndexProps) {
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            {user.is_active ? (
-                                                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-950 dark:text-green-300">
-                                                    Active
-                                                </Badge>
-                                            ) : (
-                                                <Badge variant="secondary">
-                                                    Inactive
-                                                </Badge>
-                                            )}
+                                            <div className="flex flex-wrap items-center gap-1">
+                                                {user.status === 'pending' ? (
+                                                    <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-950 dark:text-amber-300">
+                                                        Pending
+                                                    </Badge>
+                                                ) : user.is_active ? (
+                                                    <Badge className="bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-950 dark:text-green-300">
+                                                        Active
+                                                    </Badge>
+                                                ) : (
+                                                    <Badge variant="secondary">
+                                                        Inactive
+                                                    </Badge>
+                                                )}
+                                                {user.status === 'pending' &&
+                                                    canManage(user) && (
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            className="h-7 px-2 text-xs"
+                                                            onClick={() =>
+                                                                verifyUser(user)
+                                                            }
+                                                            title="Verify and activate this account"
+                                                        >
+                                                            <Check className="mr-1 h-3 w-3" />
+                                                            Verify
+                                                        </Button>
+                                                    )}
+                                            </div>
                                         </TableCell>
                                         <TableCell className="text-right">
                                             <div className="flex justify-end gap-1">

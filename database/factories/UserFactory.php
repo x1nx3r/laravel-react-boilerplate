@@ -30,6 +30,13 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'is_active' => true,
+            'status' => User::STATUS_ACTIVE,
+            'employee_id' => 'EMP-'.fake()->unique()->numerify('#####'),
+            'department' => fake()->randomElement(['HR', 'Marketing', 'Administrasi', 'Operations']),
+            'employee_status' => fake()->randomElement(['kontrak', 'tetap']),
+            'gender' => fake()->randomElement(['L', 'P']),
+            'join_date' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
+            'phone_number' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -41,6 +48,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the account awaits HR verification.
+     */
+    public function pending(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => User::STATUS_PENDING,
         ]);
     }
 }

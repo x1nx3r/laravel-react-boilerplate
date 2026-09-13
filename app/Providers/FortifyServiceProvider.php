@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
@@ -45,11 +46,23 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
-            if ($user &&
-                Hash::check($request->password, $user->password) &&
-                $user->is_active) {
-                return $user;
+            if (! $user || ! Hash::check($request->password, $user->password)) {
+                return null;
             }
+
+            if ($user->status === User::STATUS_PENDING) {
+                throw ValidationException::withMessages([
+                    Fortify::username() => __('Your account is awaiting verification by HR.'),
+                ]);
+            }
+
+            if (! $user->is_active) {
+                throw ValidationException::withMessages([
+                    Fortify::username() => __('Your account has been deactivated.'),
+                ]);
+            }
+
+            return $user;
         });
 
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
@@ -64,6 +77,10 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(fn (Request $request) => Inertia::render('auth/login/page', [
             'canResetPassword' => Features::enabled(Features::resetPasswords()),
             'canRegister' => Features::enabled(Features::registration()),
+            'status' => $request->session()->get('status'),
+        ]));
+
+        Fortify::registerView(fn (Request $request) => Inertia::render('auth/register/page', [
             'status' => $request->session()->get('status'),
         ]));
 

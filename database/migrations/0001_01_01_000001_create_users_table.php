@@ -19,6 +19,23 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default(true); // To disable accounts later
+            $table->string('status')->default('active'); // pending|active (registration approval)
+
+            // HR attributes (optional, self-service or HR-provisioned)
+            $table->string('employee_id')->nullable();
+            $table->string('nik')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->text('address')->nullable();
+            $table->string('employee_status')->nullable(); // kontrak|tetap
+            $table->string('department')->nullable();
+            $table->string('gender', 1)->nullable(); // L|P
+            $table->date('join_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('major')->nullable();
+            $table->string('education_institution')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('bank_account_number')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

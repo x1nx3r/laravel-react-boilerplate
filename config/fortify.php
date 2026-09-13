@@ -144,7 +144,7 @@ return [
     */
 
     'features' => [
-        // Features::registration(), // ❌ NO PUBLIC SIGN UPS
+        Features::registration(),    // ✅ Public sign-ups (optionally gated by approval, see Setting::REQUIRE_REGISTRATION_APPROVAL)
         Features::resetPasswords(),  // ✅ Keep for Admin onboarding
         // Features::emailVerification(),
         // Features::updateProfileInformation(), // Handled by Settings\ProfileController

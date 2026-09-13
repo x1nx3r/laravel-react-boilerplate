@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Support\Rbac;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserManagementTest extends TestCase
@@ -141,5 +143,46 @@ class UserManagementTest extends TestCase
         ]);
 
         $this->assertGuest();
+    }
+
+    public function test_hr_can_create_user_with_hr_attributes_and_documents(): void
+    {
+        Storage::fake('local');
+        $actor = $this->userWithRole(Rbac::ROLE_HR);
+
+        $this->actingAs($actor)->post(route('admin.users.store'), [
+            'name' => 'Full User',
+            'email' => 'full-user@example.com',
+            'password' => 'password123',
+            'role' => Rbac::ROLE_USER,
+            'is_active' => true,
+            'employee_id' => 'EMP-777',
+            'nik' => '3515167890123456',
+            'department' => 'Operations',
+            'employee_status' => 'tetap',
+            'gender' => 'L',
+            'join_date' => '2024-01-01',
+            'documents' => [UploadedFile::fake()->image('ijazah.png', 600, 600)],
+        ]);
+
+        $user = User::where('email', 'full-user@example.com')->first();
+
+        $this->assertNotNull($user);
+        $this->assertSame('EMP-777', $user->employee_id);
+        $this->assertSame('Operations', $user->department);
+        $this->assertCount(1, $user->documents);
+        $this->assertNotNull($user->documents->first()->thumbnail_path);
+
+        Storage::disk('local')->assertExists($user->documents->first()->path);
+    }
+
+    public function test_verify_is_rejected_for_already_active_users(): void
+    {
+        $actor = $this->userWithRole(Rbac::ROLE_SUPERADMIN);
+        $target = $this->userWithRole(Rbac::ROLE_USER);
+
+        $this->actingAs($actor)
+            ->put(route('admin.users.verify', $target))
+            ->assertForbidden();
     }
 }
