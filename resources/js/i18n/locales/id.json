@@ -18,7 +18,9 @@
         "dashboard": "Beranda",
         "administration": "Administrasi",
         "users": "Pengguna",
-        "roles": "Peran"
+        "roles": "Peran",
+        "attendance": "Absensi",
+        "leave_review": "Tinjau Cuti"
     },
     "dashboard": {
         "title": "Beranda",
@@ -295,6 +297,93 @@
         "delete_title": "Hapus Peran",
         "delete_description": "Apakah Anda yakin ingin menghapus peran <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan.",
         "no_results": "Tidak ada peran ditemukan."
+    },
+    "attendance": {
+        "title": "Absensi",
+        "description": "Check in dan check out, serta lihat rekap bulanan Anda.",
+        "breadcrumb": "Absensi",
+        "team_view": "Absensi Tim",
+        "review_queue": "Tinjau Pengajuan Cuti",
+        "today": {
+            "title": "Hari Ini",
+            "description": "Tandai kehadiran Anda untuk hari ini.",
+            "ready": "Siap memulai hari?",
+            "check_in": "Check in",
+            "check_out": "Check out",
+            "checked_in_at": "Check in pukul {{time}}",
+            "checked_out_at": "Check out pukul {{time}}",
+            "on_leave": "Anda sedang cuti hari ini."
+        },
+        "status": {
+            "present": "Hadir",
+            "in_progress": "Sedang bekerja",
+            "leave": "Cuti",
+            "weekend": "Akhir pekan",
+            "absent": "Tidak hadir",
+            "upcoming": "Akan datang"
+        },
+        "calendar": {
+            "prev_month": "Bulan sebelumnya",
+            "next_month": "Bulan berikutnya"
+        },
+        "team": {
+            "title": "Absensi Tim",
+            "description": "Pilih pengguna untuk melihat kalender, riwayat, dan pengajuan cutinya.",
+            "breadcrumb": "Absensi Tim",
+            "picker_label": "Pengguna",
+            "selected": "Pengguna terpilih",
+            "history_title": "Riwayat Absensi",
+            "leaves_title": "Pengajuan Cuti",
+            "empty": "Belum ada catatan absensi.",
+            "table": {
+                "date": "Tanggal",
+                "check_in": "Check in",
+                "check_out": "Check out",
+                "missing_checkout": "Tanpa check out"
+            }
+        }
+    },
+    "leaves": {
+        "title": "Pengajuan Cuti",
+        "description": "Ajukan cuti dan pantau status pengajuan Anda.",
+        "breadcrumb": "Pengajuan Cuti",
+        "my_leaves": "Pengajuan Cuti Saya",
+        "form": {
+            "title": "Ajukan Cuti",
+            "description": "Pilih rentang tanggal dan tulis alasan singkat.",
+            "start_date": "Tanggal Mulai",
+            "end_date": "Tanggal Selesai",
+            "reason": "Alasan",
+            "reason_placeholder": "Mengapa Anda membutuhkan cuti?",
+            "submit": "Kirim Pengajuan"
+        },
+        "table": {
+            "dates": "Tanggal",
+            "reason": "Alasan",
+            "status": "Status",
+            "reviewer": "Ditinjau oleh",
+            "note": "Catatan",
+            "empty": "Belum ada pengajuan cuti."
+        },
+        "status": {
+            "pending": "Menunggu",
+            "approved": "Disetujui",
+            "rejected": "Ditolak"
+        },
+        "review": {
+            "title": "Tinjau Pengajuan Cuti",
+            "description": "Setujui atau tolak pengajuan cuti yang menunggu.",
+            "breadcrumb": "Tinjau",
+            "queue_title": "Antrean Menunggu",
+            "queue_description": "Pengajuan yang menunggu keputusan.",
+            "user": "Pengguna",
+            "empty": "Tidak ada pengajuan cuti yang menunggu.",
+            "approve": "Setujui",
+            "reject": "Tolak",
+            "reject_title": "Tolak Pengajuan Cuti",
+            "reject_description": "Tambahkan catatan opsional untuk {{name}}.",
+            "note": "Catatan peninjau (opsional)"
+        }
     },
     "pagination": {
         "showing": "Menampilkan {{from}} sampai {{to}} dari {{total}} hasil",

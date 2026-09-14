@@ -19,6 +19,8 @@ final class Rbac
 
     public const PERM_MANAGE_ROLES = 'manage_roles';
 
+    public const PERM_VIEW_ATTENDANCE = 'view_attendance';
+
     /**
      * @return array<string, list<string>>
      */
@@ -29,10 +31,12 @@ final class Rbac
                 self::PERM_VIEW_ADMIN,
                 self::PERM_MANAGE_USERS,
                 self::PERM_MANAGE_ROLES,
+                self::PERM_VIEW_ATTENDANCE,
             ],
             self::ROLE_HR => [
                 self::PERM_VIEW_ADMIN,
                 self::PERM_MANAGE_USERS,
+                self::PERM_VIEW_ATTENDANCE,
             ],
             self::ROLE_USER => [],
         ];

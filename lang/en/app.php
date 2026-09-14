@@ -27,4 +27,21 @@ return [
     'registration' => [
         'updated' => 'Registration setting updated.',
     ],
+
+    'attendance' => [
+        'checked_in' => 'Checked in. Have a great day!',
+        'checked_out' => 'Checked out. See you tomorrow!',
+        'already_checked_in' => 'You have already checked in today.',
+        'already_checked_out' => 'You have already checked out today.',
+        'not_checked_in' => 'You have not checked in yet today.',
+        'on_leave' => 'You are on approved leave today.',
+    ],
+
+    'leaves' => [
+        'submitted' => 'Leave request submitted.',
+        'approved' => 'Leave request approved.',
+        'rejected' => 'Leave request rejected.',
+        'already_reviewed' => 'This request has already been reviewed.',
+        'overlap' => 'The selected range overlaps another pending or approved leave request.',
+    ],
 ];

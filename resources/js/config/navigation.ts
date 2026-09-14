@@ -1,7 +1,9 @@
-import { LayoutGrid, ShieldCheck } from 'lucide-react';
+import { CalendarDays, ClipboardCheck, LayoutGrid, ShieldCheck } from 'lucide-react';
 
 import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
+import AttendanceController from '@/actions/App/Http/Controllers/Attendance/AttendanceController';
+import LeaveRequestController from '@/actions/App/Http/Controllers/Attendance/LeaveRequestController';
 import type { NavItem } from '@/types';
 
 /**
@@ -14,6 +16,17 @@ export const mainNavItems: NavItem[] = [
         title: 'nav.dashboard',
         href: '/',
         icon: LayoutGrid,
+    },
+    {
+        title: 'nav.attendance',
+        href: AttendanceController.index().url,
+        icon: CalendarDays,
+    },
+    {
+        title: 'nav.leave_review',
+        href: LeaveRequestController.reviewIndex().url,
+        icon: ClipboardCheck,
+        permissions: ['view_attendance'],
     },
 ];
 

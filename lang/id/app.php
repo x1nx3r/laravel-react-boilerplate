@@ -27,4 +27,21 @@ return [
     'registration' => [
         'updated' => 'Pengaturan pendaftaran berhasil diperbarui.',
     ],
+
+    'attendance' => [
+        'checked_in' => 'Berhasil check in. Semoga harimu menyenangkan!',
+        'checked_out' => 'Berhasil check out. Sampai jumpa besok!',
+        'already_checked_in' => 'Anda sudah check in hari ini.',
+        'already_checked_out' => 'Anda sudah check out hari ini.',
+        'not_checked_in' => 'Anda belum check in hari ini.',
+        'on_leave' => 'Anda sedang cuti hari ini.',
+    ],
+
+    'leaves' => [
+        'submitted' => 'Pengajuan cuti berhasil dikirim.',
+        'approved' => 'Pengajuan cuti disetujui.',
+        'rejected' => 'Pengajuan cuti ditolak.',
+        'already_reviewed' => 'Pengajuan ini sudah ditinjau.',
+        'overlap' => 'Rentang tanggal bertabrakan dengan pengajuan cuti lain yang masih pending atau disetujui.',
+    ],
 ];

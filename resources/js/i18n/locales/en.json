@@ -18,7 +18,9 @@
         "dashboard": "Dashboard",
         "administration": "Administration",
         "users": "Users",
-        "roles": "Roles"
+        "roles": "Roles",
+        "attendance": "Attendance",
+        "leave_review": "Leave review"
     },
     "dashboard": {
         "title": "Dashboard",
@@ -295,6 +297,93 @@
         "delete_title": "Delete role",
         "delete_description": "Are you sure you want to delete the role <strong>{{name}}</strong>? This action cannot be undone.",
         "no_results": "No roles found."
+    },
+    "attendance": {
+        "title": "Attendance",
+        "description": "Check in and out, and see your month at a glance.",
+        "breadcrumb": "Attendance",
+        "team_view": "Team attendance",
+        "review_queue": "Review leave requests",
+        "today": {
+            "title": "Today",
+            "description": "Mark your attendance for today.",
+            "ready": "Ready to start the day?",
+            "check_in": "Check in",
+            "check_out": "Check out",
+            "checked_in_at": "Checked in at {{time}}",
+            "checked_out_at": "Checked out at {{time}}",
+            "on_leave": "You are on approved leave today."
+        },
+        "status": {
+            "present": "Present",
+            "in_progress": "In progress",
+            "leave": "Leave",
+            "weekend": "Weekend",
+            "absent": "Absent",
+            "upcoming": "Upcoming"
+        },
+        "calendar": {
+            "prev_month": "Previous month",
+            "next_month": "Next month"
+        },
+        "team": {
+            "title": "Team attendance",
+            "description": "Pick a user to view their calendar, history and leave requests.",
+            "breadcrumb": "Team attendance",
+            "picker_label": "User",
+            "selected": "Selected user",
+            "history_title": "Attendance history",
+            "leaves_title": "Leave requests",
+            "empty": "No attendance records yet.",
+            "table": {
+                "date": "Date",
+                "check_in": "Check in",
+                "check_out": "Check out",
+                "missing_checkout": "No check-out"
+            }
+        }
+    },
+    "leaves": {
+        "title": "Leave requests",
+        "description": "Request time off and track your submissions.",
+        "breadcrumb": "Leave requests",
+        "my_leaves": "My leave requests",
+        "form": {
+            "title": "Request leave",
+            "description": "Pick a date range and add a short reason.",
+            "start_date": "Start date",
+            "end_date": "End date",
+            "reason": "Reason",
+            "reason_placeholder": "Why do you need leave?",
+            "submit": "Submit request"
+        },
+        "table": {
+            "dates": "Dates",
+            "reason": "Reason",
+            "status": "Status",
+            "reviewer": "Reviewed by",
+            "note": "Note",
+            "empty": "No leave requests yet."
+        },
+        "status": {
+            "pending": "Pending",
+            "approved": "Approved",
+            "rejected": "Rejected"
+        },
+        "review": {
+            "title": "Review leave requests",
+            "description": "Approve or reject pending leave requests.",
+            "breadcrumb": "Review",
+            "queue_title": "Pending queue",
+            "queue_description": "Requests waiting for a decision.",
+            "user": "User",
+            "empty": "No pending leave requests.",
+            "approve": "Approve",
+            "reject": "Reject",
+            "reject_title": "Reject leave request",
+            "reject_description": "Add an optional note for {{name}}.",
+            "note": "Reviewer note (optional)"
+        }
     },
     "pagination": {
         "showing": "Showing {{from}} to {{to}} of {{total}} results",
