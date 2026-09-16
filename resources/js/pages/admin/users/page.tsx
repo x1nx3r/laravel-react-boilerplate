@@ -190,7 +190,7 @@ export default function UsersIndex({
                         <Button asChild>
                             <a href={UserController.create().url}>
                                 <Plus className="mr-2 h-4 w-4" />
-                                Create user
+                                {t('users.create')}
                             </a>
                         </Button>
                     </div>
@@ -299,7 +299,7 @@ export default function UsersIndex({
                     </Select>
                     <div className="flex items-center gap-2">
                         <Button type="submit" variant="outline">
-                            Filter
+                            {t('common.filter')}
                         </Button>
                         <Button
                             type="button"
@@ -371,7 +371,9 @@ export default function UsersIndex({
                                                     ))
                                                 ) : (
                                                     <span className="text-xs text-muted-foreground italic">
-                                                        No role
+                                                        {t(
+                                                            'users.table.no_role',
+                                                        )}
                                                     </span>
                                                 )}
                                             </div>
@@ -406,7 +408,9 @@ export default function UsersIndex({
                                                             onClick={() =>
                                                                 verifyUser(user)
                                                             }
-                                                            title="Verify and activate this account"
+                                                            title={t(
+                                                                'users.verify_title',
+                                                            )}
                                                         >
                                                             <Check className="mr-1 h-3 w-3" />
                                                             {t('users.verify')}

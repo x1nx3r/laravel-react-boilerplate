@@ -12,6 +12,10 @@
         "save_changes": "Simpan Perubahan",
         "menu": "Menu",
         "home": "Beranda",
+        "pick_date": "Pilih tanggal",
+        "clear": "Bersihkan",
+        "required": "wajib",
+        "optional": "opsional",
         "processing": "Memproses..."
     },
     "nav": {
@@ -24,11 +28,6 @@
     },
     "dashboard": {
         "title": "Beranda",
-        "welcome_title": "Selamat datang di {{name}}",
-        "welcome_description": "Kerangka aplikasi Anda sudah siap.",
-        "card_title": "Siap digunakan",
-        "card_description": "Auth, pengaturan, layout shell, dan CI sudah terpasang. Ganti halaman ini dengan modul pertama Anda.",
-        "card_body": "Tambahkan rute di <0>routes/web.php</0>, halaman di <1>resources/js/pages</1>, dan navigasi di <2>resources/js/config/navigation.ts</2>.",
         "stats": {
             "title": "Data Pegawai",
             "description": "Ringkasan komposisi pegawai.",

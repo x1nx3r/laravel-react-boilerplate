@@ -4,6 +4,7 @@ import type { FormEventHandler } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
+import FieldLabel from '@/components/common/field-label';
 import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -81,7 +82,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                 </CardHeader>
                 <CardContent className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="name">{t('users.form.name')}</Label>
+                        <FieldLabel htmlFor="name" mark="required">
+                            {t('users.form.name')}
+                        </FieldLabel>
                         <Input
                             id="name"
                             value={data.name}
@@ -93,7 +96,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="email">{t('users.form.email')}</Label>
+                        <FieldLabel htmlFor="email" mark="required">
+                            {t('users.form.email')}
+                        </FieldLabel>
                         <Input
                             id="email"
                             type="email"
@@ -106,14 +111,18 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password">
-                            {t('users.form.password')}{' '}
-                            {isEdit && (
+                        {isEdit ? (
+                            <Label htmlFor="password">
+                                {t('users.form.password')}{' '}
                                 <span className="text-muted-foreground">
                                     {t('users.form.password_keep')}
                                 </span>
-                            )}
-                        </Label>
+                            </Label>
+                        ) : (
+                            <FieldLabel htmlFor="password" mark="required">
+                                {t('users.form.password')}
+                            </FieldLabel>
+                        )}
                         <Input
                             id="password"
                             type="password"
@@ -129,9 +138,12 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password_confirmation">
+                        <FieldLabel
+                            htmlFor="password_confirmation"
+                            mark={isEdit ? 'optional' : 'required'}
+                        >
                             {t('users.form.password_confirmation')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="password_confirmation"
                             type="password"
@@ -146,7 +158,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="role">{t('users.form.role')}</Label>
+                        <FieldLabel htmlFor="role" mark="required">
+                            {t('users.form.role')}
+                        </FieldLabel>
                         <Select
                             value={data.role}
                             onValueChange={(value) => setData('role', value)}
@@ -196,9 +210,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                 </CardHeader>
                 <CardContent className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="employee_id">
+                        <FieldLabel htmlFor="employee_id">
                             {t('users.form.employee_id')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="employee_id"
                             value={data.employee_id}
@@ -213,7 +227,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="nik">{t('users.form.nik')}</Label>
+                        <FieldLabel htmlFor="nik">
+                            {t('users.form.nik')}
+                        </FieldLabel>
                         <Input
                             id="nik"
                             value={data.nik}
@@ -224,9 +240,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="employee_status">
+                        <FieldLabel htmlFor="employee_status">
                             {t('users.form.employee_status')}
-                        </Label>
+                        </FieldLabel>
                         <Select
                             value={data.employee_status}
                             onValueChange={(value) =>
@@ -253,9 +269,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="department">
+                        <FieldLabel htmlFor="department">
                             {t('users.form.department')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="department"
                             value={data.department}
@@ -268,31 +284,28 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="join_date">
+                        <FieldLabel htmlFor="join_date">
                             {t('users.form.join_date')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="join_date"
                             type="date"
                             value={data.join_date}
-                            onChange={(e) =>
-                                setData('join_date', e.target.value)
-                            }
+                            onChange={(e) => setData('join_date', e.target.value)}
                         />
                         <InputError message={errors.join_date} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="end_date">
+                        <FieldLabel htmlFor="end_date">
                             {t('users.form.end_date')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="end_date"
                             type="date"
                             value={data.end_date}
-                            onChange={(e) =>
-                                setData('end_date', e.target.value)
-                            }
+                            min={data.join_date || undefined}
+                            onChange={(e) => setData('end_date', e.target.value)}
                         />
                         <InputError message={errors.end_date} />
                     </div>
@@ -308,9 +321,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                 </CardHeader>
                 <CardContent className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="birth_place">
+                        <FieldLabel htmlFor="birth_place">
                             {t('users.form.birth_place')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="birth_place"
                             value={data.birth_place}
@@ -322,22 +335,22 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="birth_date">
+                        <FieldLabel htmlFor="birth_date">
                             {t('users.form.birth_date')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="birth_date"
                             type="date"
                             value={data.birth_date}
-                            onChange={(e) =>
-                                setData('birth_date', e.target.value)
-                            }
+                            onChange={(e) => setData('birth_date', e.target.value)}
                         />
                         <InputError message={errors.birth_date} />
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="gender">{t('users.form.gender')}</Label>
+                        <FieldLabel htmlFor="gender">
+                            {t('users.form.gender')}
+                        </FieldLabel>
                         <Select
                             value={data.gender}
                             onValueChange={(value) => setData('gender', value)}
@@ -362,9 +375,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="phone_number">
+                        <FieldLabel htmlFor="phone_number">
                             Nomor HP / WhatsApp
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="phone_number"
                             value={data.phone_number}
@@ -377,9 +390,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="bank_account_number">
+                        <FieldLabel htmlFor="bank_account_number">
                             Nomor Rekening
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="bank_account_number"
                             value={data.bank_account_number}
@@ -391,9 +404,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="education_level">
+                        <FieldLabel htmlFor="education_level">
                             {t('users.form.education_level')}
-                        </Label>
+                        </FieldLabel>
                         <Select
                             value={data.education_level}
                             onValueChange={(value) =>
@@ -426,9 +439,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="education_institution">
+                        <FieldLabel htmlFor="education_institution">
                             Asal Pendidikan
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="education_institution"
                             value={data.education_institution}
@@ -440,7 +453,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2 sm:col-span-2">
-                        <Label htmlFor="major">{t('users.form.major')}</Label>
+                        <FieldLabel htmlFor="major">
+                            {t('users.form.major')}
+                        </FieldLabel>
                         <Input
                             id="major"
                             value={data.major}
@@ -450,9 +465,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                     </div>
 
                     <div className="space-y-2 sm:col-span-2">
-                        <Label htmlFor="address">
+                        <FieldLabel htmlFor="address">
                             {t('users.form.address')}
-                        </Label>
+                        </FieldLabel>
                         <Input
                             id="address"
                             value={data.address}
@@ -469,6 +484,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                         <CardTitle className="flex items-center gap-2">
                             <Upload className="h-5 w-5" />
                             {t('users.form.documents_section')}
+                            <span className="text-xs font-normal text-muted-foreground">
+                                ({t('common.optional')})
+                            </span>
                         </CardTitle>
                         <CardDescription>
                             {t('users.form.documents_description')}

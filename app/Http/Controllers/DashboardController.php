@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Support\Rbac;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): Response|RedirectResponse
     {
-        $employeeStats = $request->user()->hasPermissionTo(Rbac::PERM_VIEW_ADMIN)
-            ? $this->employeeStats()
-            : null;
+        $user = $request->user();
+
+        if (! $user->hasPermissionTo(Rbac::PERM_VIEW_ADMIN)) {
+            return to_route('attendance.index');
+        }
 
         return Inertia::render('dashboard/page', [
-            'employeeStats' => $employeeStats,
+            'employeeStats' => $this->employeeStats(),
         ]);
     }
 

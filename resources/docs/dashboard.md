@@ -1,8 +1,9 @@
 # Employee-Data Dashboard (Requirement 5)
 
 The landing page (`/`) for admins: total headcount plus three bar charts —
-gender comparison, last education, and employee ages. Regular users see a
-simple welcome card instead.
+gender comparison, last education, and employee ages. Regular users never
+see it: `/` redirects them straight to their attendance page, and the
+sidebar entry is hidden for them.
 
 ## 1. Flow
 
@@ -11,12 +12,13 @@ GET /  →  DashboardController@index
    ▼
 user has view_admin permission?
    ├── yes → employeeStats() aggregates  → dashboard/page (charts view)
-   └── no  → employeeStats = null        → dashboard/page (welcome view)
+   └── no  → redirect to /attendance
 ```
 
-Gating is enforced in the controller — the aggregate data is simply not sent
-to users without `view_admin`. The React component branches on the
-`employeeStats` prop being null or not.
+The gate is enforced in the controller — non-admins are redirected before
+any data is computed, so the aggregate payload is never sent to them. The
+React component only ever renders the charts view (`employeeStats` is
+non-null by construction).
 
 ## 2. Data pipeline (`employeeStats()`)
 
@@ -65,6 +67,9 @@ interface EmployeeStats {
     ages: ChartDatum[];        // labels <25, 25-34, 35-44, 45-54, 55+
 }
 ```
+
+The prop is always present on this page — the controller guarantees it for
+every render.
 
 ## 4. Frontend
 

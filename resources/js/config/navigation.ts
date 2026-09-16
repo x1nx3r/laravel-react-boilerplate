@@ -16,6 +16,7 @@ export const mainNavItems: NavItem[] = [
         title: 'nav.dashboard',
         href: '/',
         icon: LayoutGrid,
+        permissions: ['view_admin'],
     },
     {
         title: 'nav.attendance',

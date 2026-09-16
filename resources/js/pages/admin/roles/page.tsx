@@ -206,7 +206,7 @@ function RoleFormDialog({
                             variant="outline"
                             onClick={onClose}
                         >
-                            Cancel
+                            {t('common.cancel')}
                         </Button>
                         <Button
                             type="submit"
@@ -328,7 +328,7 @@ export default function RolesIndex({
                         )}
                     </div>
                     <Button type="submit" variant="outline">
-                        Search
+                        {t('common.search_submit')}
                     </Button>
                 </form>
 
@@ -340,13 +340,13 @@ export default function RolesIndex({
                                     {t('roles.table.name')}
                                 </TableHead>
                                 <TableHead className="w-[45%]">
-                                    Permissions
+                                    {t('roles.permissions')}
                                 </TableHead>
                                 <TableHead className="text-center">
-                                    Users
+                                    {t('roles.table.users')}
                                 </TableHead>
                                 <TableHead className="text-right">
-                                    Actions
+                                    {t('common.actions')}
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
@@ -474,6 +474,7 @@ export default function RolesIndex({
             />
 
             <RoleFormDialog
+                key={editingRole?.id ?? 'none'}
                 role={editingRole}
                 availablePermissions={permissions}
                 open={!!editingRole}
@@ -505,7 +506,7 @@ export default function RolesIndex({
                             variant="destructive"
                             onClick={confirmDelete}
                         >
-                            Delete
+                            {t('common.delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

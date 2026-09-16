@@ -1,6 +1,6 @@
-import { Head, usePage } from '@inertiajs/react';
-import { Rocket, Users } from 'lucide-react';
-import { Trans, useTranslation } from 'react-i18next';
+import { Head } from '@inertiajs/react';
+import { Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
     Bar,
     BarChart,
@@ -31,7 +31,7 @@ interface EmployeeStats {
 }
 
 interface DashboardProps {
-    employeeStats: EmployeeStats | null;
+    employeeStats: EmployeeStats;
 }
 
 const tooltipStyle = {
@@ -78,7 +78,6 @@ function StatsBarChart({ data }: { data: ChartDatum[] }) {
 
 export default function Dashboard({ employeeStats }: DashboardProps) {
     const { t } = useTranslation();
-    const { name } = usePage().props;
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: t('dashboard.title'), href: '/' },
@@ -88,13 +87,11 @@ export default function Dashboard({ employeeStats }: DashboardProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('dashboard.title')} />
             <div className="space-y-6">
-                {employeeStats ? (
-                    <>
-                        <Heading
-                            variant="small"
-                            title={t('dashboard.stats.title')}
-                            description={t('dashboard.stats.description')}
-                        />
+                <Heading
+                    variant="small"
+                    title={t('dashboard.stats.title')}
+                    description={t('dashboard.stats.description')}
+                />
 
                         <Card>
                             <CardHeader className="pb-2">
@@ -164,48 +161,6 @@ export default function Dashboard({ employeeStats }: DashboardProps) {
                                 </CardContent>
                             </Card>
                         </div>
-                    </>
-                ) : (
-                    <>
-                        <Heading
-                            variant="small"
-                            title={t('dashboard.welcome_title', { name })}
-                            description={t('dashboard.welcome_description')}
-                        />
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Rocket className="size-4 text-primary" />
-                                    {t('dashboard.card_title')}
-                                </CardTitle>
-                                <CardDescription>
-                                    {t('dashboard.card_description')}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">
-                                    <Trans
-                                        i18nKey="dashboard.card_body"
-                                        components={[
-                                            <code
-                                                key="0"
-                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
-                                            />,
-                                            <code
-                                                key="1"
-                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
-                                            />,
-                                            <code
-                                                key="2"
-                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
-                                            />,
-                                        ]}
-                                    />
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </>
-                )}
             </div>
         </AppLayout>
     );

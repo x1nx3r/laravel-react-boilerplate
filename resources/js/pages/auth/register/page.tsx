@@ -4,6 +4,7 @@ import type { FormEventHandler } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
+import FieldLabel from '@/components/common/field-label';
 import InputError from '@/components/common/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +14,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
     Select,
     SelectContent,
@@ -79,9 +79,9 @@ export default function Register() {
                         <form onSubmit={submit} className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="name">
+                                    <FieldLabel htmlFor="name" mark="required">
                                         {t('auth.register.name')}
-                                    </Label>
+                                    </FieldLabel>
                                     <Input
                                         id="name"
                                         value={data.name}
@@ -95,9 +95,12 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="email">
+                                    <FieldLabel
+                                        htmlFor="email"
+                                        mark="required"
+                                    >
                                         {t('auth.register.email')}
-                                    </Label>
+                                    </FieldLabel>
                                     <Input
                                         id="email"
                                         type="email"
@@ -112,9 +115,12 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="password">
+                                    <FieldLabel
+                                        htmlFor="password"
+                                        mark="required"
+                                    >
                                         {t('auth.register.password')}
-                                    </Label>
+                                    </FieldLabel>
                                     <Input
                                         id="password"
                                         type="password"
@@ -130,11 +136,14 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="password_confirmation">
+                                    <FieldLabel
+                                        htmlFor="password_confirmation"
+                                        mark="required"
+                                    >
                                         {t(
                                             'auth.register.password_confirmation',
                                         )}
-                                    </Label>
+                                    </FieldLabel>
                                     <Input
                                         id="password_confirmation"
                                         type="password"
@@ -160,9 +169,9 @@ export default function Register() {
                                 </CardTitle>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="space-y-2">
-                                        <Label htmlFor="employee_id">
-                                            ID Karyawan
-                                        </Label>
+                                        <FieldLabel htmlFor="employee_id">
+                                            {t('auth.register.employee_id')}
+                                        </FieldLabel>
                                         <Input
                                             id="employee_id"
                                             value={data.employee_id}
@@ -182,9 +191,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="nik">
+                                        <FieldLabel htmlFor="nik">
                                             {t('auth.register.nik')}
-                                        </Label>
+                                        </FieldLabel>
                                         <Input
                                             id="nik"
                                             value={data.nik}
@@ -199,9 +208,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="employee_status">
-                                            Status Kontrak
-                                        </Label>
+                                        <FieldLabel htmlFor="employee_status">
+                                            {t('auth.register.employee_status')}
+                                        </FieldLabel>
                                         <Select
                                             value={data.employee_status}
                                             onValueChange={(value) =>
@@ -220,10 +229,10 @@ export default function Register() {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="kontrak">
-                                                    Kontrak
+                                                    {t('auth.register.kontrak')}
                                                 </SelectItem>
                                                 <SelectItem value="tetap">
-                                                    Tetap
+                                                    {t('auth.register.tetap')}
                                                 </SelectItem>
                                             </SelectContent>
                                         </Select>
@@ -233,9 +242,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="department">
-                                            Departemen
-                                        </Label>
+                                        <FieldLabel htmlFor="department">
+                                            {t('auth.register.department')}
+                                        </FieldLabel>
                                         <Input
                                             id="department"
                                             value={data.department}
@@ -255,9 +264,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="join_date">
-                                            Tanggal Bergabung
-                                        </Label>
+                                        <FieldLabel htmlFor="join_date">
+                                            {t('auth.register.join_date')}
+                                        </FieldLabel>
                                         <Input
                                             id="join_date"
                                             type="date"
@@ -275,13 +284,14 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="end_date">
-                                            Tanggal Berakhir
-                                        </Label>
+                                        <FieldLabel htmlFor="end_date">
+                                            {t('auth.register.end_date')}
+                                        </FieldLabel>
                                         <Input
                                             id="end_date"
                                             type="date"
                                             value={data.end_date}
+                                            min={data.join_date || undefined}
                                             onChange={(e) =>
                                                 setData(
                                                     'end_date',
@@ -296,13 +306,13 @@ export default function Register() {
 
                             <div className="space-y-4 rounded-lg border bg-muted/20 p-4">
                                 <CardTitle className="text-base">
-                                    Informasi Pribadi
+                                    {t('auth.register.personal_section')}
                                 </CardTitle>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="space-y-2">
-                                        <Label htmlFor="birth_place">
-                                            Tempat Lahir
-                                        </Label>
+                                        <FieldLabel htmlFor="birth_place">
+                                            {t('auth.register.birth_place')}
+                                        </FieldLabel>
                                         <Input
                                             id="birth_place"
                                             value={data.birth_place}
@@ -319,9 +329,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="birth_date">
-                                            Tanggal Lahir
-                                        </Label>
+                                        <FieldLabel htmlFor="birth_date">
+                                            {t('auth.register.birth_date')}
+                                        </FieldLabel>
                                         <Input
                                             id="birth_date"
                                             type="date"
@@ -339,9 +349,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="gender">
-                                            Jenis Kelamin
-                                        </Label>
+                                        <FieldLabel htmlFor="gender">
+                                            {t('auth.register.gender')}
+                                        </FieldLabel>
                                         <Select
                                             value={data.gender}
                                             onValueChange={(value) =>
@@ -357,10 +367,10 @@ export default function Register() {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="L">
-                                                    Laki-laki
+                                                    {t('auth.register.male')}
                                                 </SelectItem>
                                                 <SelectItem value="P">
-                                                    Perempuan
+                                                    {t('auth.register.female')}
                                                 </SelectItem>
                                             </SelectContent>
                                         </Select>
@@ -368,9 +378,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="phone_number">
-                                            Nomor HP / WhatsApp
-                                        </Label>
+                                        <FieldLabel htmlFor="phone_number">
+                                            {t('auth.register.phone_number')}
+                                        </FieldLabel>
                                         <Input
                                             id="phone_number"
                                             value={data.phone_number}
@@ -390,9 +400,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="bank_account_number">
-                                            Nomor Rekening
-                                        </Label>
+                                        <FieldLabel htmlFor="bank_account_number">
+                                            {t('auth.register.bank_account_number')}
+                                        </FieldLabel>
                                         <Input
                                             id="bank_account_number"
                                             value={data.bank_account_number}
@@ -409,9 +419,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="education_level">
+                                        <FieldLabel htmlFor="education_level">
                                             {t('auth.register.education_level')}
-                                        </Label>
+                                        </FieldLabel>
                                         <Select
                                             value={data.education_level}
                                             onValueChange={(value) =>
@@ -452,9 +462,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="education_institution">
-                                            Asal Pendidikan
-                                        </Label>
+                                        <FieldLabel htmlFor="education_institution">
+                                            {t('auth.register.education_institution')}
+                                        </FieldLabel>
                                         <Input
                                             id="education_institution"
                                             value={data.education_institution}
@@ -473,9 +483,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2 sm:col-span-2">
-                                        <Label htmlFor="major">
+                                        <FieldLabel htmlFor="major">
                                             {t('auth.register.major')}
-                                        </Label>
+                                        </FieldLabel>
                                         <Input
                                             id="major"
                                             value={data.major}
@@ -487,9 +497,9 @@ export default function Register() {
                                     </div>
 
                                     <div className="space-y-2 sm:col-span-2">
-                                        <Label htmlFor="address">
-                                            Alamat Domisili
-                                        </Label>
+                                        <FieldLabel htmlFor="address">
+                                            {t('auth.register.address')}
+                                        </FieldLabel>
                                         <Input
                                             id="address"
                                             value={data.address}
@@ -507,7 +517,10 @@ export default function Register() {
 
                             <div className="space-y-4 rounded-lg border border-dashed p-4">
                                 <CardTitle className="text-base">
-                                    {t('auth.register.documents_section')}
+                                    {t('auth.register.documents_section')}{' '}
+                                    <span className="text-xs font-normal text-muted-foreground">
+                                        ({t('common.optional')})
+                                    </span>
                                 </CardTitle>
                                 <CardDescription>
                                     {t('auth.register.documents_description')}
@@ -542,7 +555,7 @@ export default function Register() {
                                     {processing && (
                                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     )}
-                                    Daftar
+                                    {t('auth.register.submit')}
                                 </Button>
                             </div>
                         </form>

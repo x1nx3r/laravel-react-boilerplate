@@ -20,7 +20,7 @@ note — their behavior is customized in
 
 | Method | Path | Name | Middleware | Purpose |
 |--------|------|------|------------|---------|
-| GET | `/` | `dashboard` | auth | Employee-data dashboard (charts for `view_admin` holders, welcome card otherwise) |
+| GET | `/` | `dashboard` | auth | Employee-data dashboard (`view_admin` holders; non-admins are redirected to `/attendance`) |
 
 ## Settings (auth required — `routes/settings.php`)
 

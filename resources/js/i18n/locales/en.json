@@ -12,6 +12,10 @@
         "save_changes": "Save changes",
         "menu": "Menu",
         "home": "Home",
+        "pick_date": "Pick a date",
+        "clear": "Clear",
+        "required": "required",
+        "optional": "optional",
         "processing": "Processing..."
     },
     "nav": {
@@ -24,11 +28,6 @@
     },
     "dashboard": {
         "title": "Dashboard",
-        "welcome_title": "Welcome to {{name}}",
-        "welcome_description": "Your application skeleton is ready.",
-        "card_title": "Scaffolded and ready",
-        "card_description": "Auth, settings, the layout shell and CI are wired up. Replace this page with your first module.",
-        "card_body": "Add routes in <0>routes/web.php</0>, pages under <1>resources/js/pages</1> and navigation entries in <2>resources/js/config/navigation.ts</2>.",
         "stats": {
             "title": "Employee data",
             "description": "Overview of employee composition.",
