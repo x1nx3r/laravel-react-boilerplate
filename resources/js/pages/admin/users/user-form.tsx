@@ -53,6 +53,7 @@ export function UserForm({ user, roles }: UserFormProps) {
         join_date: user?.join_date ?? '',
         end_date: user?.end_date ?? '',
         major: user?.major ?? '',
+        education_level: user?.education_level ?? '',
         education_institution: user?.education_institution ?? '',
         phone_number: user?.phone_number ?? '',
         bank_account_number: user?.bank_account_number ?? '',
@@ -387,6 +388,41 @@ export function UserForm({ user, roles }: UserFormProps) {
                             }
                         />
                         <InputError message={errors.bank_account_number} />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="education_level">
+                            {t('users.form.education_level')}
+                        </Label>
+                        <Select
+                            value={data.education_level}
+                            onValueChange={(value) =>
+                                setData('education_level', value)
+                            }
+                        >
+                            <SelectTrigger id="education_level">
+                                <SelectValue
+                                    placeholder={t(
+                                        'users.form.education_level_placeholder',
+                                    )}
+                                />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {[
+                                    'sma',
+                                    'smk',
+                                    'd3',
+                                    's1',
+                                    's2',
+                                    's3',
+                                ].map((level) => (
+                                    <SelectItem key={level} value={level}>
+                                        {level.toUpperCase()}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        <InputError message={errors.education_level} />
                     </div>
 
                     <div className="space-y-2">

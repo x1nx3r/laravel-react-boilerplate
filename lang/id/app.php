@@ -9,10 +9,10 @@ return [
     ],
 
     'users' => [
-        'created' => 'Pengguna berhasil dibuat.',
-        'updated' => 'Pengguna berhasil diperbarui.',
-        'verified' => 'Pengguna berhasil diverifikasi dan diaktifkan.',
-        'deleted' => 'Pengguna berhasil dihapus.',
+        'created' => 'Pegawai berhasil dibuat.',
+        'updated' => 'Pegawai berhasil diperbarui.',
+        'verified' => 'Pegawai berhasil diverifikasi dan diaktifkan.',
+        'deleted' => 'Pegawai berhasil dihapus.',
         'document_uploaded' => 'Dokumen berhasil diunggah.',
         'document_deleted' => 'Dokumen berhasil dihapus.',
     ],

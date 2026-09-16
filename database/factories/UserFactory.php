@@ -35,6 +35,8 @@ class UserFactory extends Factory
             'department' => fake()->randomElement(['HR', 'Marketing', 'Administrasi', 'Operations']),
             'employee_status' => fake()->randomElement(['kontrak', 'tetap']),
             'gender' => fake()->randomElement(['L', 'P']),
+            'birth_date' => fake()->dateTimeBetween('-55 years', '-20 years')->format('Y-m-d'),
+            'education_level' => fake()->randomElement(['sma', 'smk', 'd3', 's1', 's2', 's3']),
             'join_date' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
             'phone_number' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),

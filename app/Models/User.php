@@ -40,6 +40,7 @@ class User extends Authenticatable
         'join_date',
         'end_date',
         'major',
+        'education_level',
         'education_institution',
         'phone_number',
         'bank_account_number',

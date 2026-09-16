@@ -41,6 +41,7 @@ export default function Register() {
         join_date: '',
         end_date: '',
         major: '',
+        education_level: '',
         education_institution: '',
         phone_number: '',
         bank_account_number: '',
@@ -404,6 +405,49 @@ export default function Register() {
                                         />
                                         <InputError
                                             message={errors.bank_account_number}
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="education_level">
+                                            {t('auth.register.education_level')}
+                                        </Label>
+                                        <Select
+                                            value={data.education_level}
+                                            onValueChange={(value) =>
+                                                setData(
+                                                    'education_level',
+                                                    value,
+                                                )
+                                            }
+                                        >
+                                            <SelectTrigger id="education_level">
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        'auth.register.education_level_placeholder',
+                                                    )}
+                                                />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {[
+                                                    'sma',
+                                                    'smk',
+                                                    'd3',
+                                                    's1',
+                                                    's2',
+                                                    's3',
+                                                ].map((level) => (
+                                                    <SelectItem
+                                                        key={level}
+                                                        value={level}
+                                                    >
+                                                        {level.toUpperCase()}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <InputError
+                                            message={errors.education_level}
                                         />
                                     </div>
 

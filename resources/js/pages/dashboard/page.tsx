@@ -1,6 +1,15 @@
 import { Head, usePage } from '@inertiajs/react';
-import { Rocket } from 'lucide-react';
+import { Rocket, Users } from 'lucide-react';
 import { Trans, useTranslation } from 'react-i18next';
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 import Heading from '@/components/common/heading';
 import {
     Card,
@@ -12,51 +21,191 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 
-export default function Dashboard() {
+type ChartDatum = { label: string; total: number };
+
+interface EmployeeStats {
+    total: number;
+    gender: ChartDatum[];
+    education: ChartDatum[];
+    ages: ChartDatum[];
+}
+
+interface DashboardProps {
+    employeeStats: EmployeeStats | null;
+}
+
+const tooltipStyle = {
+    backgroundColor: 'var(--card)',
+    border: '1px solid var(--border)',
+    borderRadius: 8,
+    fontSize: 12,
+};
+
+function StatsBarChart({ data }: { data: ChartDatum[] }) {
+    return (
+        <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={data}>
+                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                    <XAxis
+                        dataKey="label"
+                        tickLine={false}
+                        axisLine={false}
+                        fontSize={12}
+                    />
+                    <YAxis
+                        allowDecimals={false}
+                        tickLine={false}
+                        axisLine={false}
+                        width={32}
+                        fontSize={12}
+                    />
+                    <Tooltip
+                        cursor={{ fill: 'var(--muted)', opacity: 0.4 }}
+                        contentStyle={tooltipStyle}
+                    />
+                    <Bar
+                        dataKey="total"
+                        fill="var(--primary)"
+                        radius={[4, 4, 0, 0]}
+                        maxBarSize={48}
+                    />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
+    );
+}
+
+export default function Dashboard({ employeeStats }: DashboardProps) {
     const { t } = useTranslation();
     const { name } = usePage().props;
 
     const breadcrumbs: BreadcrumbItem[] = [
-        {
-            title: t('dashboard.title'),
-            href: '/',
-        },
+        { title: t('dashboard.title'), href: '/' },
     ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('dashboard.title')} />
-
             <div className="space-y-6">
-                <Heading
-                    variant="small"
-                    title={t('dashboard.welcome_title', { name })}
-                    description={t('dashboard.welcome_description')}
-                />
+                {employeeStats ? (
+                    <>
+                        <Heading
+                            variant="small"
+                            title={t('dashboard.stats.title')}
+                            description={t('dashboard.stats.description')}
+                        />
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Rocket className="size-4 text-primary" />
-                            {t('dashboard.card_title')}
-                        </CardTitle>
-                        <CardDescription>
-                            {t('dashboard.card_description')}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                            <Trans
-                                i18nKey="dashboard.card_body"
-                                components={[
-                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
-                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
-                                    <code className="rounded bg-muted px-1.5 py-0.5 text-xs" />,
-                                ]}
-                            />
-                        </p>
-                    </CardContent>
-                </Card>
+                        <Card>
+                            <CardHeader className="pb-2">
+                                <CardDescription className="flex items-center gap-2">
+                                    <Users className="size-4 text-primary" />
+                                    {t('dashboard.stats.total_employees')}
+                                </CardDescription>
+                                <CardTitle className="text-4xl tabular-nums">
+                                    {employeeStats.total}
+                                </CardTitle>
+                            </CardHeader>
+                        </Card>
+
+                        <div className="grid gap-6 lg:grid-cols-3">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="text-base">
+                                        {t('dashboard.stats.gender_title')}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {t('dashboard.stats.gender_description')}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <StatsBarChart
+                                        data={employeeStats.gender.map(
+                                            (d) => ({
+                                                ...d,
+                                                label: t(
+                                                    `dashboard.stats.gender.${d.label}`,
+                                                ),
+                                            }),
+                                        )}
+                                    />
+                                </CardContent>
+                            </Card>
+
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="text-base">
+                                        {t('dashboard.stats.education_title')}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {t(
+                                            'dashboard.stats.education_description',
+                                        )}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <StatsBarChart
+                                        data={employeeStats.education}
+                                    />
+                                </CardContent>
+                            </Card>
+
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="text-base">
+                                        {t('dashboard.stats.age_title')}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {t('dashboard.stats.age_description')}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <StatsBarChart data={employeeStats.ages} />
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <Heading
+                            variant="small"
+                            title={t('dashboard.welcome_title', { name })}
+                            description={t('dashboard.welcome_description')}
+                        />
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2">
+                                    <Rocket className="size-4 text-primary" />
+                                    {t('dashboard.card_title')}
+                                </CardTitle>
+                                <CardDescription>
+                                    {t('dashboard.card_description')}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-sm text-muted-foreground">
+                                    <Trans
+                                        i18nKey="dashboard.card_body"
+                                        components={[
+                                            <code
+                                                key="0"
+                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
+                                            />,
+                                            <code
+                                                key="1"
+                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
+                                            />,
+                                            <code
+                                                key="2"
+                                                className="rounded bg-muted px-1.5 py-0.5 text-xs"
+                                            />,
+                                        ]}
+                                    />
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </>
+                )}
             </div>
         </AppLayout>
     );

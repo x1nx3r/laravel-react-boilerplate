@@ -35,6 +35,7 @@ export type User = {
     join_date?: string | null;
     end_date?: string | null;
     major?: string | null;
+    education_level?: 'sma' | 'smk' | 'd3' | 's1' | 's2' | 's3' | null;
     education_institution?: string | null;
     phone_number?: string | null;
     bank_account_number?: string | null;

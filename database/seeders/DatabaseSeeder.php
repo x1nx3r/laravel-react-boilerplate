@@ -52,6 +52,11 @@ class DatabaseSeeder extends Seeder
         ]);
         $regular->assignRole(Rbac::ROLE_USER);
 
+        // Demo pegawai pool so the dashboard charts have real volume.
+        User::factory()->count(24)->create()->each(function (User $user) {
+            $user->assignRole(Rbac::ROLE_USER);
+        });
+
         // Demo activity: past-month attendance + leave requests so the
         // calendar and the HR review queue are populated. Seeded RNG keeps
         // screenshots reproducible.

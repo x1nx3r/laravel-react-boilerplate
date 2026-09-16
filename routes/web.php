@@ -5,12 +5,12 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Attendance\AttendanceController;
 use App\Http\Controllers\Attendance\LeaveRequestController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('dashboard/page');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::middleware(['auth', 'permission:view_admin'])
     ->prefix('admin')

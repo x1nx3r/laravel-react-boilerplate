@@ -9,10 +9,10 @@ return [
     ],
 
     'users' => [
-        'created' => 'User created.',
-        'updated' => 'User updated.',
-        'verified' => 'User verified and activated.',
-        'deleted' => 'User deleted.',
+        'created' => 'Employee created.',
+        'updated' => 'Employee updated.',
+        'verified' => 'Employee verified and activated.',
+        'deleted' => 'Employee deleted.',
         'document_uploaded' => 'Document uploaded.',
         'document_deleted' => 'Document deleted.',
     ],

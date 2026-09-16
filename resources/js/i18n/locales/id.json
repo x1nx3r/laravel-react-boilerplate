@@ -17,7 +17,7 @@
     "nav": {
         "dashboard": "Beranda",
         "administration": "Administrasi",
-        "users": "Pengguna",
+        "users": "Pegawai",
         "roles": "Peran",
         "attendance": "Absensi",
         "leave_review": "Tinjau Cuti"
@@ -28,7 +28,22 @@
         "welcome_description": "Kerangka aplikasi Anda sudah siap.",
         "card_title": "Siap digunakan",
         "card_description": "Auth, pengaturan, layout shell, dan CI sudah terpasang. Ganti halaman ini dengan modul pertama Anda.",
-        "card_body": "Tambahkan rute di <0>routes/web.php</0>, halaman di <1>resources/js/pages</1>, dan navigasi di <2>resources/js/config/navigation.ts</2>."
+        "card_body": "Tambahkan rute di <0>routes/web.php</0>, halaman di <1>resources/js/pages</1>, dan navigasi di <2>resources/js/config/navigation.ts</2>.",
+        "stats": {
+            "title": "Data Pegawai",
+            "description": "Ringkasan komposisi pegawai.",
+            "total_employees": "Total Pegawai",
+            "gender_title": "Pegawai Berdasarkan Jenis Kelamin",
+            "gender_description": "Perbandingan jumlah pegawai laki-laki dan perempuan.",
+            "gender": {
+                "L": "Laki-laki",
+                "P": "Perempuan"
+            },
+            "education_title": "Pegawai Berdasarkan Pendidikan Terakhir",
+            "education_description": "Distribusi jenjang pendidikan terakhir.",
+            "age_title": "Pegawai Berdasarkan Usia",
+            "age_description": "Distribusi pegawai per kelompok usia."
+        }
     },
     "auth": {
         "login": {
@@ -74,6 +89,8 @@
             "phone_number": "Nomor HP / WhatsApp",
             "phone_placeholder": "08...",
             "bank_account_number": "Nomor Rekening",
+            "education_level": "Pendidikan Terakhir",
+            "education_level_placeholder": "Pilih pendidikan terakhir",
             "education_institution": "Asal Pendidikan",
             "major": "Jurusan",
             "address": "Alamat Domisili",
@@ -171,10 +188,10 @@
         "back_home": "Kembali ke Beranda"
     },
     "users": {
-        "title": "Pengguna",
-        "create": "Buat Pengguna",
-        "edit_title": "Edit Pengguna",
-        "breadcrumb": "Pengguna",
+        "title": "Pegawai",
+        "create": "Buat Pegawai",
+        "edit_title": "Edit Pegawai",
+        "breadcrumb": "Pegawai",
         "search_placeholder": "Cari nama atau email...",
         "require_approval": "Wajib verifikasi pendaftaran",
         "filters": {
@@ -207,9 +224,9 @@
         "verify_title": "Verifikasi dan aktifkan akun ini",
         "edit_locked": "Hanya superadmin yang dapat mengedit akun superadmin",
         "delete_self": "Anda tidak dapat menghapus akun sendiri",
-        "delete_title": "Hapus Pengguna",
+        "delete_title": "Hapus Pegawai",
         "delete_description": "Apakah Anda yakin ingin menghapus <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan.",
-        "no_results": "Tidak ada pengguna ditemukan.",
+        "no_results": "Tidak ada pegawai ditemukan.",
         "self_note": "Anda tidak dapat mengubah peran atau menonaktifkan akun sendiri.",
         "form": {
             "account_section": "Informasi Akun & Akses",
@@ -247,13 +264,15 @@
             "phone_number": "Nomor HP / WhatsApp",
             "phone_placeholder": "08...",
             "bank_account_number": "Nomor Rekening",
+            "education_level": "Pendidikan Terakhir",
+            "education_level_placeholder": "Pilih pendidikan terakhir",
             "education_institution": "Asal Pendidikan",
             "major": "Jurusan",
             "address": "Alamat Domisili",
             "documents_section": "Dokumen Pendukung",
             "documents_description": "Unggah scan KTP, Ijazah, CV, atau dokumen lainnya (Maks. 10MB per file).",
             "files_selected": "{{count}} file dipilih.",
-            "submit_create": "Buat Pengguna",
+            "submit_create": "Buat Pegawai",
             "submit_edit": "Simpan Perubahan"
         },
         "documents": {
@@ -286,7 +305,7 @@
         "table": {
             "name": "Nama Peran",
             "permissions": "Hak Akses",
-            "users": "Pengguna",
+            "users": "Pegawai",
             "actions": "Aksi"
         },
         "full_access": "Akses Penuh",
