@@ -5,7 +5,7 @@ not as a collection of generated files.
 
 ## Before you build
 
-1. Read `README.md` and this file.
+1. Read `README.md`, `DESIGN.md`, and this file.
 2. Ask what is being changed and who uses it.
 3. For cross-cutting or irreversible decisions, write an ADR under `docs/adr/`.
 4. Work in a small scope. Do not mix unrelated refactors with a feature.

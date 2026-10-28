@@ -86,7 +86,7 @@ export default function AttendanceOthers({
 
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
-                        <h1 className="text-base font-medium">
+                        <h1 className="text-3xl font-semibold tracking-tight">
                             {t('attendance.team.title')}
                         </h1>
                         <p className="text-sm text-muted-foreground">
@@ -181,7 +181,7 @@ export default function AttendanceOthers({
                                             <TableCell>{row.checkIn}</TableCell>
                                             <TableCell>
                                                 {row.checkOut ?? (
-                                                    <span className="text-amber-600 dark:text-amber-400">
+                                                    <span className="text-warning">
                                                         {t(
                                                             'attendance.team.table.missing_checkout',
                                                         )}

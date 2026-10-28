@@ -111,7 +111,7 @@ function RoleFormDialog({
         };
 
         if (isEdit && role) {
-            put(RoleController.update({ role: role.id }).url, options);
+            put(RoleController.update({ role: String(role.id) }).url, options);
         } else {
             post(RoleController.store().url, options);
         }
@@ -252,7 +252,7 @@ export default function RolesIndex({
     const confirmDelete = () => {
         if (roleToDelete) {
             router.delete(
-                RoleController.destroy({ role: roleToDelete.id }).url,
+                RoleController.destroy({ role: String(roleToDelete.id) }).url,
                 {
                     onSuccess: () => setRoleToDelete(null),
                 },
@@ -288,7 +288,7 @@ export default function RolesIndex({
                 )}
 
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold tracking-tight">
+                    <h1 className="text-3xl font-semibold tracking-tight">
                         {t('roles.title')}
                     </h1>
                     <Button onClick={() => setIsCreating(true)}>

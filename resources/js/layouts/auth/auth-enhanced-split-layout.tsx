@@ -10,60 +10,60 @@ export default function AuthEnhancedSplitLayout({
     const { name } = usePage().props;
 
     return (
-        <div className="flex min-h-dvh">
-            {/* Left Panel - Welcome Section */}
-            <div className="relative hidden overflow-hidden bg-linear-to-br from-primary via-primary/90 to-primary lg:flex lg:w-1/2">
-                {/* Floating Animated Shapes */}
-                <div className="absolute top-20 left-10 h-32 w-32 animate-pulse rounded-full bg-white/10"></div>
-                <div className="absolute top-40 right-20 h-20 w-20 animate-bounce rounded-full bg-white/5"></div>
-                <div className="absolute bottom-32 left-20 h-24 w-24 animate-ping rounded-full bg-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-start justify-center p-12 text-white">
-                    {/* Logo */}
-                    <div className="mb-8 flex items-center">
-                        <div className="mr-4 flex h-36 w-36 items-center justify-center overflow-hidden rounded-full bg-white">
-                            <AppLogoIcon className="h-32 w-32 fill-primary" />
-                        </div>
-                        <span className="text-4xl font-bold">{name}</span>
-                    </div>
-
-                    {/* Welcome Text */}
-                    <h1 className="mb-4 text-7xl leading-tight font-bold">
-                        Selamat Datang!
-                    </h1>
+        <div className="flex min-h-dvh bg-background">
+            <aside className="relative hidden w-[44%] flex-col justify-between overflow-hidden bg-sidebar p-12 text-sidebar-foreground lg:flex">
+                <div className="relative z-10 flex items-center gap-3">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-sidebar-primary text-sidebar-primary-foreground">
+                        <AppLogoIcon className="size-7 fill-current" />
+                    </span>
+                    <span className="text-lg font-semibold tracking-tight">
+                        {name}
+                    </span>
                 </div>
-            </div>
 
-            {/* Right Panel - Login Form */}
-            <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
+                <div className="relative z-10 max-w-md">
+                    <p className="mb-4 text-xs font-semibold tracking-[0.18em] text-sidebar-primary uppercase">
+                        Operations workspace
+                    </p>
+                    <h1 className="text-4xl font-semibold tracking-tight">
+                        People, attendance, and approvals in one place.
+                    </h1>
+                    <p className="text-sidebar-muted mt-5 text-sm leading-7">
+                        A focused workspace for the people who keep the
+                        organization running.
+                    </p>
+                </div>
+
+                <div className="text-sidebar-muted relative z-10 border-t border-sidebar-border pt-6 text-xs">
+                    Internal operations · {new Date().getFullYear()}
+                </div>
+            </aside>
+
+            <main className="flex w-full items-center justify-center p-6 lg:w-[56%] lg:p-12">
                 <div className="w-full max-w-md">
-                    {/* Mobile Logo */}
-                    <div className="mb-8 text-center lg:hidden">
-                        <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-lg">
-                            <AppLogoIcon className="h-28 w-28 fill-primary" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                            {name}
-                        </h2>
+                    <div className="mb-8 flex items-center gap-2 lg:hidden">
+                        <span className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                            <AppLogoIcon className="size-6 fill-current" />
+                        </span>
+                        <span className="text-lg font-semibold">{name}</span>
                     </div>
 
-                    {/* Welcome Text */}
                     <div className="mb-8">
-                        <h3 className="mb-2 text-2xl font-bold text-gray-800 dark:text-gray-100">
+                        <h2 className="text-3xl font-semibold tracking-tight">
                             {title}
-                        </h3>
+                        </h2>
                         {description && (
-                            <p className="text-sm text-balance text-muted-foreground">
+                            <p className="mt-2 text-sm text-muted-foreground">
                                 {description}
                             </p>
                         )}
                     </div>
 
-                    {/* Form Content */}
-                    {children}
+                    <div className="rounded-xl border border-border bg-card p-6 shadow-xs sm:p-8">
+                        {children}
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
