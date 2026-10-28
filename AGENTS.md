@@ -35,7 +35,6 @@ After you change the shape, run `make lint` and `make test`. If the app no
 longer builds, fix the build before you continue. Do not leave a partial
 boilerplate behind.
 
-
 ## Before you build
 
 1. Read `README.md`, `DESIGN.md`, `resources/docs/README.md`,
@@ -49,21 +48,22 @@ boilerplate behind.
 
 ## Map
 
-| Need | Read |
-|---|---|
-| Product flows and domain behavior | `resources/docs/README.md` |
-| Architecture decisions and their reasons | `docs/adr/README.md` |
-| App routes | `routes/web.php`, `routes/settings.php` |
-| Auth and profile flows | `app/Providers/FortifyServiceProvider.php`, `app/Actions/Fortify` |
-| RBAC | `app/Support/Rbac.php`, policies under `app/Policies` |
-| Shared Inertia state | `app/Http/Middleware/HandleInertiaRequests.php` |
-| Pages and layouts | `resources/js/pages`, `resources/js/layouts` |
-| Page layout rules | `DESIGN.md` §Layout, `docs/adr/0009-page-anatomy-and-containers.md`, `docs/adr/0011-pages-use-the-full-width.md`, `docs/adr/0012-page-composition-main-and-rail.md` |
-| UI components | `resources/js/components/ui`, `docs/adr/0008-one-ui-primitive-layer.md` |
-| Navigation and permissions | `resources/js/config/navigation.ts` |
-| Localization | `lang/`, `resources/js/i18n/locales/`, `eslint-rules/i18n`, `scripts/check-i18n.mjs` |
-| Tests | `tests/Feature`, `tests/Unit` |
-| Database | `database/migrations`, `database/seeders` |
+| Need                                     | Read                                                                                                                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product flows and domain behavior        | `resources/docs/README.md`                                                                                                                                          |
+| Architecture decisions and their reasons | `docs/adr/README.md`                                                                                                                                                |
+| Preview dev proxy and Vite HMR           | `scripts/preview-proxy.mjs`, `docs/adr/0013-preview-dev-proxy.md`                                                                                                   |
+| App routes                               | `routes/web.php`, `routes/settings.php`                                                                                                                             |
+| Auth and profile flows                   | `app/Providers/FortifyServiceProvider.php`, `app/Actions/Fortify`                                                                                                   |
+| RBAC                                     | `app/Support/Rbac.php`, policies under `app/Policies`                                                                                                               |
+| Shared Inertia state                     | `app/Http/Middleware/HandleInertiaRequests.php`                                                                                                                     |
+| Pages and layouts                        | `resources/js/pages`, `resources/js/layouts`                                                                                                                        |
+| Page layout rules                        | `DESIGN.md` §Layout, `docs/adr/0009-page-anatomy-and-containers.md`, `docs/adr/0011-pages-use-the-full-width.md`, `docs/adr/0012-page-composition-main-and-rail.md` |
+| UI components                            | `resources/js/components/ui`, `docs/adr/0008-one-ui-primitive-layer.md`                                                                                             |
+| Navigation and permissions               | `resources/js/config/navigation.ts`                                                                                                                                 |
+| Localization                             | `lang/`, `resources/js/i18n/locales/`, `eslint-rules/i18n`, `scripts/check-i18n.mjs`                                                                                |
+| Tests                                    | `tests/Feature`, `tests/Unit`                                                                                                                                       |
+| Database                                 | `database/migrations`, `database/seeders`                                                                                                                           |
 
 Wayfinder files under `resources/js/{actions,routes,wayfinder}` are generated.
 Do not edit them by hand. Vite regenerates them during dev/build.
@@ -86,7 +86,7 @@ Postgres is the only local database for this repo. Do not add a second developme
 
 ```sh
 make setup              # install, migrate/seed Postgres, build frontend
-make dev                # PHP server + queue + Vite
+make dev                # PHP server + queue + Vite + preview proxy
 make test               # PHPUnit against laravel_boilerplate_test
 make lint               # Pint check, ESLint (incl. i18n rules), i18n key check, Prettier check, TypeScript
 make format             # apply Pint and Prettier

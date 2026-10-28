@@ -6,7 +6,7 @@ SHELL := /bin/bash
 help:
 	@printf '%s\n' \
 	  'setup                Install deps, prepare .env, migrate/seed, and build frontend' \
-	  'dev                  Run PHP server, queue listener, and Vite' \
+	  'dev                  Run PHP server, queue listener, Vite, and preview proxy' \
 	  'test                 Create the test DB and run PHPUnit against Postgres' \
 	  'lint                 Check PHP, frontend formatting, and TypeScript' \
 	  'format               Apply PHP and frontend formatting' \

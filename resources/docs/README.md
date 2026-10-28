@@ -57,13 +57,8 @@ Plus two bonus modules built on the same foundation:
 ## Quick start
 
 ```bash
-composer install
-cp .env.example .env         # then set DB credentials + APP_KEY
-php artisan key:generate
-php artisan migrate --seed   # creates schema + demo users + demo history
-npm install
-npm run dev                  # Vite dev server (or: npm run build)
-php artisan serve            # http://localhost:8000
+make setup    # dependencies, .env, key, migrate/seed, frontend build
+make dev      # PHP :8001, Vite :5173, preview proxy :8000, queue
 ```
 
 Notes:
