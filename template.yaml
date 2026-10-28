@@ -1,0 +1,19 @@
+apiVersion: manus-dei/v1
+name: laravel-react-boilerplate
+base: manus-dei/base@sha256:16677b06c50c7ebbaabb718c2b5812b5db2c0e54f6dc4c0031b1169701127065
+platform: linux/amd64
+workspace: template
+toolchain:
+  - php@8.5
+  - composer@2
+  - node@22
+  - postgresql@18
+opencode:
+  mode: connect
+  model: opencode/glm-5.3-flash
+resources:
+  cpus: "4"
+  memory: 6g
+  pids: 1024
+secrets:
+  - OPENCODE_API_KEY
