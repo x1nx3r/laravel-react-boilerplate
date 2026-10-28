@@ -18,7 +18,10 @@ const TOKEN = process.env.MANUS_PREVIEW_TOKEN ?? '';
 const appProxy = httpProxy.createProxyServer({
     target: `http://127.0.0.1:${APP_PORT}`,
     changeOrigin: false,
-    xfwd: true,
+    // Do not let http-proxy append its own http to X-Forwarded-Proto: the
+    // incoming request is HTTP (deusd -> this proxy), but the browser's
+    // original request may be HTTPS. The header is set explicitly below.
+    xfwd: false,
     ws: true,
 });
 
@@ -31,10 +34,12 @@ const viteProxy = httpProxy.createProxyServer({
 
 appProxy.on('proxyReq', (proxyReq, req) => {
     const host = req.headers['x-forwarded-host'] ?? req.headers.host;
-    const proto = req.headers['x-forwarded-proto'] ?? 'http';
+    const proto = (req.headers['x-forwarded-proto'] ?? 'http')
+        .split(',')[0]
+        .trim();
 
     if (host) proxyReq.setHeader('X-Forwarded-Host', host);
-    proxyReq.setHeader('X-Forwarded-Proto', proto);
+    proxyReq.setHeader('X-Forwarded-Proto', proto || 'http');
 });
 
 function fail(res, error) {
