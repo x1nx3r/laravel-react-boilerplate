@@ -61,7 +61,9 @@ make dev
 
 `make setup` uses `.env.example` and assumes PostgreSQL on `127.0.0.1:5432` with database `laravel_boilerplate`, user `postgres`, password `postgres`. Change `.env` for another local instance. MySQL remains supported by Laravel config for downstream adopters, but is not part of this repo’s setup flow.
 
-Agent-specific instructions live in `AGENTS.md`. Visual rules live in `DESIGN.md`.
+Agent-specific instructions live in `AGENTS.md`. Product flows live in
+`resources/docs/README.md`. Architecture decisions and their reasons live in
+`docs/adr/README.md`. Visual rules live in `DESIGN.md`.
 
 ## Where things live
 

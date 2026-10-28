@@ -5,6 +5,11 @@ Complete flow documentation for the HR employee-management application
 describes one domain end to end — data model, backend flow, frontend flow,
 permissions, and i18n.
 
+This folder explains how the current application works. For why the baseline
+is shaped this way, read the [architecture decision records](../../docs/adr/README.md).
+When behavior changes, update the matching page here. When a cross-cutting
+decision changes, add or supersede an ADR and link it here.
+
 ## What this app is
 
 An HR demo application built to satisfy these requirements:
@@ -37,17 +42,17 @@ Plus two bonus modules built on the same foundation:
 
 ## Document map
 
-| Document                                           | Contents                                                               |
-| -------------------------------------------------- | ---------------------------------------------------------------------- |
-| [architecture.md](architecture.md)                 | Request lifecycle, project structure, conventions, quality gates       |
-| [auth-and-rbac.md](auth-and-rbac.md)               | Login, registration + approval, roles, permissions, enforcement layers |
-| [employee-management.md](employee-management.md)   | Employee CRUD (requirements 1–4), fields, documents, verification      |
-| [dashboard.md](dashboard.md)                       | Employee-data dashboard (requirement 5), chart data pipeline           |
-| [attendance.md](attendance.md)                     | Check-in/check-out, month calendar, HR team view, timezone rules       |
-| [leave-requests.md](leave-requests.md)             | Cuti state machine, validation, review queue, calendar effects         |
-| [internationalization.md](internationalization.md) | Two-locale system (id/en), where strings live, how to add new ones     |
-| [routes-reference.md](routes-reference.md)         | Every route with method, name, middleware, and purpose                 |
-| [demo-guide.md](demo-guide.md)                     | Demo accounts, seeded data, step-by-step demo script                   |
+| Document                                           | Contents                                                               | Decision                                                                |
+| -------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [architecture.md](architecture.md)                 | Request lifecycle, project structure, conventions, quality gates       | [ADR-0002](../../docs/adr/0002-laravel-inertia-react-baseline.md)       |
+| [auth-and-rbac.md](auth-and-rbac.md)               | Login, registration + approval, roles, permissions, enforcement layers | [ADR-0004](../../docs/adr/0004-authorization-belongs-to-the-backend.md) |
+| [employee-management.md](employee-management.md)   | Employee CRUD (requirements 1–4), fields, documents, verification      | [ADR-0007](../../docs/adr/0007-boilerplate-is-a-scaffold.md)            |
+| [dashboard.md](dashboard.md)                       | Employee-data dashboard (requirement 5), chart data pipeline           | [ADR-0002](../../docs/adr/0002-laravel-inertia-react-baseline.md)       |
+| [attendance.md](attendance.md)                     | Check-in/check-out, month calendar, HR team view, timezone rules       | [ADR-0002](../../docs/adr/0002-laravel-inertia-react-baseline.md)       |
+| [leave-requests.md](leave-requests.md)             | Cuti state machine, validation, review queue, calendar effects         | [ADR-0002](../../docs/adr/0002-laravel-inertia-react-baseline.md)       |
+| [internationalization.md](internationalization.md) | Two-locale system (id/en), where strings live, how to add new ones     | [ADR-0005](../../docs/adr/0005-locale-cookie-is-the-source-of-truth.md) |
+| [routes-reference.md](routes-reference.md)         | Every route with method, name, middleware, and purpose                 | [ADR-0002](../../docs/adr/0002-laravel-inertia-react-baseline.md)       |
+| [demo-guide.md](demo-guide.md)                     | Demo accounts, seeded data, step-by-step demo script                   | [ADR-0007](../../docs/adr/0007-boilerplate-is-a-scaffold.md)            |
 
 ## Quick start
 

@@ -38,15 +38,21 @@ boilerplate behind.
 
 ## Before you build
 
-1. Read `README.md`, `DESIGN.md`, and this file.
+1. Read `README.md`, `DESIGN.md`, `resources/docs/README.md`,
+   `docs/adr/README.md`, and this file.
 2. Ask what is being changed and who uses it.
-3. For cross-cutting or irreversible decisions, write an ADR under `docs/adr/`.
-4. Work in a small scope. Do not mix unrelated refactors with a feature.
+3. For cross-cutting or irreversible decisions, add or supersede an ADR under
+   `docs/adr/` before you write code.
+4. If behavior changes, update the matching page under `resources/docs/` in the
+   same change.
+5. Work in a small scope. Do not mix unrelated refactors with a feature.
 
 ## Map
 
 | Need | Read |
 |---|---|
+| Product flows and domain behavior | `resources/docs/README.md` |
+| Architecture decisions and their reasons | `docs/adr/README.md` |
 | App routes | `routes/web.php`, `routes/settings.php` |
 | Auth and profile flows | `app/Providers/FortifyServiceProvider.php`, `app/Actions/Fortify` |
 | RBAC | `app/Support/Rbac.php`, policies under `app/Policies` |
@@ -101,6 +107,8 @@ Demo accounts use password `password`:
   layer.
 - Use Wayfinder routes/actions where the project already uses them.
 - Add or update a feature test when behavior changes.
+- Keep `resources/docs/` and `docs/adr/` in sync with the code. Product docs
+  describe behavior; ADRs record why the behavior exists.
 - Run `make lint` and `make test` before calling the change done.
 - If a frontend change affects the visible shell, check the relevant route in
   the browser at desktop and narrow widths.
