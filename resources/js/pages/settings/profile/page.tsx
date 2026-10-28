@@ -1,9 +1,9 @@
-import { Transition } from '@headlessui/react';
 import { Form, Head, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import Heading from '@/components/common/heading';
 import InputError from '@/components/common/input-error';
+import SuccessMessage from '@/components/common/success-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -96,17 +96,9 @@ export default function Profile() {
                                         {t('settings.profile.save')}
                                     </Button>
 
-                                    <Transition
-                                        show={recentlySuccessful}
-                                        enter="transition ease-in-out"
-                                        enterFrom="opacity-0"
-                                        leave="transition ease-in-out"
-                                        leaveTo="opacity-0"
-                                    >
-                                        <p className="text-sm text-muted-foreground">
-                                            {t('common.saved')}
-                                        </p>
-                                    </Transition>
+                                    <SuccessMessage show={recentlySuccessful}>
+                                        {t('common.saved')}
+                                    </SuccessMessage>
                                 </div>
                             </>
                         )}

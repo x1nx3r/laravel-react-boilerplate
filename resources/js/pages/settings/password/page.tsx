@@ -1,13 +1,12 @@
-import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
-import { Eye, EyeOff } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import Heading from '@/components/common/heading';
 import InputError from '@/components/common/input-error';
+import PasswordInput from '@/components/common/password-input';
+import SuccessMessage from '@/components/common/success-message';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
@@ -18,10 +17,6 @@ export default function Password() {
     const { t } = useTranslation();
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showPasswordConfirmation, setShowPasswordConfirmation] =
-        useState(false);
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -73,39 +68,16 @@ export default function Password() {
                                         {t('settings.password.current')}
                                     </Label>
 
-                                    <div className="relative">
-                                        <Input
-                                            id="current_password"
-                                            ref={currentPasswordInput}
-                                            name="current_password"
-                                            type={
-                                                showCurrentPassword
-                                                    ? 'text'
-                                                    : 'password'
-                                            }
-                                            className="mt-1 block w-full pr-10"
-                                            autoComplete="current-password"
-                                            placeholder={t(
-                                                'settings.password.current',
-                                            )}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setShowCurrentPassword(
-                                                    (prev) => !prev,
-                                                )
-                                            }
-                                            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
-                                            tabIndex={-1}
-                                        >
-                                            {showCurrentPassword ? (
-                                                <EyeOff className="h-4 w-4" />
-                                            ) : (
-                                                <Eye className="h-4 w-4" />
-                                            )}
-                                        </button>
-                                    </div>
+                                    <PasswordInput
+                                        id="current_password"
+                                        ref={currentPasswordInput}
+                                        name="current_password"
+                                        className="mt-1 block w-full"
+                                        autoComplete="current-password"
+                                        placeholder={t(
+                                            'settings.password.current',
+                                        )}
+                                    />
 
                                     <InputError
                                         message={errors.current_password}
@@ -117,37 +89,14 @@ export default function Password() {
                                         {t('settings.password.new')}
                                     </Label>
 
-                                    <div className="relative">
-                                        <Input
-                                            id="password"
-                                            ref={passwordInput}
-                                            name="password"
-                                            type={
-                                                showPassword
-                                                    ? 'text'
-                                                    : 'password'
-                                            }
-                                            className="mt-1 block w-full pr-10"
-                                            autoComplete="new-password"
-                                            placeholder={t(
-                                                'settings.password.new',
-                                            )}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setShowPassword((prev) => !prev)
-                                            }
-                                            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
-                                            tabIndex={-1}
-                                        >
-                                            {showPassword ? (
-                                                <EyeOff className="h-4 w-4" />
-                                            ) : (
-                                                <Eye className="h-4 w-4" />
-                                            )}
-                                        </button>
-                                    </div>
+                                    <PasswordInput
+                                        id="password"
+                                        ref={passwordInput}
+                                        name="password"
+                                        className="mt-1 block w-full"
+                                        autoComplete="new-password"
+                                        placeholder={t('settings.password.new')}
+                                    />
 
                                     <InputError message={errors.password} />
                                 </div>
@@ -157,38 +106,15 @@ export default function Password() {
                                         {t('settings.password.confirm')}
                                     </Label>
 
-                                    <div className="relative">
-                                        <Input
-                                            id="password_confirmation"
-                                            name="password_confirmation"
-                                            type={
-                                                showPasswordConfirmation
-                                                    ? 'text'
-                                                    : 'password'
-                                            }
-                                            className="mt-1 block w-full pr-10"
-                                            autoComplete="new-password"
-                                            placeholder={t(
-                                                'settings.password.confirm',
-                                            )}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setShowPasswordConfirmation(
-                                                    (prev) => !prev,
-                                                )
-                                            }
-                                            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
-                                            tabIndex={-1}
-                                        >
-                                            {showPasswordConfirmation ? (
-                                                <EyeOff className="h-4 w-4" />
-                                            ) : (
-                                                <Eye className="h-4 w-4" />
-                                            )}
-                                        </button>
-                                    </div>
+                                    <PasswordInput
+                                        id="password_confirmation"
+                                        name="password_confirmation"
+                                        className="mt-1 block w-full"
+                                        autoComplete="new-password"
+                                        placeholder={t(
+                                            'settings.password.confirm',
+                                        )}
+                                    />
 
                                     <InputError
                                         message={errors.password_confirmation}
@@ -203,17 +129,9 @@ export default function Password() {
                                         {t('settings.password.save')}
                                     </Button>
 
-                                    <Transition
-                                        show={recentlySuccessful}
-                                        enter="transition ease-in-out"
-                                        enterFrom="opacity-0"
-                                        leave="transition ease-in-out"
-                                        leaveTo="opacity-0"
-                                    >
-                                        <p className="text-sm text-muted-foreground">
-                                            {t('common.saved')}
-                                        </p>
-                                    </Transition>
+                                    <SuccessMessage show={recentlySuccessful}>
+                                        {t('common.saved')}
+                                    </SuccessMessage>
                                 </div>
                             </>
                         )}

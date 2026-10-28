@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
 import FieldLabel from '@/components/common/field-label';
 import InputError from '@/components/common/input-error';
+import PasswordInput from '@/components/common/password-input';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -118,9 +119,9 @@ export default function Register() {
                                     >
                                         {t('auth.register.password')}
                                     </FieldLabel>
-                                    <Input
+                                    <PasswordInput
                                         id="password"
-                                        type="password"
+                                        name="password"
                                         value={data.password}
                                         onChange={(e) =>
                                             setData('password', e.target.value)
@@ -141,9 +142,9 @@ export default function Register() {
                                             'auth.register.password_confirmation',
                                         )}
                                     </FieldLabel>
-                                    <Input
+                                    <PasswordInput
                                         id="password_confirmation"
-                                        type="password"
+                                        name="password_confirmation"
                                         value={data.password_confirmation}
                                         onChange={(e) =>
                                             setData(

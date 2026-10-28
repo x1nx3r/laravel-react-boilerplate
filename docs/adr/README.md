@@ -40,3 +40,4 @@ page under `resources/docs/` instead.
 | [0005](0005-locale-cookie-is-the-source-of-truth.md) | The locale cookie is the single source of truth       | [internationalization.md](../../resources/docs/internationalization.md)               |
 | [0006](0006-semantic-design-tokens.md)               | Use semantic design tokens, not a fixed visual brand  | [DESIGN.md](../../DESIGN.md), [architecture.md](../../resources/docs/architecture.md) |
 | [0007](0007-boilerplate-is-a-scaffold.md)            | The boilerplate is a scaffold, not the product        | [README.md](../../README.md), [AGENTS.md](../../AGENTS.md)                            |
+| [0008](0008-one-ui-primitive-layer.md)               | One UI primitive layer, shadcn/ui on radix-ui         | [architecture.md](../../resources/docs/architecture.md)                               |

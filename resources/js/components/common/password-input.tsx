@@ -1,7 +1,9 @@
 import { Eye, EyeOff } from 'lucide-react';
 import { forwardRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
@@ -10,6 +12,7 @@ interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement>
 
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     ({ id, name, className, ...props }, ref) => {
+        const { t } = useTranslation();
         const [showPassword, setShowPassword] = useState(false);
 
         const togglePasswordVisibility = () => {
@@ -23,7 +26,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
                     id={id}
                     name={name}
                     type={showPassword ? 'text' : 'password'}
-                    className={className}
+                    className={cn('pr-10', className)}
                     {...props}
                 />
                 <Button
@@ -34,8 +37,8 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
                     onClick={togglePasswordVisibility}
                     aria-label={
                         showPassword
-                            ? 'Sembunyikan kata sandi'
-                            : 'Tampilkan kata sandi'
+                            ? t('common.hide_password')
+                            : t('common.show_password')
                     }
                     tabIndex={-1}
                 >

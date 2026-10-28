@@ -1,8 +1,8 @@
 import { Form, Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import InputError from '@/components/common/input-error';
+import PasswordInput from '@/components/common/password-input';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
@@ -25,9 +25,8 @@ export default function ConfirmPassword() {
                             <Label htmlFor="password">
                                 {t('auth.confirm.password')}
                             </Label>
-                            <Input
+                            <PasswordInput
                                 id="password"
-                                type="password"
                                 name="password"
                                 placeholder={t('auth.confirm.password')}
                                 autoComplete="current-password"
