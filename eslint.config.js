@@ -6,6 +6,8 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import typescript from 'typescript-eslint';
 
+import i18n from './eslint-rules/i18n/index.js';
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
     js.configs.recommended,
@@ -42,7 +44,14 @@ export default [
             'import/order': [
                 'error',
                 {
-                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                    groups: [
+                        'builtin',
+                        'external',
+                        'internal',
+                        'parent',
+                        'sibling',
+                        'index',
+                    ],
                     alphabetize: {
                         order: 'asc',
                         caseInsensitive: true,
@@ -65,7 +74,39 @@ export default [
         },
     },
     {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'vite.config.ts', 'resources/js/actions/**', 'resources/js/routes/**', 'resources/js/wayfinder/**'],
+        files: ['resources/js/**/*.{ts,tsx}'],
+        ignores: ['resources/js/components/ui/**'],
+        plugins: { i18n },
+        rules: {
+            'i18n/no-missing-key': 'error',
+            'i18n/no-literal-string': [
+                'error',
+                {
+                    ignore: ['English', 'Bahasa Indonesia'],
+                },
+            ],
+        },
+    },
+    {
+        files: ['eslint-rules/**/*.js', 'scripts/**/*.mjs'],
+        languageOptions: {
+            globals: {
+                ...globals.node,
+            },
+        },
+    },
+    {
+        ignores: [
+            'vendor',
+            'node_modules',
+            'public',
+            'bootstrap/ssr',
+            'tailwind.config.js',
+            'vite.config.ts',
+            'resources/js/actions/**',
+            'resources/js/routes/**',
+            'resources/js/wayfinder/**',
+        ],
     },
     prettier, // Turn off all rules that might conflict with Prettier
 ];

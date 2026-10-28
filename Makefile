@@ -39,6 +39,8 @@ db-create-postgres:
 
 lint:
 	composer test:lint
+	npm run lint:check
+	npm run lint:i18n
 	npm run format:check
 	npm run types
 

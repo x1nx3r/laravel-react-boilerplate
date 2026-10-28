@@ -6,9 +6,11 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
-        "format": "prettier --write resources/",
-        "format:check": "prettier --check resources/",
+        "format": "prettier --write resources/ eslint.config.js eslint-rules/ scripts/",
+        "format:check": "prettier --check resources/ eslint.config.js eslint-rules/ scripts/",
         "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "lint:i18n": "node scripts/check-i18n.mjs",
         "types": "tsc --noEmit"
     },
     "devDependencies": {

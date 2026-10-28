@@ -63,3 +63,29 @@ Top-level sections in the JSON files (identical in both): `common`, `nav`,
    `lang/en/app.php` and `lang/id/app.php`, then
    `back()->with('success', __('app.your.key'))`.
 4. Verify by switching language in the user menu and re-visiting the page.
+
+## 5. Linting
+
+Two layers keep the bundles honest, and both run in `make lint`.
+
+**ESLint (per file)** — local plugin in `eslint-rules/i18n`:
+
+- `i18n/no-missing-key` — every `t('key')`, ``t(`key`)`` and
+  `<Trans i18nKey="key">` must exist in `en.json` and `id.json`. Keys with
+  `${}` interpolation are skipped here; the parity script covers their
+  families.
+- `i18n/no-literal-string` — flags visible text in JSX and string values for
+  `placeholder`, `title`, `alt`, `aria-label`, `aria-description`,
+  `aria-placeholder`, and `label`. Text without letters (`—`, `·`, numbers)
+  is allowed, as is text inside `<Trans>`, `<code>`, and `<pre>`.
+  `resources/js/components/ui/**` is excluded: it is the shadcn registry
+  layer.
+
+**Key check (whole project)** — `npm run lint:i18n`
+(`scripts/check-i18n.mjs`):
+
+- locale parity: `en` and `id` must have the same key set
+- unused keys: a key must be referenced as `t('key')`, `<Trans i18nKey>`, a
+  dynamic ``t(`prefix.${…}`)``, or appear as a plain string literal
+  (navigation and table config). `--allow-unused` downgrades unused keys to
+  a warning.
