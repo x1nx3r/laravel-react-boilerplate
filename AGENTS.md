@@ -3,6 +3,39 @@
 This is a Laravel 12 + Inertia React 19 application. Treat it as the product,
 not as a collection of generated files.
 
+## Boilerplate, not the product
+
+This repository is a starting point, not the final application. It exists to
+give the agent a working Laravel, Inertia, React, auth, RBAC, localization,
+and design-system baseline.
+
+If the requested product does not need a part of this boilerplate, rework it or
+remove it. Do not preserve a feature only because it is already here.
+
+Examples:
+
+- A request for a public landing page may remove the attendance, leave,
+  dashboard, and admin screens.
+- A request for a small API may remove the React shell and Inertia pages.
+- A request for a different domain may replace the users, roles, and
+  attendance model with the new domain model.
+- A request for a different visual identity may replace `DESIGN.md`,
+  `resources/css/app.css`, and the shared components.
+
+Before you delete, check:
+
+- routes and controllers
+- migrations and seeders
+- tests
+- navigation and permissions
+- shared components and layouts
+- generated Wayfinder files
+
+After you change the shape, run `make lint` and `make test`. If the app no
+longer builds, fix the build before you continue. Do not leave a partial
+boilerplate behind.
+
+
 ## Before you build
 
 1. Read `README.md`, `DESIGN.md`, and this file.
