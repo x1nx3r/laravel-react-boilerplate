@@ -55,6 +55,9 @@ export default defineConfig(({ command }) => ({
         // The preview proxy and the agent browser both run in this
         // container; loopback is enough.
         host: '127.0.0.1',
+        // Keep CSS asset URLs relative so they resolve against the browser's
+        // origin instead of the container's Vite origin.
+        origin: '',
         port: 5173,
         strictPort: true,
         allowedHosts: ['.agent.tcl-it.tech', 'localhost', '127.0.0.1'],

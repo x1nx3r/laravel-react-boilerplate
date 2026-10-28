@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\Response;
 
 class TrustCloudflare
@@ -27,6 +28,14 @@ class TrustCloudflare
                 Request::HEADER_X_FORWARDED_PORT |
                 Request::HEADER_X_FORWARDED_PROTO
             );
+
+            // The preview proxy forwards HTTPS through an HTTP hop. Make
+            // the URL generator follow the browser's scheme even when PHP's
+            // request object sees a plain socket.
+            $forwardedProto = strtolower((string) $request->headers->get('X-Forwarded-Proto', ''));
+            if (str_contains($forwardedProto, 'https')) {
+                URL::forceScheme('https');
+            }
 
             // Look at the CF-Connecting-IP header to find the real user.
             if ($request->headers->has('CF-Connecting-IP')) {
