@@ -134,9 +134,11 @@ export default function AttendanceOthers({
                     <div className="lg:col-span-2">
                         <CalendarGrid
                             calendar={calendar}
-                            baseUrl={AttendanceController.others({
-                                user: selectedUser.id,
-                            }).url}
+                            baseUrl={
+                                AttendanceController.others({
+                                    user: selectedUser.id,
+                                }).url
+                            }
                         />
                     </div>
                 </div>

@@ -95,10 +95,7 @@ export default function Register() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <FieldLabel
-                                        htmlFor="email"
-                                        mark="required"
-                                    >
+                                    <FieldLabel htmlFor="email" mark="required">
                                         {t('auth.register.email')}
                                     </FieldLabel>
                                     <Input
@@ -401,7 +398,9 @@ export default function Register() {
 
                                     <div className="space-y-2">
                                         <FieldLabel htmlFor="bank_account_number">
-                                            {t('auth.register.bank_account_number')}
+                                            {t(
+                                                'auth.register.bank_account_number',
+                                            )}
                                         </FieldLabel>
                                         <Input
                                             id="bank_account_number"
@@ -463,7 +462,9 @@ export default function Register() {
 
                                     <div className="space-y-2">
                                         <FieldLabel htmlFor="education_institution">
-                                            {t('auth.register.education_institution')}
+                                            {t(
+                                                'auth.register.education_institution',
+                                            )}
                                         </FieldLabel>
                                         <Input
                                             id="education_institution"

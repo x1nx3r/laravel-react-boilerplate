@@ -10,7 +10,7 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 - **Frontend**: Inertia 2 + React 19 + TypeScript, React Compiler, Vite 7 (SSR-ready), Tailwind 4 + shadcn/ui, [Wayfinder](https://github.com/laravel/wayfinder) typed routing
 - **i18n**: Indonesian (default) + English — react-i18next on the frontend, Laravel `lang/` files for backend messages, cookie-based locale with a user-menu switcher
 - **Layout shell**: sidebar + header layouts, light/dark/system appearance (cookie + middleware), permission-aware navigation
-- **Tooling**: Pint, ESLint 9, Prettier, PHPUnit (SQLite `:memory:`), GitHub Actions lint workflow
+- **Tooling**: Pint, ESLint 9, Prettier, PHPUnit (Postgres test database), GitHub Actions lint workflow
 - **Seeders**: three demo accounts, one per role (all with password `password`)
 
 | Account | Email | Role | Permissions |
@@ -46,19 +46,22 @@ Opinionated Laravel 12 + Inertia (React 19) boilerplate, extracted from producti
 
 ## Requirements
 
-- PHP 8.2+
-- Composer
-- Node 20+
+- PHP 8.2+ (PHP 8.4 is used in CI)
+- Composer 2
+- Node 20+ (Node 22 is the container base)
+- PostgreSQL 16+ (the only local database path in this repo)
 
 ## Boot a new project
 
 ```bash
 php bin/rename.php "Client App" client-app
-composer setup
-composer dev
+make setup          # dependencies, key, migrate/seed, frontend build
+make dev
 ```
 
-`composer setup` copies `.env.example`, generates the app key, migrates + seeds, and builds the frontend. Default database is MySQL — adjust `.env` (e.g. `DB_CONNECTION=sqlite`) before running setup if needed.
+`make setup` uses `.env.example` and assumes PostgreSQL on `127.0.0.1:5432` with database `laravel_boilerplate`, user `postgres`, password `postgres`. Change `.env` for another local instance. MySQL remains supported by Laravel config for downstream adopters, but is not part of this repo’s setup flow.
+
+Agent-specific instructions live in `AGENTS.md`.
 
 ## Where things live
 

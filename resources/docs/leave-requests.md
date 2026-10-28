@@ -8,16 +8,16 @@ attendance calendar.
 
 `leave_requests` (model `App\Models\LeaveRequest`, ULID key):
 
-| Column        | Type      | Notes                                   |
-|---------------|-----------|-----------------------------------------|
-| user_id       | ULID FK   | constrained                             |
-| start_date    | date      |                                         |
-| end_date      | date      | must be ≥ start_date                    |
-| reason        | text      | required                                |
-| status        | string    | `pending` \| `approved` \| `rejected`   |
-| reviewed_by   | ULID FK   | nullable, set on review                 |
-| reviewed_at   | timestamp | nullable, set on review                 |
-| reviewer_note | text      | nullable, optional note from reviewer   |
+| Column        | Type      | Notes                                 |
+| ------------- | --------- | ------------------------------------- |
+| user_id       | ULID FK   | constrained                           |
+| start_date    | date      |                                       |
+| end_date      | date      | must be ≥ start_date                  |
+| reason        | text      | required                              |
+| status        | string    | `pending` \| `approved` \| `rejected` |
+| reviewed_by   | ULID FK   | nullable, set on review               |
+| reviewed_at   | timestamp | nullable, set on review               |
+| reviewer_note | text      | nullable, optional note from reviewer |
 
 Constants: `STATUS_PENDING` / `STATUS_APPROVED` / `STATUS_REJECTED`.
 Relations: `user()`, `reviewer()` (reviewed_by → User). Scopes: `pending()`,
@@ -41,13 +41,13 @@ approved/rejected are terminal — re-review attempts get a flash error.
 
 ## 3. Routes & permissions
 
-| Method | Path                                | Gate                         | Purpose                    |
-|--------|-------------------------------------|------------------------------|----------------------------|
-| GET    | `/attendance/leaves`                | auth                         | Own leave requests page    |
-| POST   | `/attendance/leaves`                | auth                         | Submit (self)              |
-| GET    | `/attendance/leaves/review`         | `permission:view_attendance` | HR pending queue           |
-| PUT    | `/attendance/leaves/{leave}/approve`| `permission:view_attendance` | Approve                    |
-| PUT    | `/attendance/leaves/{leave}/reject` | `permission:view_attendance` | Reject (with optional note)|
+| Method | Path                                 | Gate                         | Purpose                     |
+| ------ | ------------------------------------ | ---------------------------- | --------------------------- |
+| GET    | `/attendance/leaves`                 | auth                         | Own leave requests page     |
+| POST   | `/attendance/leaves`                 | auth                         | Submit (self)               |
+| GET    | `/attendance/leaves/review`          | `permission:view_attendance` | HR pending queue            |
+| PUT    | `/attendance/leaves/{leave}/approve` | `permission:view_attendance` | Approve                     |
+| PUT    | `/attendance/leaves/{leave}/reject`  | `permission:view_attendance` | Reject (with optional note) |
 
 Reviewing is an oversight action (`view_attendance`), deliberately not
 `manage_users`.
@@ -97,14 +97,14 @@ Reject actions.
 
 ## 7. Frontend surfaces
 
-| Surface                                   | Contents                                            |
-|-------------------------------------------|-----------------------------------------------------|
-| `pages/attendance/page.tsx`               | Today card + calendar + `LeavesSection`             |
-| `pages/attendance/leaves/page.tsx`        | Own leaves (same shared `LeavesSection`)            |
-| `pages/attendance/leaves/review/page.tsx` | HR pending queue + reject dialog                    |
-| `pages/attendance/others/page.tsx`        | Selected user's leaves with status badges           |
-| `components/attendance/leaves-section.tsx`| Submit form + `LeavesTable` (shared)                |
-| `components/attendance/leaves-table.tsx`  | Dates / reason / status badge / reviewer + note     |
+| Surface                                        | Contents                                                        |
+| ---------------------------------------------- | --------------------------------------------------------------- |
+| `pages/attendance/page.tsx`                    | Today card + calendar + `LeavesSection`                         |
+| `pages/attendance/leaves/page.tsx`             | Own leaves (same shared `LeavesSection`)                        |
+| `pages/attendance/leaves/review/page.tsx`      | HR pending queue + reject dialog                                |
+| `pages/attendance/others/page.tsx`             | Selected user's leaves with status badges                       |
+| `components/attendance/leaves-section.tsx`     | Submit form + `LeavesTable` (shared)                            |
+| `components/attendance/leaves-table.tsx`       | Dates / reason / status badge / reviewer + note                 |
 | `components/attendance/leave-status-badge.tsx` | Color-coded pending (amber) / approved (green) / rejected (red) |
 
 ## 8. Deliberate scope limits

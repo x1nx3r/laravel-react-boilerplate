@@ -291,7 +291,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                             id="join_date"
                             type="date"
                             value={data.join_date}
-                            onChange={(e) => setData('join_date', e.target.value)}
+                            onChange={(e) =>
+                                setData('join_date', e.target.value)
+                            }
                         />
                         <InputError message={errors.join_date} />
                     </div>
@@ -305,7 +307,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                             type="date"
                             value={data.end_date}
                             min={data.join_date || undefined}
-                            onChange={(e) => setData('end_date', e.target.value)}
+                            onChange={(e) =>
+                                setData('end_date', e.target.value)
+                            }
                         />
                         <InputError message={errors.end_date} />
                     </div>
@@ -342,7 +346,9 @@ export function UserForm({ user, roles }: UserFormProps) {
                             id="birth_date"
                             type="date"
                             value={data.birth_date}
-                            onChange={(e) => setData('birth_date', e.target.value)}
+                            onChange={(e) =>
+                                setData('birth_date', e.target.value)
+                            }
                         />
                         <InputError message={errors.birth_date} />
                     </div>
@@ -421,18 +427,13 @@ export function UserForm({ user, roles }: UserFormProps) {
                                 />
                             </SelectTrigger>
                             <SelectContent>
-                                {[
-                                    'sma',
-                                    'smk',
-                                    'd3',
-                                    's1',
-                                    's2',
-                                    's3',
-                                ].map((level) => (
-                                    <SelectItem key={level} value={level}>
-                                        {level.toUpperCase()}
-                                    </SelectItem>
-                                ))}
+                                {['sma', 'smk', 'd3', 's1', 's2', 's3'].map(
+                                    (level) => (
+                                        <SelectItem key={level} value={level}>
+                                            {level.toUpperCase()}
+                                        </SelectItem>
+                                    ),
+                                )}
                             </SelectContent>
                         </Select>
                         <InputError message={errors.education_level} />

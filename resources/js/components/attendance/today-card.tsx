@@ -16,8 +16,7 @@ export default function TodayCard({ today }: { today: TodayState }) {
     const { t } = useTranslation();
     const form = useForm({});
 
-    const submit = (url: string) =>
-        form.post(url, { preserveScroll: true });
+    const submit = (url: string) => form.post(url, { preserveScroll: true });
 
     return (
         <Card>

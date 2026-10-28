@@ -10,7 +10,11 @@ import {
 } from '@/components/ui/table';
 import type { LeaveRequestPayload } from '@/types';
 
-export default function LeavesTable({ leaves }: { leaves: LeaveRequestPayload[] }) {
+export default function LeavesTable({
+    leaves,
+}: {
+    leaves: LeaveRequestPayload[];
+}) {
     const { t } = useTranslation();
 
     return (

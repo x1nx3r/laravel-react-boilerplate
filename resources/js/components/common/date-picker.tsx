@@ -90,8 +90,14 @@ export default function DatePicker({
                         mode="single"
                         selected={selected}
                         defaultMonth={selected}
-                        onSelect={(date) => onChange(date ? formatIsoDate(date) : '')}
-                        disabled={disabledMatchers.length ? disabledMatchers : undefined}
+                        onSelect={(date) =>
+                            onChange(date ? formatIsoDate(date) : '')
+                        }
+                        disabled={
+                            disabledMatchers.length
+                                ? disabledMatchers
+                                : undefined
+                        }
                         startMonth={new Date(1970, 0)}
                         endMonth={new Date(new Date().getFullYear() + 10, 11)}
                         captionLayout="dropdown"

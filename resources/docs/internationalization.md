@@ -28,11 +28,11 @@ cookie 'locale' ──► HandleLocale middleware ──► app locale
 
 ## 2. Where strings live
 
-| Kind                              | File                                        |
-|-----------------------------------|---------------------------------------------|
-| Frontend UI strings               | `resources/js/i18n/locales/{en,id}.json`    |
-| Backend flash / status messages   | `lang/{en,id}/app.php`                      |
-| Calendar weekday & month names    | generated via `Intl` with the active locale |
+| Kind                            | File                                        |
+| ------------------------------- | ------------------------------------------- |
+| Frontend UI strings             | `resources/js/i18n/locales/{en,id}.json`    |
+| Backend flash / status messages | `lang/{en,id}/app.php`                      |
+| Calendar weekday & month names  | generated via `Intl` with the active locale |
 
 Top-level sections in the JSON files (identical in both): `common`, `nav`,
 `dashboard`, `auth`, `settings`, `errors`, `users` (employees), `roles`,

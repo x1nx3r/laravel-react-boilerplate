@@ -6,11 +6,11 @@ employee attribute set.
 
 ## 1. Screen map
 
-| Page (Inertia component)        | Route                        | Purpose                                        |
-|---------------------------------|------------------------------|------------------------------------------------|
-| `admin/users/page`              | `GET /admin/users`           | List with search, 5 filters, pagination        |
-| `admin/users/create/page`       | `GET /admin/users/create`    | Create form                                    |
-| `admin/users/edit/page`         | `GET /admin/users/{user}/edit` | Edit form (same `UserForm` component)         |
+| Page (Inertia component)  | Route                          | Purpose                                 |
+| ------------------------- | ------------------------------ | --------------------------------------- |
+| `admin/users/page`        | `GET /admin/users`             | List with search, 5 filters, pagination |
+| `admin/users/create/page` | `GET /admin/users/create`      | Create form                             |
+| `admin/users/edit/page`   | `GET /admin/users/{user}/edit` | Edit form (same `UserForm` component)   |
 
 All three share `resources/js/pages/admin/users/user-form.tsx` and live under
 the `Administration` sidebar group (permission `view_admin`; the Users entry
@@ -23,31 +23,31 @@ extraction), used by registration, admin create, and admin edit.
 
 **Account fields** (admin forms only):
 
-| Field      | Rules                                        | Notes                          |
-|------------|----------------------------------------------|--------------------------------|
-| name/email | required, unique email                       |                                |
-| password   | required on create, optional blank on edit   | hashed                         |
-| role       | required, exists in roles                    | superadmin only assignable by `manage_roles` holders |
-| is_active  | boolean                                      | inactive accounts cannot log in |
+| Field      | Rules                                      | Notes                                                |
+| ---------- | ------------------------------------------ | ---------------------------------------------------- |
+| name/email | required, unique email                     |                                                      |
+| password   | required on create, optional blank on edit | hashed                                               |
+| role       | required, exists in roles                  | superadmin only assignable by `manage_roles` holders |
+| is_active  | boolean                                    | inactive accounts cannot log in                      |
 
 **Employee profile fields**:
 
-| Field                  | Type/Rules                          | Used by dashboard?        |
-|------------------------|-------------------------------------|---------------------------|
-| employee_id            | nullable string (e.g. `EMP-00123`)  |                           |
-| nik                    | nullable string (national ID)       |                           |
-| birth_place            | nullable string                     |                           |
-| birth_date             | nullable date                       | age chart                 |
-| gender                 | nullable `L` \| `P`                 | gender chart              |
-| education_level        | nullable `sma` \| `smk` \| `d3` \| `s1` \| `s2` \| `s3` | education chart |
-| education_institution  | nullable string                     |                           |
-| major                  | nullable string                     |                           |
-| employee_status        | nullable `kontrak` \| `tetap`       |                           |
-| department             | nullable string                     | list filter               |
-| join_date / end_date   | nullable dates, end ≥ join          |                           |
-| phone_number           | nullable string                     |                           |
-| bank_account_number    | nullable string                     |                           |
-| address                | nullable string                     |                           |
+| Field                 | Type/Rules                                              | Used by dashboard? |
+| --------------------- | ------------------------------------------------------- | ------------------ |
+| employee_id           | nullable string (e.g. `EMP-00123`)                      |                    |
+| nik                   | nullable string (national ID)                           |                    |
+| birth_place           | nullable string                                         |                    |
+| birth_date            | nullable date                                           | age chart          |
+| gender                | nullable `L` \| `P`                                     | gender chart       |
+| education_level       | nullable `sma` \| `smk` \| `d3` \| `s1` \| `s2` \| `s3` | education chart    |
+| education_institution | nullable string                                         |                    |
+| major                 | nullable string                                         |                    |
+| employee_status       | nullable `kontrak` \| `tetap`                           |                    |
+| department            | nullable string                                         | list filter        |
+| join_date / end_date  | nullable dates, end ≥ join                              |                    |
+| phone_number          | nullable string                                         |                    |
+| bank_account_number   | nullable string                                         |                    |
+| address               | nullable string                                         |                    |
 
 `education_level` is stored as a plain string column (`users.education_level`)
 with the same `in:` validation pattern as `gender`/`employee_status`; the

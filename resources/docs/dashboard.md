@@ -40,13 +40,13 @@ including zero-count levels so the axis is stable.
 
 **Ages** — computed in PHP from `birth_date` (Carbon `->age`), bucketed:
 
-| Bin     | Meaning        |
-|---------|----------------|
-| `<25`   | age < 25       |
-| `25-34` | 25 ≤ age < 35  |
-| `35-44` | 35 ≤ age < 45  |
-| `45-54` | 45 ≤ age < 55  |
-| `55+`   | age ≥ 55       |
+| Bin     | Meaning       |
+| ------- | ------------- |
+| `<25`   | age < 25      |
+| `25-34` | 25 ≤ age < 35 |
+| `35-44` | 35 ≤ age < 45 |
+| `45-54` | 45 ≤ age < 55 |
+| `55+`   | age ≥ 55      |
 
 Every bin is always present in the payload (zero-filled). Users without a
 birth date or gender or education level are excluded from the respective
@@ -63,8 +63,8 @@ type ChartDatum = { label: string; total: number };
 interface EmployeeStats {
     total: number;
     gender: ChartDatum[];
-    education: ChartDatum[];   // labels SMA/SMK/D3/S1/S2/S3
-    ages: ChartDatum[];        // labels <25, 25-34, 35-44, 45-54, 55+
+    education: ChartDatum[]; // labels SMA/SMK/D3/S1/S2/S3
+    ages: ChartDatum[]; // labels <25, 25-34, 35-44, 45-54, 55+
 }
 ```
 

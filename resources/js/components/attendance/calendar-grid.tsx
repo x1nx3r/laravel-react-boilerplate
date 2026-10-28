@@ -49,7 +49,8 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
 
     const daysInMonth = new Date(calendar.year, calendar.month, 0).getDate();
     // Monday-first offset of the 1st: Mon=0 ... Sun=6.
-    const leadingBlanks = (new Date(calendar.year, calendar.month - 1, 1).getDay() + 6) % 7;
+    const leadingBlanks =
+        (new Date(calendar.year, calendar.month - 1, 1).getDay() + 6) % 7;
 
     const cells: { key: string; day: number }[] = Array.from(
         { length: daysInMonth },
@@ -125,7 +126,10 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 border-t pt-3 text-xs text-muted-foreground">
                     {legendItems.map(({ status, dot }) => (
-                        <span key={status} className="flex items-center gap-1.5">
+                        <span
+                            key={status}
+                            className="flex items-center gap-1.5"
+                        >
                             <span
                                 className={cn('size-2.5 rounded-full', dot)}
                             />

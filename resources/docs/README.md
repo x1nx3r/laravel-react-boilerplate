@@ -24,30 +24,30 @@ Plus two bonus modules built on the same foundation:
 
 ## Stack
 
-| Layer      | Technology                                                                 |
-|------------|----------------------------------------------------------------------------|
-| Backend    | PHP ^8.2, Laravel 12, Fortify (auth), spatie/laravel-permission (RBAC)     |
-| Frontend   | React 19, Inertia v2, TypeScript (strict), Tailwind CSS v4, shadcn/ui      |
-| Charts     | recharts                                                                   |
-| Routing    | Laravel routes + Wayfinder (typed controller actions generated to JS)      |
-| i18n       | react-i18next (frontend), Laravel lang files (backend flash messages)      |
-| DB         | MySQL (default), SQLite supported; sessions/cache/queue in database        |
-| Testing    | PHPUnit 11 (feature + unit)                                                |
-| Quality    | Pint (PHP), ESLint + Prettier + tsc --noEmit (JS/TS), Vite build           |
+| Layer    | Technology                                                             |
+| -------- | ---------------------------------------------------------------------- |
+| Backend  | PHP ^8.2, Laravel 12, Fortify (auth), spatie/laravel-permission (RBAC) |
+| Frontend | React 19, Inertia v2, TypeScript (strict), Tailwind CSS v4, shadcn/ui  |
+| Charts   | recharts                                                               |
+| Routing  | Laravel routes + Wayfinder (typed controller actions generated to JS)  |
+| i18n     | react-i18next (frontend), Laravel lang files (backend flash messages)  |
+| DB       | PostgreSQL; sessions/cache/queue in database                           |
+| Testing  | PHPUnit 11 (feature + unit)                                            |
+| Quality  | Pint (PHP), ESLint + Prettier + tsc --noEmit (JS/TS), Vite build       |
 
 ## Document map
 
-| Document                                        | Contents                                                              |
-|-------------------------------------------------|-----------------------------------------------------------------------|
-| [architecture.md](architecture.md)               | Request lifecycle, project structure, conventions, quality gates       |
-| [auth-and-rbac.md](auth-and-rbac.md)             | Login, registration + approval, roles, permissions, enforcement layers |
-| [employee-management.md](employee-management.md) | Employee CRUD (requirements 1–4), fields, documents, verification      |
-| [dashboard.md](dashboard.md)                     | Employee-data dashboard (requirement 5), chart data pipeline           |
-| [attendance.md](attendance.md)                   | Check-in/check-out, month calendar, HR team view, timezone rules       |
-| [leave-requests.md](leave-requests.md)           | Cuti state machine, validation, review queue, calendar effects         |
-| [internationalization.md](internationalization.md)| Two-locale system (id/en), where strings live, how to add new ones     |
-| [routes-reference.md](routes-reference.md)       | Every route with method, name, middleware, and purpose                 |
-| [demo-guide.md](demo-guide.md)                   | Demo accounts, seeded data, step-by-step demo script                   |
+| Document                                           | Contents                                                               |
+| -------------------------------------------------- | ---------------------------------------------------------------------- |
+| [architecture.md](architecture.md)                 | Request lifecycle, project structure, conventions, quality gates       |
+| [auth-and-rbac.md](auth-and-rbac.md)               | Login, registration + approval, roles, permissions, enforcement layers |
+| [employee-management.md](employee-management.md)   | Employee CRUD (requirements 1–4), fields, documents, verification      |
+| [dashboard.md](dashboard.md)                       | Employee-data dashboard (requirement 5), chart data pipeline           |
+| [attendance.md](attendance.md)                     | Check-in/check-out, month calendar, HR team view, timezone rules       |
+| [leave-requests.md](leave-requests.md)             | Cuti state machine, validation, review queue, calendar effects         |
+| [internationalization.md](internationalization.md) | Two-locale system (id/en), where strings live, how to add new ones     |
+| [routes-reference.md](routes-reference.md)         | Every route with method, name, middleware, and purpose                 |
+| [demo-guide.md](demo-guide.md)                     | Demo accounts, seeded data, step-by-step demo script                   |
 
 ## Quick start
 
@@ -72,11 +72,11 @@ Notes:
 
 All demo accounts use password `password`.
 
-| Role       | Email                   | Can do                                                  |
-|------------|-------------------------|---------------------------------------------------------|
-| superadmin | superadmin@example.com  | Everything: admin CRUD, roles, attendance review, charts |
-| hr         | hr@example.com          | Employee CRUD, attendance review, charts (no role mgmt)  |
-| user       | user@example.com        | Own attendance, own leave requests (no admin access)     |
+| Role       | Email                  | Can do                                                   |
+| ---------- | ---------------------- | -------------------------------------------------------- |
+| superadmin | superadmin@example.com | Everything: admin CRUD, roles, attendance review, charts |
+| hr         | hr@example.com         | Employee CRUD, attendance review, charts (no role mgmt)  |
+| user       | user@example.com       | Own attendance, own leave requests (no admin access)     |
 
 The seeder also creates 24 additional demo employees (with roles, gender,
 education, birth dates) so the dashboard charts and HR lists have realistic

@@ -69,15 +69,21 @@ export default function AttendanceIndex({
                         <div className="flex flex-wrap gap-2">
                             <Button asChild variant="outline">
                                 <a
-                                    href={AttendanceController.others({
-                                        user: auth.user.id,
-                                    }).url}
+                                    href={
+                                        AttendanceController.others({
+                                            user: auth.user.id,
+                                        }).url
+                                    }
                                 >
                                     {t('attendance.team_view')}
                                 </a>
                             </Button>
                             <Button asChild variant="outline">
-                                <a href={LeaveRequestController.reviewIndex().url}>
+                                <a
+                                    href={
+                                        LeaveRequestController.reviewIndex().url
+                                    }
+                                >
                                     {t('attendance.review_queue')}
                                 </a>
                             </Button>

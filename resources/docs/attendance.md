@@ -9,24 +9,24 @@ visibility (`view_attendance`).
 
 `attendances` (model `App\Models\Attendance`, ULID key):
 
-| Column       | Type      | Notes                              |
-|--------------|-----------|------------------------------------|
-| user_id      | ULID FK   | constrained                        |
-| date         | date      | **unique together with user_id**   |
-| check_in_at  | timestamp | set on check-in                    |
-| check_out_at | timestamp | nullable, set on check-out         |
+| Column       | Type      | Notes                            |
+| ------------ | --------- | -------------------------------- |
+| user_id      | ULID FK   | constrained                      |
+| date         | date      | **unique together with user_id** |
+| check_in_at  | timestamp | set on check-in                  |
+| check_out_at | timestamp | nullable, set on check-out       |
 
 One row per user per day. Created by check-in, updated by check-out.
 Relations: `User::attendances()` hasMany; scopes `scopeForMonth(Y, m)`.
 
 ## 2. Routes & permissions
 
-| Method | Path                        | Gate                        | Purpose                       |
-|--------|-----------------------------|-----------------------------|-------------------------------|
-| GET    | `/attendance`               | auth                        | Own calendar + today card     |
-| POST   | `/attendance/check-in`      | auth                        | Check in (self)               |
-| POST   | `/attendance/check-out`     | auth                        | Check out (self)              |
-| GET    | `/attendance/others/{user}` | `permission:view_attendance`| HR team view for one user     |
+| Method | Path                        | Gate                         | Purpose                   |
+| ------ | --------------------------- | ---------------------------- | ------------------------- |
+| GET    | `/attendance`               | auth                         | Own calendar + today card |
+| POST   | `/attendance/check-in`      | auth                         | Check in (self)           |
+| POST   | `/attendance/check-out`     | auth                         | Check out (self)          |
+| GET    | `/attendance/others/{user}` | `permission:view_attendance` | HR team view for one user |
 
 ## 3. Check-in flow
 

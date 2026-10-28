@@ -171,9 +171,7 @@ export default function LeaveReview({ pending }: LeaveReviewProps) {
                                                         className="text-destructive hover:text-destructive"
                                                         onClick={() => {
                                                             setNote('');
-                                                            setRejecting(
-                                                                leave,
-                                                            );
+                                                            setRejecting(leave);
                                                         }}
                                                     >
                                                         {t(
