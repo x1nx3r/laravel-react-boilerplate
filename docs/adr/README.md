@@ -45,3 +45,4 @@ page under `resources/docs/` instead.
 | [0010](0010-long-forms-use-one-card-and-tabs.md)     | Long forms use one card and tabs                      | [DESIGN.md](../../DESIGN.md)                                                          |
 | [0011](0011-pages-use-the-full-width.md)             | Pages use the full width                              | [DESIGN.md](../../DESIGN.md)                                                          |
 | [0012](0012-page-composition-main-and-rail.md)       | Every page has a main zone and a context rail         | [DESIGN.md](../../DESIGN.md)                                                          |
+| [0013](0013-preview-dev-proxy.md)                    | Preview uses an app-side dev proxy for Vite HMR       | [architecture.md](../../resources/docs/architecture.md), `vite.config.ts`             |
