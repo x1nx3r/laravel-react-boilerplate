@@ -15,5 +15,7 @@ resources:
   cpus: "4"
   memory: 6g
   pids: 1024
+preview:
+  port: 8000
 secrets:
   - OPENCODE_API_KEY

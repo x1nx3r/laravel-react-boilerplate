@@ -52,6 +52,12 @@ preview proxy :8000
 
 The proxy is development-only. Production serves built assets through PHP.
 
+The proxy binds `0.0.0.0` inside the container so Docker can publish it on
+the host's loopback for deusd. It is not published to the LAN. Loopback
+callers (the agent's own browser) are trusted; every other caller must send
+`X-Manus-Preview-Token` with the per-session preview token. The proxy strips
+that header before forwarding.
+
 The proxy must:
 
 - forward HTTP and WebSocket upgrades

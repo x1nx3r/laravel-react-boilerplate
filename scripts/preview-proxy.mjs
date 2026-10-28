@@ -4,14 +4,16 @@
 // owns the reserved /_vite path (HTTP and HMR WebSocket); everything else is
 // Laravel. The proxy preserves the incoming Host for Laravel so its URL
 // generation and TrustCloudflare middleware see the preview origin.
+import crypto from 'node:crypto';
 import http from 'node:http';
 import httpProxy from 'http-proxy';
 
-const HOST = process.env.PREVIEW_HOST ?? '127.0.0.1';
+const HOST = process.env.PREVIEW_HOST ?? '0.0.0.0';
 const PORT = Number(process.env.PREVIEW_PORT ?? 8000);
 const APP_PORT = Number(process.env.APP_PORT ?? 8001);
 const VITE_PORT = Number(process.env.VITE_PORT ?? 5173);
 const VITE_BASE = (process.env.VITE_BASE ?? '/_vite').replace(/\/$/, '');
+const TOKEN = process.env.MANUS_PREVIEW_TOKEN ?? '';
 
 const appProxy = httpProxy.createProxyServer({
     target: `http://127.0.0.1:${APP_PORT}`,
@@ -52,13 +54,48 @@ function isVitePath(url) {
     return path === VITE_BASE || path.startsWith(`${VITE_BASE}/`);
 }
 
+function loopback(req) {
+    const address = req.socket.remoteAddress ?? '';
+    return (
+        address === '127.0.0.1' ||
+        address === '::1' ||
+        address === '::ffff:127.0.0.1'
+    );
+}
+
+function hasPreviewToken(req) {
+    if (!TOKEN || loopback(req)) return true;
+    const given = req.headers['x-manus-preview-token'] ?? '';
+    if (typeof given !== 'string') return false;
+    const want = Buffer.from(TOKEN);
+    const got = Buffer.from(given);
+    return want.length === got.length && crypto.timingSafeEqual(want, got);
+}
+
+function authorize(req, res) {
+    if (hasPreviewToken(req)) {
+        // The token is for this proxy, never for the app behind it.
+        delete req.headers['x-manus-preview-token'];
+        return true;
+    }
+    res.writeHead(401, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Preview token is missing or invalid.\n');
+    return false;
+}
+
 const server = http.createServer((req, res) => {
+    if (!authorize(req, res)) return;
     const proxy = isVitePath(req.url) ? viteProxy : appProxy;
 
     proxy.web(req, res, {}, (error) => fail(res, error));
 });
 
 server.on('upgrade', (req, socket, head) => {
+    if (!hasPreviewToken(req)) {
+        socket.destroy();
+        return;
+    }
+    delete req.headers['x-manus-preview-token'];
     const proxy = isVitePath(req.url) ? viteProxy : appProxy;
 
     proxy.ws(req, socket, head, (error) => {
