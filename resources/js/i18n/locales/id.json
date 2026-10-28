@@ -1,6 +1,5 @@
 {
     "common": {
-        "search": "Cari...",
         "search_submit": "Cari",
         "filter": "Filter",
         "clear_filters": "Hapus filter",
@@ -13,12 +12,12 @@
         "hide_password": "Sembunyikan kata sandi",
         "save_changes": "Simpan Perubahan",
         "menu": "Menu",
-        "home": "Beranda",
         "pick_date": "Pilih tanggal",
         "clear": "Bersihkan",
         "required": "wajib",
         "optional": "opsional",
-        "processing": "Memproses..."
+        "processing": "Memproses...",
+        "all_rights_reserved": "Hak cipta dilindungi."
     },
     "nav": {
         "dashboard": "Beranda",
@@ -34,8 +33,6 @@
             "title": "Data Pegawai",
             "description": "Ringkasan komposisi pegawai.",
             "total_employees": "Total Pegawai",
-            "gender_title": "Pegawai Berdasarkan Jenis Kelamin",
-            "gender_description": "Perbandingan jumlah pegawai laki-laki dan perempuan.",
             "gender": {
                 "L": "Laki-laki",
                 "P": "Perempuan"
@@ -124,11 +121,17 @@
             "description": "Ini adalah area aman aplikasi. Harap konfirmasi kata sandi Anda sebelum melanjutkan.",
             "password": "Kata Sandi",
             "submit": "Konfirmasi kata sandi"
+        },
+        "shell": {
+            "eyebrow": "Ruang kerja operasional",
+            "headline": "SDM, absensi, dan persetujuan dalam satu tempat.",
+            "description": "Ruang kerja terfokus bagi orang-orang yang menjalankan organisasi.",
+            "footer": "Operasional internal · {{year}}",
+            "split_description": "Operasional terfokus untuk SDM, absensi, dan persetujuan."
         }
     },
     "settings": {
         "title": "Pengaturan",
-        "description": "Kelola profil dan pengaturan akun Anda",
         "tabs": {
             "profile": "Profil",
             "password": "Kata Sandi",
@@ -157,12 +160,22 @@
             "breadcrumb": "Pengaturan Tampilan",
             "title": "Pengaturan Tampilan",
             "description": "Perbarui pengaturan tampilan akun Anda",
-            "theme": "Tema",
             "light": "Terang",
             "dark": "Gelap",
             "system": "Sistem",
             "language": "Bahasa",
             "language_description": "Ganti bahasa antarmuka aplikasi"
+        },
+        "delete": {
+            "title": "Hapus akun",
+            "description": "Hapus akun Anda dan seluruh sumber dayanya",
+            "warning": "Peringatan",
+            "warning_body": "Harap berhati-hati, tindakan ini tidak dapat dibatalkan.",
+            "confirm_title": "Yakin ingin menghapus akun Anda?",
+            "confirm_body": "Setelah akun dihapus, seluruh sumber daya dan datanya akan terhapus permanen. Masukkan kata sandi untuk mengonfirmasi bahwa Anda ingin menghapus akun ini secara permanen.",
+            "password": "Kata sandi",
+            "password_placeholder": "Masukkan kata sandi",
+            "submit": "Hapus akun"
         }
     },
     "errors": {
@@ -192,10 +205,34 @@
         "title": "Pegawai",
         "create": "Buat Pegawai",
         "edit_title": "Edit Pegawai",
+        "stats": {
+            "total": "Total pegawai",
+            "active": "Akun aktif",
+            "pending": "Menunggu persetujuan"
+        },
+        "summary": {
+            "title": "Ringkasan"
+        },
+        "guide": {
+            "title": "Panduan pengisian",
+            "account_title": "Akun & akses",
+            "account": "Kata sandi minimal 8 karakter. Peran menentukan menu yang dapat dibuka pengguna.",
+            "employment_title": "Kepegawaian",
+            "employment": "NIK terdiri dari 16 digit. Status kontrak membedakan karyawan Kontrak dan Tetap.",
+            "personal_title": "Data pribadi",
+            "personal": "Kolom ini opsional. Isi bila diperlukan untuk penggajian atau identitas.",
+            "documents_title": "Dokumen",
+            "documents": "PDF, JPG, PNG, DOC, atau XLS. Maksimal 10 MB per file."
+        },
         "breadcrumb": "Pegawai",
         "search_placeholder": "Cari nama atau email...",
         "require_approval": "Wajib verifikasi pendaftaran",
         "filters": {
+            "role": "Peran",
+            "approval": "Persetujuan",
+            "status": "Status",
+            "department": "Departemen",
+            "contract": "Kontrak",
             "role_all": "Semua peran",
             "approval_all": "Semua status verifikasi",
             "pending": "Menunggu Verifikasi",
@@ -228,10 +265,15 @@
         "delete_title": "Hapus Pegawai",
         "delete_description": "Apakah Anda yakin ingin menghapus <strong>{{name}}</strong>? Tindakan ini tidak dapat dibatalkan.",
         "no_results": "Tidak ada pegawai ditemukan.",
-        "self_note": "Anda tidak dapat mengubah peran atau menonaktifkan akun sendiri.",
         "form": {
             "account_section": "Informasi Akun & Akses",
             "account_description": "Detail kredensial dan hak akses pengguna di sistem.",
+            "tabs": {
+                "account": "Akun",
+                "employment": "Kepegawaian",
+                "personal": "Pribadi",
+                "documents": "Dokumen"
+            },
             "name": "Nama Lengkap",
             "email": "Email",
             "password": "Kata Sandi",
@@ -274,7 +316,8 @@
             "documents_description": "Unggah scan KTP, Ijazah, CV, atau dokumen lainnya (Maks. 10MB per file).",
             "files_selected": "{{count}} file dipilih.",
             "submit_create": "Buat Pegawai",
-            "submit_edit": "Simpan Perubahan"
+            "submit_edit": "Simpan Perubahan",
+            "self_note": "Anda tidak dapat mengubah peran atau status akun Anda sendiri."
         },
         "documents": {
             "title": "Dokumen Pendukung",
@@ -305,9 +348,7 @@
         "search_placeholder": "Cari peran...",
         "table": {
             "name": "Nama Peran",
-            "permissions": "Hak Akses",
-            "users": "Pegawai",
-            "actions": "Aksi"
+            "users": "Pegawai"
         },
         "full_access": "Akses Penuh",
         "no_permissions": "Tidak ada akses",
@@ -330,7 +371,7 @@
             "ready": "Siap memulai hari?",
             "check_in": "Check in",
             "check_out": "Check out",
-            "checked_in_at": "Check in pukul {{time}}",
+            "duration": "Durasi kerja",
             "checked_out_at": "Check out pukul {{time}}",
             "on_leave": "Anda sedang cuti hari ini."
         },
@@ -346,6 +387,15 @@
             "prev_month": "Bulan sebelumnya",
             "next_month": "Bulan berikutnya"
         },
+        "history": {
+            "title": "Riwayat Kehadiran",
+            "date": "Tanggal",
+            "check_in": "Masuk",
+            "check_out": "Keluar",
+            "duration": "Durasi",
+            "missing_checkout": "Belum keluar",
+            "empty": "Belum ada catatan kehadiran."
+        },
         "team": {
             "title": "Absensi Tim",
             "description": "Pilih pengguna untuk melihat kalender, riwayat, dan pengajuan cutinya.",
@@ -353,14 +403,7 @@
             "picker_label": "Pengguna",
             "selected": "Pengguna terpilih",
             "history_title": "Riwayat Absensi",
-            "leaves_title": "Pengajuan Cuti",
-            "empty": "Belum ada catatan absensi.",
-            "table": {
-                "date": "Tanggal",
-                "check_in": "Check in",
-                "check_out": "Check out",
-                "missing_checkout": "Tanpa check out"
-            }
+            "leaves_title": "Pengajuan Cuti"
         }
     },
     "leaves": {

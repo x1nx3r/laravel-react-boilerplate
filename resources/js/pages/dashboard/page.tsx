@@ -10,7 +10,8 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import Heading from '@/components/common/heading';
+import PageHeader from '@/components/common/page-header';
+import StatCard from '@/components/common/stat-card';
 import {
     Card,
     CardContent,
@@ -87,46 +88,28 @@ export default function Dashboard({ employeeStats }: DashboardProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('dashboard.title')} />
             <div className="space-y-6">
-                <Heading
-                    variant="small"
+                <PageHeader
                     title={t('dashboard.stats.title')}
                     description={t('dashboard.stats.description')}
                 />
 
-                <Card>
-                    <CardHeader className="pb-2">
-                        <CardDescription className="flex items-center gap-2">
-                            <Users className="size-4 text-primary" />
-                            {t('dashboard.stats.total_employees')}
-                        </CardDescription>
-                        <CardTitle className="text-4xl tabular-nums">
-                            {employeeStats.total}
-                        </CardTitle>
-                    </CardHeader>
-                </Card>
+                <div className="grid gap-4 sm:grid-cols-3">
+                    <StatCard
+                        icon={Users}
+                        label={t('dashboard.stats.total_employees')}
+                        value={employeeStats.total}
+                    />
+                    {employeeStats.gender.map((gender) => (
+                        <StatCard
+                            key={gender.label}
+                            icon={Users}
+                            label={t(`dashboard.stats.gender.${gender.label}`)}
+                            value={gender.total}
+                        />
+                    ))}
+                </div>
 
-                <div className="grid gap-6 lg:grid-cols-3">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-base">
-                                {t('dashboard.stats.gender_title')}
-                            </CardTitle>
-                            <CardDescription>
-                                {t('dashboard.stats.gender_description')}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <StatsBarChart
-                                data={employeeStats.gender.map((d) => ({
-                                    ...d,
-                                    label: t(
-                                        `dashboard.stats.gender.${d.label}`,
-                                    ),
-                                }))}
-                            />
-                        </CardContent>
-                    </Card>
-
+                <div className="grid gap-6 lg:grid-cols-2">
                     <Card>
                         <CardHeader>
                             <CardTitle className="text-base">

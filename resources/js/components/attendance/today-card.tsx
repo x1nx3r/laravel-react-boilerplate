@@ -10,6 +10,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { formatDuration } from '@/lib/utils';
 import type { TodayState } from '@/types';
 
 export default function TodayCard({ today }: { today: TodayState }) {
@@ -36,7 +37,37 @@ export default function TodayCard({ today }: { today: TodayState }) {
                     </p>
                 ) : (
                     <>
-                        {!today.checkIn ? (
+                        <dl className="grid grid-cols-2 gap-3 text-sm">
+                            <div className="space-y-1">
+                                <dt className="text-xs text-muted-foreground">
+                                    {t('attendance.today.check_in')}
+                                </dt>
+                                <dd className="tabular-nums">
+                                    {today.checkIn ?? '—'}
+                                </dd>
+                            </div>
+                            <div className="space-y-1">
+                                <dt className="text-xs text-muted-foreground">
+                                    {t('attendance.today.check_out')}
+                                </dt>
+                                <dd className="tabular-nums">
+                                    {today.checkOut ?? '—'}
+                                </dd>
+                            </div>
+                            <div className="col-span-2 space-y-1">
+                                <dt className="text-xs text-muted-foreground">
+                                    {t('attendance.today.duration')}
+                                </dt>
+                                <dd className="tabular-nums">
+                                    {formatDuration(
+                                        today.checkIn,
+                                        today.checkOut,
+                                    )}
+                                </dd>
+                            </div>
+                        </dl>
+
+                        {!today.checkIn && (
                             <>
                                 <p className="text-sm text-muted-foreground">
                                     {t('attendance.today.ready')}
@@ -55,37 +86,29 @@ export default function TodayCard({ today }: { today: TodayState }) {
                                     {t('attendance.today.check_in')}
                                 </Button>
                             </>
-                        ) : (
-                            <>
-                                <p className="text-sm text-muted-foreground">
-                                    {t('attendance.today.checked_in_at', {
-                                        time: today.checkIn,
-                                    })}
-                                </p>
-                                {!today.checkOut ? (
-                                    <Button
-                                        size="lg"
-                                        variant="outline"
-                                        className="w-full"
-                                        disabled={form.processing}
-                                        onClick={() =>
-                                            submit(
-                                                AttendanceController.checkOut()
-                                                    .url,
-                                            )
-                                        }
-                                    >
-                                        <LogOut className="size-4" />
-                                        {t('attendance.today.check_out')}
-                                    </Button>
-                                ) : (
-                                    <p className="rounded-md bg-success/5 p-3 text-sm font-normal text-success">
-                                        {t('attendance.today.checked_out_at', {
-                                            time: today.checkOut,
-                                        })}
-                                    </p>
-                                )}
-                            </>
+                        )}
+
+                        {today.checkIn && !today.checkOut && (
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="w-full"
+                                disabled={form.processing}
+                                onClick={() =>
+                                    submit(AttendanceController.checkOut().url)
+                                }
+                            >
+                                <LogOut className="size-4" />
+                                {t('attendance.today.check_out')}
+                            </Button>
+                        )}
+
+                        {today.checkIn && today.checkOut && (
+                            <p className="rounded-md bg-success/5 p-3 text-sm font-normal text-success">
+                                {t('attendance.today.checked_out_at', {
+                                    time: today.checkOut,
+                                })}
+                            </p>
                         )}
                     </>
                 )}

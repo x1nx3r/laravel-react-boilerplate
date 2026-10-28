@@ -1,6 +1,5 @@
 {
     "common": {
-        "search": "Search...",
         "search_submit": "Search",
         "filter": "Filter",
         "clear_filters": "Clear filters",
@@ -13,12 +12,12 @@
         "hide_password": "Hide password",
         "save_changes": "Save changes",
         "menu": "Menu",
-        "home": "Home",
         "pick_date": "Pick a date",
         "clear": "Clear",
         "required": "required",
         "optional": "optional",
-        "processing": "Processing..."
+        "processing": "Processing...",
+        "all_rights_reserved": "All rights reserved."
     },
     "nav": {
         "dashboard": "Dashboard",
@@ -34,8 +33,6 @@
             "title": "Employee data",
             "description": "Overview of employee composition.",
             "total_employees": "Total employees",
-            "gender_title": "Employees by gender",
-            "gender_description": "Comparison of male and female employees.",
             "gender": {
                 "L": "Male",
                 "P": "Female"
@@ -124,11 +121,17 @@
             "description": "This is a secure area of the application. Please confirm your password before continuing.",
             "password": "Password",
             "submit": "Confirm password"
+        },
+        "shell": {
+            "eyebrow": "Operations workspace",
+            "headline": "People, attendance, and approvals in one place.",
+            "description": "A focused workspace for the people who keep the organization running.",
+            "footer": "Internal operations · {{year}}",
+            "split_description": "Focused operations for people, attendance, and approvals."
         }
     },
     "settings": {
         "title": "Settings",
-        "description": "Manage your profile and account settings",
         "tabs": {
             "profile": "Profile",
             "password": "Password",
@@ -157,12 +160,22 @@
             "breadcrumb": "Appearance settings",
             "title": "Appearance settings",
             "description": "Update your account's appearance settings",
-            "theme": "Theme",
             "light": "Light",
             "dark": "Dark",
             "system": "System",
             "language": "Language",
             "language_description": "Switch the interface language"
+        },
+        "delete": {
+            "title": "Delete account",
+            "description": "Delete your account and all of its resources",
+            "warning": "Warning",
+            "warning_body": "Please proceed with caution, this cannot be undone.",
+            "confirm_title": "Are you sure you want to delete your account?",
+            "confirm_body": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+            "password": "Password",
+            "password_placeholder": "Enter your password",
+            "submit": "Delete account"
         }
     },
     "errors": {
@@ -192,10 +205,34 @@
         "title": "Employees",
         "create": "Create employee",
         "edit_title": "Edit employee",
+        "stats": {
+            "total": "Total employees",
+            "active": "Active accounts",
+            "pending": "Pending approval"
+        },
+        "summary": {
+            "title": "Summary"
+        },
+        "guide": {
+            "title": "Filling guide",
+            "account_title": "Account & access",
+            "account": "The password needs at least 8 characters. The role decides which menus the user can open.",
+            "employment_title": "Employment",
+            "employment": "NIK is 16 digits. Contract status separates fixed-term (Contract) from permanent (Permanent) staff.",
+            "personal_title": "Personal data",
+            "personal": "These fields are optional. Fill them when payroll or identification needs them.",
+            "documents_title": "Documents",
+            "documents": "PDF, JPG, PNG, DOC, or XLS. Maximum 10 MB per file."
+        },
         "breadcrumb": "Employees",
         "search_placeholder": "Search name or email...",
         "require_approval": "Require registration approval",
         "filters": {
+            "role": "Role",
+            "approval": "Approval",
+            "status": "Status",
+            "department": "Department",
+            "contract": "Contract",
             "role_all": "All roles",
             "approval_all": "All approvals",
             "pending": "Pending",
@@ -228,10 +265,15 @@
         "delete_title": "Delete employee",
         "delete_description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone.",
         "no_results": "No employees found.",
-        "self_note": "You cannot change your own role or deactivate your own account.",
         "form": {
             "account_section": "Account & access information",
             "account_description": "Credentials and access details for this user.",
+            "tabs": {
+                "account": "Account",
+                "employment": "Employment",
+                "personal": "Personal",
+                "documents": "Documents"
+            },
             "name": "Full name",
             "email": "Email",
             "password": "Password",
@@ -274,7 +316,8 @@
             "documents_description": "Upload scans of ID card, diploma, CV, or other documents (max 10MB per file).",
             "files_selected": "{{count}} file(s) selected.",
             "submit_create": "Create employee",
-            "submit_edit": "Save changes"
+            "submit_edit": "Save changes",
+            "self_note": "You cannot change your own role or account state."
         },
         "documents": {
             "title": "Supporting documents",
@@ -305,9 +348,7 @@
         "search_placeholder": "Search roles...",
         "table": {
             "name": "Name",
-            "permissions": "Permissions",
-            "users": "Employees",
-            "actions": "Actions"
+            "users": "Employees"
         },
         "full_access": "Full access",
         "no_permissions": "No permissions",
@@ -330,7 +371,7 @@
             "ready": "Ready to start the day?",
             "check_in": "Check in",
             "check_out": "Check out",
-            "checked_in_at": "Checked in at {{time}}",
+            "duration": "Work duration",
             "checked_out_at": "Checked out at {{time}}",
             "on_leave": "You are on approved leave today."
         },
@@ -346,6 +387,15 @@
             "prev_month": "Previous month",
             "next_month": "Next month"
         },
+        "history": {
+            "title": "Attendance history",
+            "date": "Date",
+            "check_in": "Check in",
+            "check_out": "Check out",
+            "duration": "Duration",
+            "missing_checkout": "No check-out",
+            "empty": "No attendance records yet."
+        },
         "team": {
             "title": "Team attendance",
             "description": "Pick a user to view their calendar, history and leave requests.",
@@ -353,14 +403,7 @@
             "picker_label": "User",
             "selected": "Selected user",
             "history_title": "Attendance history",
-            "leaves_title": "Leave requests",
-            "empty": "No attendance records yet.",
-            "table": {
-                "date": "Date",
-                "check_in": "Check in",
-                "check_out": "Check out",
-                "missing_checkout": "No check-out"
-            }
+            "leaves_title": "Leave requests"
         }
     },
     "leaves": {

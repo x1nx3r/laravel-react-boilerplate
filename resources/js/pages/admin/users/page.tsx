@@ -1,12 +1,23 @@
 import { Head, router, usePage } from '@inertiajs/react';
-import { Check, Pencil, Plus, Search, X } from 'lucide-react';
+import {
+    Check,
+    Clock,
+    Pencil,
+    Plus,
+    Search,
+    UserCheck,
+    Users,
+    X,
+} from 'lucide-react';
 import type { FormEventHandler } from 'react';
 import { useState } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 import RegistrationSettingController from '@/actions/App/Http/Controllers/Admin/RegistrationSettingController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
+import PageHeader from '@/components/common/page-header';
 import { Pagination } from '@/components/common/pagination';
+import StatCard from '@/components/common/stat-card';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -42,6 +53,11 @@ import type { PaginatedData, User } from '@/types';
 
 interface UsersIndexProps {
     users: PaginatedData<User>;
+    stats: {
+        total: number;
+        active: number;
+        pending: number;
+    };
     roles: string[];
     departments: string[];
     requireRegistrationApproval: boolean;
@@ -57,6 +73,7 @@ interface UsersIndexProps {
 
 export default function UsersIndex({
     users,
+    stats,
     roles,
     departments,
     requireRegistrationApproval,
@@ -150,34 +167,52 @@ export default function UsersIndex({
         >
             <Head title={t('users.title')} />
 
-            <div className="space-y-4">
-                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                    <h1 className="text-3xl tracking-tight">
-                        {t('users.title')}
-                    </h1>
-                    <div className="flex flex-wrap items-center gap-3">
-                        <div className="flex items-center gap-2 rounded-md border p-2">
-                            <Switch
-                                id="require-approval"
-                                checked={requireApproval}
-                                onCheckedChange={(checked) =>
-                                    toggleApproval(checked === true)
-                                }
-                            />
-                            <Label
-                                htmlFor="require-approval"
-                                className="text-sm font-normal"
-                            >
-                                {t('users.require_approval')}
-                            </Label>
-                        </div>
-                        <Button asChild>
-                            <a href={UserController.create().url}>
-                                <Plus className="mr-2 h-4 w-4" />
-                                {t('users.create')}
-                            </a>
-                        </Button>
-                    </div>
+            <div className="space-y-6">
+                <PageHeader
+                    title={t('users.title')}
+                    actions={
+                        <>
+                            <div className="flex items-center gap-2 rounded-md border p-2">
+                                <Switch
+                                    id="require-approval"
+                                    checked={requireApproval}
+                                    onCheckedChange={(checked) =>
+                                        toggleApproval(checked === true)
+                                    }
+                                />
+                                <Label
+                                    htmlFor="require-approval"
+                                    className="text-sm font-normal"
+                                >
+                                    {t('users.require_approval')}
+                                </Label>
+                            </div>
+                            <Button asChild>
+                                <a href={UserController.create().url}>
+                                    <Plus className="mr-2 h-4 w-4" />
+                                    {t('users.create')}
+                                </a>
+                            </Button>
+                        </>
+                    }
+                />
+
+                <div className="grid gap-4 sm:grid-cols-3">
+                    <StatCard
+                        icon={Users}
+                        label={t('users.stats.total')}
+                        value={stats.total}
+                    />
+                    <StatCard
+                        icon={UserCheck}
+                        label={t('users.stats.active')}
+                        value={stats.active}
+                    />
+                    <StatCard
+                        icon={Clock}
+                        label={t('users.stats.pending')}
+                        value={stats.pending}
+                    />
                 </div>
 
                 <form
@@ -196,7 +231,9 @@ export default function UsersIndex({
                     </div>
                     <Select value={role} onValueChange={setRole}>
                         <SelectTrigger className="md:w-36">
-                            <SelectValue placeholder="Role" />
+                            <SelectValue
+                                placeholder={t('users.filters.role')}
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">
@@ -214,7 +251,9 @@ export default function UsersIndex({
                         onValueChange={setApprovalStatus}
                     >
                         <SelectTrigger className="md:w-40">
-                            <SelectValue placeholder="Approval" />
+                            <SelectValue
+                                placeholder={t('users.filters.approval')}
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">
@@ -233,7 +272,9 @@ export default function UsersIndex({
                         onValueChange={setAccountStatus}
                     >
                         <SelectTrigger className="md:w-36">
-                            <SelectValue placeholder="Status" />
+                            <SelectValue
+                                placeholder={t('users.filters.status')}
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">
@@ -249,7 +290,9 @@ export default function UsersIndex({
                     </Select>
                     <Select value={department} onValueChange={setDepartment}>
                         <SelectTrigger className="md:w-40">
-                            <SelectValue placeholder="Department" />
+                            <SelectValue
+                                placeholder={t('users.filters.department')}
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">
@@ -267,7 +310,9 @@ export default function UsersIndex({
                         onValueChange={setEmployeeStatus}
                     >
                         <SelectTrigger className="md:w-36">
-                            <SelectValue placeholder="Contract" />
+                            <SelectValue
+                                placeholder={t('users.filters.contract')}
+                            />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">

@@ -128,7 +128,8 @@ export default function Login({ status, canRegister }: Props) {
 
             <div className="mt-8 text-center">
                 <p className="text-xs text-muted-foreground">
-                    © {new Date().getFullYear()} · All rights reserved.
+                    © {new Date().getFullYear()} ·{' '}
+                    {t('common.all_rights_reserved')}
                 </p>
             </div>
         </AuthEnhancedSplitLayout>

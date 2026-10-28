@@ -58,6 +58,23 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
         }),
     );
 
+    const statusCounts = Object.values(calendar.days).reduce<
+        Record<AttendanceDayStatus, number>
+    >(
+        (acc, status) => {
+            acc[status] += 1;
+            return acc;
+        },
+        {
+            present: 0,
+            in_progress: 0,
+            leave: 0,
+            weekend: 0,
+            absent: 0,
+            upcoming: 0,
+        },
+    );
+
     return (
         <Card>
             <CardHeader>
@@ -132,6 +149,9 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
                                 className={cn('size-2.5 rounded-full', dot)}
                             />
                             {t(`attendance.status.${status}`)}
+                            <span className="text-foreground tabular-nums">
+                                {statusCounts[status]}
+                            </span>
                         </span>
                     ))}
                 </div>

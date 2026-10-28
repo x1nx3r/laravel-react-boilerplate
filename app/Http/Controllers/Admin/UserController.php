@@ -45,6 +45,11 @@ class UserController extends Controller
 
         return Inertia::render('admin/users/page', [
             'users' => $users,
+            'stats' => [
+                'total' => User::count(),
+                'active' => User::where('status', 'active')->where('is_active', true)->count(),
+                'pending' => User::where('status', 'pending')->count(),
+            ],
             'roles' => Role::orderBy('name')->pluck('name'),
             'departments' => User::whereNotNull('department')
                 ->where('department', '!=', '')

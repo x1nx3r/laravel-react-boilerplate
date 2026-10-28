@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AppearanceTabs from '@/components/app-shell/appearance-tabs';
-import Heading from '@/components/common/heading';
+import PageHeader from '@/components/common/page-header';
 import {
     Card,
     CardContent,
@@ -35,12 +35,9 @@ export default function Appearance() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('settings.appearance.breadcrumb')} />
 
-            <h1 className="sr-only">{t('settings.appearance.breadcrumb')}</h1>
-
             <SettingsLayout>
                 <div className="space-y-6">
-                    <Heading
-                        variant="small"
+                    <PageHeader
                         title={t('settings.appearance.title')}
                         description={t('settings.appearance.description')}
                     />

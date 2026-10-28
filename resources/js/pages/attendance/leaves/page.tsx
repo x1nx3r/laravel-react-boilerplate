@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AttendanceController from '@/actions/App/Http/Controllers/Attendance/AttendanceController';
 import LeavesSection from '@/components/attendance/leaves-section';
-import Heading from '@/components/common/heading';
+import PageHeader from '@/components/common/page-header';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem, LeaveRequestPayload } from '@/types';
 
@@ -25,8 +25,7 @@ export default function LeaveIndex({ leaves }: LeaveIndexProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('leaves.title')} />
             <div className="space-y-6">
-                <Heading
-                    variant="small"
+                <PageHeader
                     title={t('leaves.title')}
                     description={t('leaves.description')}
                 />

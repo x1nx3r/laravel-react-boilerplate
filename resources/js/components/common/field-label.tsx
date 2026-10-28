@@ -22,7 +22,10 @@ export default function FieldLabel({
     const { t } = useTranslation();
 
     return (
-        <Label htmlFor={htmlFor} className={cn('gap-1', className)}>
+        <Label
+            htmlFor={htmlFor}
+            className={cn('flex flex-wrap items-center gap-x-1.5', className)}
+        >
             {children}
             {mark === 'required' ? (
                 <span

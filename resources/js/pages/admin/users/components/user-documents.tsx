@@ -86,14 +86,16 @@ export function UserDocuments({ user }: UserDocumentsProps) {
             <div className="rounded-xl border bg-card text-card-foreground shadow">
                 <div className="p-6">
                     <div className="mb-4 flex flex-col justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center sm:gap-0">
-                        <h3 className="text-lg">Supporting documents</h3>
+                        <h3 className="text-lg">
+                            {t('users.documents.title')}
+                        </h3>
                         <Button
                             onClick={() => setIsUploadModalOpen(true)}
                             size="sm"
                             className="h-9"
                         >
                             <Upload className="mr-2 h-4 w-4" />
-                            Upload
+                            {t('users.documents.upload')}
                         </Button>
                     </div>
 
@@ -202,7 +204,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-12 text-muted-foreground">
                             <FileText className="mb-4 h-12 w-12 text-muted-foreground/50" />
                             <p className="text-sm font-normal">
-                                No documents yet.
+                                {t('users.documents.empty_title')}
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">
                                 {t('users.documents.empty_description')}
@@ -317,7 +319,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                 {uploadForm.processing && (
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Upload
+                                {t('users.documents.upload')}
                             </Button>
                         </DialogFooter>
                     </form>

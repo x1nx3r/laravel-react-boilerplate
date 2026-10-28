@@ -1,4 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
 import type { AuthLayoutProps } from '@/types';
 
@@ -8,6 +9,7 @@ export default function AuthSplitLayout({
     description,
 }: AuthLayoutProps) {
     const { name } = usePage().props;
+    const { t } = useTranslation();
 
     return (
         <div className="relative grid min-h-dvh flex-col bg-background lg:grid-cols-2">
@@ -17,7 +19,7 @@ export default function AuthSplitLayout({
                     {name}
                 </Link>
                 <p className="max-w-sm text-sm leading-7 text-sidebar-muted">
-                    Focused operations for people, attendance, and approvals.
+                    {t('auth.shell.split_description')}
                 </p>
                 <span className="text-xs text-sidebar-muted">
                     {new Date().getFullYear()}

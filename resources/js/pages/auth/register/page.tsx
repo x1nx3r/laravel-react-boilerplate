@@ -4,6 +4,7 @@ import type { FormEventHandler } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
+import DatePicker from '@/components/common/date-picker';
 import FieldLabel from '@/components/common/field-label';
 import InputError from '@/components/common/input-error';
 import PasswordInput from '@/components/common/password-input';
@@ -75,7 +76,7 @@ export default function Register() {
 
                 <Card className="shadow-xs">
                     <CardContent className="pt-6">
-                        <Head title="Register" />
+                        <Head title={t('auth.register.title')} />
 
                         <form onSubmit={submit} className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
@@ -265,15 +266,11 @@ export default function Register() {
                                         <FieldLabel htmlFor="join_date">
                                             {t('auth.register.join_date')}
                                         </FieldLabel>
-                                        <Input
+                                        <DatePicker
                                             id="join_date"
-                                            type="date"
                                             value={data.join_date}
-                                            onChange={(e) =>
-                                                setData(
-                                                    'join_date',
-                                                    e.target.value,
-                                                )
+                                            onChange={(value) =>
+                                                setData('join_date', value)
                                             }
                                         />
                                         <InputError
@@ -285,16 +282,12 @@ export default function Register() {
                                         <FieldLabel htmlFor="end_date">
                                             {t('auth.register.end_date')}
                                         </FieldLabel>
-                                        <Input
+                                        <DatePicker
                                             id="end_date"
-                                            type="date"
                                             value={data.end_date}
                                             min={data.join_date || undefined}
-                                            onChange={(e) =>
-                                                setData(
-                                                    'end_date',
-                                                    e.target.value,
-                                                )
+                                            onChange={(value) =>
+                                                setData('end_date', value)
                                             }
                                         />
                                         <InputError message={errors.end_date} />
@@ -330,15 +323,11 @@ export default function Register() {
                                         <FieldLabel htmlFor="birth_date">
                                             {t('auth.register.birth_date')}
                                         </FieldLabel>
-                                        <Input
+                                        <DatePicker
                                             id="birth_date"
-                                            type="date"
                                             value={data.birth_date}
-                                            onChange={(e) =>
-                                                setData(
-                                                    'birth_date',
-                                                    e.target.value,
-                                                )
+                                            onChange={(value) =>
+                                                setData('birth_date', value)
                                             }
                                         />
                                         <InputError

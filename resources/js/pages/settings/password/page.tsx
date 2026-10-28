@@ -2,8 +2,8 @@ import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
-import Heading from '@/components/common/heading';
 import InputError from '@/components/common/input-error';
+import PageHeader from '@/components/common/page-header';
 import PasswordInput from '@/components/common/password-input';
 import SuccessMessage from '@/components/common/success-message';
 import { Button } from '@/components/ui/button';
@@ -29,12 +29,9 @@ export default function Password() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('settings.password.breadcrumb')} />
 
-            <h1 className="sr-only">{t('settings.password.breadcrumb')}</h1>
-
             <SettingsLayout>
-                <div className="space-y-6">
-                    <Heading
-                        variant="small"
+                <div className="@container space-y-6">
+                    <PageHeader
                         title={t('settings.password.title')}
                         description={t('settings.password.description')}
                     />
@@ -63,62 +60,68 @@ export default function Password() {
                     >
                         {({ errors, processing, recentlySuccessful }) => (
                             <>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="current_password">
-                                        {t('settings.password.current')}
-                                    </Label>
+                                <div className="grid gap-4 @lg:grid-cols-2 @3xl:grid-cols-3">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="current_password">
+                                            {t('settings.password.current')}
+                                        </Label>
 
-                                    <PasswordInput
-                                        id="current_password"
-                                        ref={currentPasswordInput}
-                                        name="current_password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="current-password"
-                                        placeholder={t(
-                                            'settings.password.current',
-                                        )}
-                                    />
+                                        <PasswordInput
+                                            id="current_password"
+                                            ref={currentPasswordInput}
+                                            name="current_password"
+                                            className="mt-1 block w-full"
+                                            autoComplete="current-password"
+                                            placeholder={t(
+                                                'settings.password.current',
+                                            )}
+                                        />
 
-                                    <InputError
-                                        message={errors.current_password}
-                                    />
-                                </div>
+                                        <InputError
+                                            message={errors.current_password}
+                                        />
+                                    </div>
 
-                                <div className="grid gap-2">
-                                    <Label htmlFor="password">
-                                        {t('settings.password.new')}
-                                    </Label>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="password">
+                                            {t('settings.password.new')}
+                                        </Label>
 
-                                    <PasswordInput
-                                        id="password"
-                                        ref={passwordInput}
-                                        name="password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        placeholder={t('settings.password.new')}
-                                    />
+                                        <PasswordInput
+                                            id="password"
+                                            ref={passwordInput}
+                                            name="password"
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                            placeholder={t(
+                                                'settings.password.new',
+                                            )}
+                                        />
 
-                                    <InputError message={errors.password} />
-                                </div>
+                                        <InputError message={errors.password} />
+                                    </div>
 
-                                <div className="grid gap-2">
-                                    <Label htmlFor="password_confirmation">
-                                        {t('settings.password.confirm')}
-                                    </Label>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="password_confirmation">
+                                            {t('settings.password.confirm')}
+                                        </Label>
 
-                                    <PasswordInput
-                                        id="password_confirmation"
-                                        name="password_confirmation"
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        placeholder={t(
-                                            'settings.password.confirm',
-                                        )}
-                                    />
+                                        <PasswordInput
+                                            id="password_confirmation"
+                                            name="password_confirmation"
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                            placeholder={t(
+                                                'settings.password.confirm',
+                                            )}
+                                        />
 
-                                    <InputError
-                                        message={errors.password_confirmation}
-                                    />
+                                        <InputError
+                                            message={
+                                                errors.password_confirmation
+                                            }
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="flex items-center gap-4">

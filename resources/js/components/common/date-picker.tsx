@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
 import { enUS, id as localeId, type Locale } from 'date-fns/locale';
-import { CalendarIcon, ChevronDown, X } from 'lucide-react';
+import { CalendarIcon, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
     Popover,
@@ -68,22 +67,21 @@ export default function DatePicker({
         <div className={cn('relative', className)}>
             <Popover>
                 <PopoverTrigger asChild>
-                    <Button
+                    <button
                         id={id}
                         type="button"
-                        variant="outline"
                         disabled={disabled}
                         className={cn(
-                            'w-full justify-between pr-8 text-left font-normal',
+                            'flex h-9 w-full items-center gap-2 rounded-md border border-input bg-transparent px-3 text-sm shadow-xs transition-[color,box-shadow] outline-none',
+                            'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+                            'disabled:cursor-not-allowed disabled:opacity-50',
+                            selected ? 'pr-9' : 'pr-3',
                             !selected && 'text-muted-foreground',
                         )}
                     >
-                        <span className="flex min-w-0 items-center gap-2">
-                            <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
-                            <span className="truncate">{label}</span>
-                        </span>
-                        <ChevronDown className="size-4 shrink-0 opacity-50" />
-                    </Button>
+                        <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
+                        <span className="truncate">{label}</span>
+                    </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
@@ -110,7 +108,7 @@ export default function DatePicker({
                     tabIndex={-1}
                     aria-label={t('common.clear')}
                     onClick={() => onChange('')}
-                    className="absolute top-1/2 right-7 -translate-y-1/2 text-muted-foreground opacity-60 transition-opacity hover:opacity-100"
+                    className="absolute top-1/2 right-2 -translate-y-1/2 rounded-sm p-0.5 text-muted-foreground opacity-60 transition-opacity hover:opacity-100"
                 >
                     <X className="size-3.5" />
                 </button>

@@ -2,7 +2,7 @@ import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LeaveRequestController from '@/actions/App/Http/Controllers/Attendance/LeaveRequestController';
-import Heading from '@/components/common/heading';
+import PageHeader from '@/components/common/page-header';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -80,8 +80,7 @@ export default function LeaveReview({ pending }: LeaveReviewProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('leaves.review.title')} />
             <div className="space-y-6">
-                <Heading
-                    variant="small"
+                <PageHeader
                     title={t('leaves.review.title')}
                     description={t('leaves.review.description')}
                 />

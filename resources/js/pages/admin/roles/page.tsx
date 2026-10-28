@@ -13,6 +13,7 @@ import { useState } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
+import PageHeader from '@/components/common/page-header';
 import { Pagination } from '@/components/common/pagination';
 import {
     AlertDialog,
@@ -269,16 +270,16 @@ export default function RolesIndex({
         >
             <Head title={t('roles.title')} />
 
-            <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                    <h1 className="text-3xl tracking-tight">
-                        {t('roles.title')}
-                    </h1>
-                    <Button onClick={() => setIsCreating(true)}>
-                        <Plus className="mr-2 h-4 w-4" />
-                        {t('roles.create')}
-                    </Button>
-                </div>
+            <div className="space-y-6">
+                <PageHeader
+                    title={t('roles.title')}
+                    actions={
+                        <Button onClick={() => setIsCreating(true)}>
+                            <Plus className="mr-2 h-4 w-4" />
+                            {t('roles.create')}
+                        </Button>
+                    }
+                />
 
                 <form
                     onSubmit={handleSearch}

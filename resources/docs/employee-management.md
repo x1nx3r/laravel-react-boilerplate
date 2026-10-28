@@ -16,6 +16,13 @@ All three share `resources/js/pages/admin/users/user-form.tsx` and live under
 the `Administration` sidebar group (permission `view_admin`; the Users entry
 itself requires `manage_users`).
 
+Each page follows the page-composition contract (`DESIGN.md` §Page
+Composition):
+
+- `index` — KPI strip (total / active / pending), filters, table
+- `create` — tabbed form (main) + filling guide (rail)
+- `edit` — tabbed form and documents (main) + employee summary (rail)
+
 ## 2. The employee attribute set
 
 Defined once in `app/Concerns/UserAttributeRules.php` (validation +
@@ -78,10 +85,15 @@ redirect → admin.users.index with flash app.users.created
 - `filters` — current filter state (sticky across pagination)
 - `requireRegistrationApproval` — for the settings toggle on this page
 
-Frontend features: text search (name/email), role / approval status /
-account state / department / contract filters, status badges (pending /
-active / inactive), verify button for pending accounts, row edit/delete
-gated by `canManage` (superadmin protection), delete confirmation dialog.
+Frontend features: KPI strip (total / active / pending accounts), text
+search (name/email), role / approval status / account state / department /
+contract filters, status badges (pending / active / inactive), verify button
+for pending accounts, row edit/delete gated by `canManage` (superadmin
+protection), delete confirmation dialog.
+
+The create and edit forms are one card with tabbed sections (Account,
+Employment, Personal, Documents). All fields stay in one form and submit
+together; a failed submit switches to the first tab with an error.
 
 ## 5. Flow: update (requirement 3)
 

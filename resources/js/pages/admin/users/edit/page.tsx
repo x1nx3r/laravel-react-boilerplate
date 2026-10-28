@@ -1,9 +1,10 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent } from '@/components/ui/card';
+import PageHeader from '@/components/common/page-header';
 import AppLayout from '@/layouts/app-layout';
 import type { User } from '@/types';
 import { UserDocuments } from '../components/user-documents';
+import { UserSummary } from '../components/user-summary';
 import { UserForm } from '../user-form';
 
 interface EditProps {
@@ -23,15 +24,21 @@ export default function Edit({ user, roles }: EditProps) {
         >
             <Head title={`${t('users.edit_title')}: ${user.name}`} />
 
-            <h1 className="text-3xl tracking-tight">{t('users.edit_title')}</h1>
+            <div className="w-full space-y-6">
+                <PageHeader title={t('users.edit_title')} />
 
-            <Card>
-                <CardContent className="pt-6">
-                    <UserForm user={user} roles={roles} />
-                </CardContent>
-            </Card>
+                <div className="grid gap-6 xl:grid-cols-12">
+                    <div className="space-y-6 xl:col-span-8">
+                        <UserForm user={user} roles={roles} />
 
-            <UserDocuments user={user} />
+                        <UserDocuments user={user} />
+                    </div>
+
+                    <aside className="xl:col-span-4">
+                        <UserSummary user={user} />
+                    </aside>
+                </div>
+            </div>
         </AppLayout>
     );
 }

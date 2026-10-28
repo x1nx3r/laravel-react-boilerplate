@@ -398,6 +398,39 @@ Sohne is proprietary. Use **Inter** (open-source via Google Fonts) at weight 300
 ### Whitespace Philosophy
 The gradient mesh occupies the upper third of the page; the white canvas below is generously padded. Section gaps tend toward 96px, with content tightening to 32px on dashboard / pricing pages where users compare and act.
 
+### App Shell & Page Anatomy
+
+The authenticated product surface does not follow the marketing container.
+These rules apply to every page inside the app shell.
+
+- **Container.** The sidebar shell fills the viewport beside the sidebar, and pages use that width with `p-4` / `md:p-6` / `lg:p-8` padding. Do not center a page in a narrow column or cap its width. Constrain the content grid, not the page.
+- **Field grids.** Form panels are `@container`s and grids use `grid gap-4 @lg:grid-cols-2 @3xl:grid-cols-3`, so fields follow the panel width, not the viewport. A field that needs the full row uses `@lg:col-span-2 @3xl:col-span-3`.
+- **Page anatomy.** Every page renders, top to bottom: `PageHeader` (title, optional description, right-aligned actions), an optional toolbar for filters or search, the content (cards, table, or grid), and an optional pagination footer.
+- **One title.** `PageHeader` (`resources/js/components/common/page-header.tsx`) renders the single `h1`. Do not add a second title block, and do not hand-roll the title/actions row.
+- **Vertical rhythm.** Page sections use `space-y-6`. Groups inside a section use `space-y-4`. Toolbars use `gap-2` or `gap-3`.
+- **Tables.** A primary table sits in a bare `overflow-x-auto rounded-md border` wrapper. A secondary table may sit inside a Card. Do not mix both treatments on one page.
+- **Stat rows.** Use `grid gap-4 sm:grid-cols-2 lg:grid-cols-4`, or `sm:grid-cols-3` for three stats. Content grids use `gap-6` and collapse to one column below `lg`.
+- **Breakpoints.** The sidebar collapses to an icon rail and then a mobile sheet (shadcn Sidebar). Page headers stack below `sm`. Tables scroll horizontally; they do not reflow into cards.
+
+### Page Composition
+
+Every page has a main zone. At `xl` and up, most pages also have a context
+rail. The rail carries context or secondary actions; it never repeats the
+main zone.
+
+| Archetype | Examples | Main zone | Context rail |
+|---|---|---|---|
+| Workbench | Users, Roles, Leave review, Team attendance | KPI strip, filters, table | Selected record, saved views, recent activity |
+| Record | User edit, Settings | Identity, form, related sections | Summary, metadata, danger zone |
+| Task | User create, Leave request, Attendance | Tabs or form | Guidance: section help, policies, field hints |
+| Exception | Auth, Error | Centered card | None |
+
+- Grid: `grid gap-6 xl:grid-cols-12`. Main zone `xl:col-span-8`, rail `xl:col-span-4`. Below `xl` the rail stacks under the main zone.
+- The rail holds real content: a summary, guidance, history, or actions. Do not use it for decoration or filler stats.
+- Every card earns its space. A card with one line of content is merged or enriched.
+- Empty states carry one sentence and one action. No blank panels.
+- Tables keep the full main-zone width; the rail never squeezes them below about 900px.
+
 ## Elevation & Depth
 
 | Level | Treatment | Use |
@@ -462,6 +495,16 @@ The brand uses **product UI mockups** more than photography. Dashboard composite
 **`text-input`** — standard form field.
 - Background `{colors.canvas}` (#ffffff), text `{colors.ink}` (#0d253d), type `{typography.body-md}`, padding `{spacing.sm} {spacing.md}` (8px 12px), rounded `{rounded.sm}` 6px, 1px `{colors.hairline-input}` (#a8c3de) border.
 - Focus state `text-input-focused`: border swaps to `{colors.primary}` (#533afd).
+
+**Form page** — the layout for create and edit screens.
+- The form fills the page width. Fields use `grid gap-4 sm:grid-cols-2 xl:grid-cols-3`; do not cap the page to make inputs narrower.
+- The form is one `Card`. Do not wrap it in a second card; nested cards are not a sectioning device.
+- Forms with two or more sections use tabs: a segmented `TabsList` in a bordered strip at the top of the card, one `TabsContent` per section with its own heading and description.
+- Tab labels are short nouns ("Account", "Employment"). The full section title and its description stay inside the panel.
+- One submit footer closes the card: Cancel (outline) and the primary action, separated by `border-t`.
+- Fields sit in a `grid gap-4 @lg:grid-cols-2 @3xl:grid-cols-3` inside an `@container` panel; a field that needs the full width uses `@lg:col-span-2 @3xl:col-span-3`.
+- Server validation errors mark the affected tab with a destructive dot. A failed submit switches to the first tab that has an error.
+- Every field is `FieldLabel` + control + `InputError`. Required and optional hints belong in `FieldLabel`, not in the label text.
 
 ### Navigation
 

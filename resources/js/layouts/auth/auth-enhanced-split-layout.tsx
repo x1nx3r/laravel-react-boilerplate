@@ -1,4 +1,5 @@
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AppLogoIcon from '@/components/app-shell/app-logo-icon';
 import type { AuthLayoutProps } from '@/types';
 
@@ -8,6 +9,7 @@ export default function AuthEnhancedSplitLayout({
     description,
 }: AuthLayoutProps) {
     const { name } = usePage().props;
+    const { t } = useTranslation();
 
     return (
         <div className="flex min-h-dvh bg-background">
@@ -21,19 +23,20 @@ export default function AuthEnhancedSplitLayout({
 
                 <div className="relative z-10 max-w-md">
                     <p className="mb-4 text-xs font-normal tracking-[0.18em] text-sidebar-primary uppercase">
-                        Operations workspace
+                        {t('auth.shell.eyebrow')}
                     </p>
                     <h1 className="text-4xl tracking-tight">
-                        People, attendance, and approvals in one place.
+                        {t('auth.shell.headline')}
                     </h1>
                     <p className="mt-5 text-sm leading-7 text-sidebar-muted">
-                        A focused workspace for the people who keep the
-                        organization running.
+                        {t('auth.shell.description')}
                     </p>
                 </div>
 
                 <div className="relative z-10 border-t border-sidebar-border pt-6 text-xs text-sidebar-muted">
-                    Internal operations · {new Date().getFullYear()}
+                    {t('auth.shell.footer', {
+                        year: new Date().getFullYear(),
+                    })}
                 </div>
             </aside>
 

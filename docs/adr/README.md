@@ -41,3 +41,7 @@ page under `resources/docs/` instead.
 | [0006](0006-semantic-design-tokens.md)               | Use semantic design tokens, not a fixed visual brand  | [DESIGN.md](../../DESIGN.md), [architecture.md](../../resources/docs/architecture.md) |
 | [0007](0007-boilerplate-is-a-scaffold.md)            | The boilerplate is a scaffold, not the product        | [README.md](../../README.md), [AGENTS.md](../../AGENTS.md)                            |
 | [0008](0008-one-ui-primitive-layer.md)               | One UI primitive layer, shadcn/ui on radix-ui         | [architecture.md](../../resources/docs/architecture.md)                               |
+| [0009](0009-page-anatomy-and-containers.md)          | One page anatomy and container tiers                  | [DESIGN.md](../../DESIGN.md)                                                          |
+| [0010](0010-long-forms-use-one-card-and-tabs.md)     | Long forms use one card and tabs                      | [DESIGN.md](../../DESIGN.md)                                                          |
+| [0011](0011-pages-use-the-full-width.md)             | Pages use the full width                              | [DESIGN.md](../../DESIGN.md)                                                          |
+| [0012](0012-page-composition-main-and-rail.md)       | Every page has a main zone and a context rail         | [DESIGN.md](../../DESIGN.md)                                                          |

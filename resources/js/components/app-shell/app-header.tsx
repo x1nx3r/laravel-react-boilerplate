@@ -1,5 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Breadcrumbs } from '@/components/common/breadcrumbs';
 import AppLogo from '@/components/sidebar/app-logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -64,13 +65,14 @@ const activeItemStyles = 'text-foreground bg-accent';
 
 export function AppHeader({ breadcrumbs = [] }: Props) {
     const page = usePage();
+    const { t } = useTranslation();
     const { auth } = page.props;
     const getInitials = useInitials();
     const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
     return (
         <>
             <div className="border-b border-border bg-card">
-                <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
+                <div className="flex h-16 items-center px-4">
                     {/* Mobile Menu */}
                     <div className="lg:hidden">
                         <Sheet>
@@ -88,7 +90,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 className="flex h-full w-64 flex-col items-stretch justify-between bg-sidebar"
                             >
                                 <SheetTitle className="sr-only">
-                                    Navigation Menu
+                                    {t('common.menu')}
                                 </SheetTitle>
                                 <SheetHeader className="flex justify-start text-left">
                                     <AppLogoIcon className="h-6 w-6 fill-current text-foreground" />
@@ -239,7 +241,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
             </div>
             {breadcrumbs.length > 1 && (
                 <div className="flex w-full border-b border-border">
-                    <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-muted-foreground md:max-w-7xl">
+                    <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-muted-foreground">
                         <Breadcrumbs breadcrumbs={breadcrumbs} />
                     </div>
                 </div>

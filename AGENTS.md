@@ -58,9 +58,10 @@ boilerplate behind.
 | RBAC | `app/Support/Rbac.php`, policies under `app/Policies` |
 | Shared Inertia state | `app/Http/Middleware/HandleInertiaRequests.php` |
 | Pages and layouts | `resources/js/pages`, `resources/js/layouts` |
+| Page layout rules | `DESIGN.md` §Layout, `docs/adr/0009-page-anatomy-and-containers.md`, `docs/adr/0011-pages-use-the-full-width.md`, `docs/adr/0012-page-composition-main-and-rail.md` |
 | UI components | `resources/js/components/ui`, `docs/adr/0008-one-ui-primitive-layer.md` |
 | Navigation and permissions | `resources/js/config/navigation.ts` |
-| Localization | `lang/`, `resources/js/i18n/locales/` |
+| Localization | `lang/`, `resources/js/i18n/locales/`, `eslint-rules/i18n`, `scripts/check-i18n.mjs` |
 | Tests | `tests/Feature`, `tests/Unit` |
 | Database | `database/migrations`, `database/seeders` |
 
@@ -87,7 +88,7 @@ Postgres is the only local database for this repo. Do not add a second developme
 make setup              # install, migrate/seed Postgres, build frontend
 make dev                # PHP server + queue + Vite
 make test               # PHPUnit against laravel_boilerplate_test
-make lint               # Pint check, Prettier check, TypeScript
+make lint               # Pint check, ESLint (incl. i18n rules), i18n key check, Prettier check, TypeScript
 make format             # apply Pint and Prettier
 make build              # production frontend build
 ```

@@ -65,8 +65,9 @@ show as `in_progress` forever ("honest data"; visible as a gap in HR view).
 Frontend (`components/attendance/today-card.tsx`) renders:
 
 - `onLeave` → info message, no buttons
-- no checkIn → big "Check in" button
-- checkIn, no checkOut → "Checked in at HH:MM" + "Check out" button
+- otherwise a log grid: check-in, check-out, and work duration (`HH:MM`)
+- no checkIn → "Ready to start the day?" + "Check in" button
+- checkIn, no checkOut → "Check out" button
 - checkIn + checkOut → "Checked out at HH:MM" (done for today)
 
 ## 6. Month calendar
@@ -95,8 +96,20 @@ Payload:
 
 The shared `components/attendance/calendar-grid.tsx` renders a Monday-first
 grid (weekday/month names via `Intl` with the active locale), prev/next
-month links (`?month=`), a color legend, and the today ring. It is reused
-by the self page and the HR team view.
+month links (`?month=`), a color legend with per-status counts, and the today
+ring. It is reused by the self page and the HR team view.
+
+### Self page composition
+
+`GET /attendance` also receives `history` — the current user's paginated
+attendance rows — and composes as a main zone plus a context rail:
+
+- main (8/12 at `xl`): month calendar + attendance history
+- rail (4/12 at `xl`): today card, leave request form, own leave requests
+
+`components/attendance/attendance-history.tsx` renders the history table
+(date, check-in, check-out, computed duration, pagination) and is shared by
+the self page and the HR team view.
 
 ## 7. HR team view (`attendance/others/page.tsx`)
 
@@ -104,8 +117,9 @@ by the self page and the HR team view.
 
 - User picker (all users; selecting navigates via Wayfinder action)
 - Selected user's month calendar (same `calendar()` builder)
-- Paginated attendance history (`latest('date')`, 10/page, mapped to
-  `{ date, checkIn, checkOut }`; open check-outs highlighted "No check-out")
+- Paginated attendance history via the shared `AttendanceHistory` table
+  (`latest('date')`, 10/page, `{ date, checkIn, checkOut }` plus computed
+  duration; open check-outs highlighted "No check-out")
 - The user's leave requests with status badges
 
 HR reaches it from the Attendance page ("Team attendance" button) and the

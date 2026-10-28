@@ -22,6 +22,7 @@ class AttendanceController extends Controller
         return Inertia::render('attendance/page', [
             'today' => $this->todayState($user),
             'calendar' => $this->calendar($user, $request->query('month')),
+            'history' => $this->history($user),
             'leaves' => $this->leavesPayload($user->leaveRequests()->with('reviewer')->latest('start_date')->get()),
         ]);
     }
@@ -68,7 +69,21 @@ class AttendanceController extends Controller
 
     public function others(Request $request, User $user): Response
     {
-        $history = $user->attendances()
+        return Inertia::render('attendance/others/page', [
+            'users' => User::orderBy('name')->get(['id', 'name', 'email']),
+            'selectedUser' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email],
+            'calendar' => $this->calendar($user, $request->query('month')),
+            'history' => $this->history($user),
+            'leaves' => $this->leavesPayload($user->leaveRequests()->with('reviewer')->latest('start_date')->get()),
+        ]);
+    }
+
+    /**
+     * Paginated attendance history for one user.
+     */
+    private function history(User $user)
+    {
+        return $user->attendances()
             ->latest('date')
             ->paginate(10)
             ->withQueryString()
@@ -78,14 +93,6 @@ class AttendanceController extends Controller
                 'checkIn' => $attendance->check_in_at->format('H:i'),
                 'checkOut' => $attendance->check_out_at?->format('H:i'),
             ]);
-
-        return Inertia::render('attendance/others/page', [
-            'users' => User::orderBy('name')->get(['id', 'name', 'email']),
-            'selectedUser' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email],
-            'calendar' => $this->calendar($user, $request->query('month')),
-            'history' => $history,
-            'leaves' => $this->leavesPayload($user->leaveRequests()->with('reviewer')->latest('start_date')->get()),
-        ]);
     }
 
     /**

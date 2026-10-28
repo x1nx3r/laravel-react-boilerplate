@@ -8,6 +8,7 @@ use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class UserManagementTest extends TestCase
@@ -31,6 +32,21 @@ class UserManagementTest extends TestCase
         $actor = $this->userWithRole(Rbac::ROLE_SUPERADMIN);
 
         $this->actingAs($actor)->get(route('admin.users.index'))->assertOk();
+    }
+
+    public function test_users_index_returns_summary_stats(): void
+    {
+        $actor = $this->userWithRole(Rbac::ROLE_SUPERADMIN);
+
+        $this->actingAs($actor)
+            ->get(route('admin.users.index'))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('admin/users/page')
+                ->where('stats.total', User::count())
+                ->where('stats.active', User::where('status', 'active')->where('is_active', true)->count())
+                ->where('stats.pending', User::where('status', 'pending')->count())
+            );
     }
 
     public function test_hr_can_view_users_index(): void

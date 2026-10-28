@@ -1,7 +1,8 @@
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent } from '@/components/ui/card';
+import PageHeader from '@/components/common/page-header';
 import AppLayout from '@/layouts/app-layout';
+import { UserFormGuide } from '../components/user-form-guide';
 import { UserForm } from '../user-form';
 
 interface CreateProps {
@@ -20,13 +21,19 @@ export default function Create({ roles }: CreateProps) {
         >
             <Head title={t('users.create')} />
 
-            <h1 className="text-3xl tracking-tight">{t('users.create')}</h1>
+            <div className="w-full space-y-6">
+                <PageHeader title={t('users.create')} />
 
-            <Card>
-                <CardContent className="pt-6">
-                    <UserForm roles={roles} />
-                </CardContent>
-            </Card>
+                <div className="grid gap-6 xl:grid-cols-12">
+                    <div className="xl:col-span-8">
+                        <UserForm roles={roles} />
+                    </div>
+
+                    <aside className="xl:col-span-4">
+                        <UserFormGuide />
+                    </aside>
+                </div>
+            </div>
         </AppLayout>
     );
 }
