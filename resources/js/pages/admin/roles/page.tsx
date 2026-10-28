@@ -111,7 +111,7 @@ function RoleFormDialog({
         };
 
         if (isEdit && role) {
-            put(RoleController.update({ role: String(role.id) }).url, options);
+            put(RoleController.update({ role: role.id }).url, options);
         } else {
             post(RoleController.store().url, options);
         }
@@ -252,7 +252,7 @@ export default function RolesIndex({
     const confirmDelete = () => {
         if (roleToDelete) {
             router.delete(
-                RoleController.destroy({ role: String(roleToDelete.id) }).url,
+                RoleController.destroy({ role: roleToDelete.id }).url,
                 {
                     onSuccess: () => setRoleToDelete(null),
                 },

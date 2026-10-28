@@ -19,10 +19,10 @@ export default function AuthSplitLayout({
                     <AppLogoIcon className="size-8 fill-current text-sidebar-primary" />
                     {name}
                 </Link>
-                <p className="text-sidebar-muted max-w-sm text-sm leading-7">
+                <p className="max-w-sm text-sm leading-7 text-sidebar-muted">
                     Focused operations for people, attendance, and approvals.
                 </p>
-                <span className="text-sidebar-muted text-xs">
+                <span className="text-xs text-sidebar-muted">
                     {new Date().getFullYear()}
                 </span>
             </aside>

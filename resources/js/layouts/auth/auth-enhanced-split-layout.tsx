@@ -28,13 +28,13 @@ export default function AuthEnhancedSplitLayout({
                     <h1 className="text-4xl font-semibold tracking-tight">
                         People, attendance, and approvals in one place.
                     </h1>
-                    <p className="text-sidebar-muted mt-5 text-sm leading-7">
+                    <p className="mt-5 text-sm leading-7 text-sidebar-muted">
                         A focused workspace for the people who keep the
                         organization running.
                     </p>
                 </div>
 
-                <div className="text-sidebar-muted relative z-10 border-t border-sidebar-border pt-6 text-xs">
+                <div className="relative z-10 border-t border-sidebar-border pt-6 text-xs text-sidebar-muted">
                     Internal operations · {new Date().getFullYear()}
                 </div>
             </aside>
