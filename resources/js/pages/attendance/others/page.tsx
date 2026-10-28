@@ -1,10 +1,9 @@
-import { Head, router, usePage } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AttendanceController from '@/actions/App/Http/Controllers/Attendance/AttendanceController';
 import CalendarGrid from '@/components/attendance/calendar-grid';
 import LeavesTable from '@/components/attendance/leaves-table';
 import { Pagination } from '@/components/common/pagination';
-import StatusMessage from '@/components/common/status-message';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
     Select,
@@ -47,7 +46,6 @@ export default function AttendanceOthers({
     leaves,
 }: AttendanceOthersProps) {
     const { t } = useTranslation();
-    const { flash } = usePage().props;
 
     const selectUser = (userId: string) => {
         router.get(
@@ -69,21 +67,6 @@ export default function AttendanceOthers({
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('attendance.team.title')} />
             <div className="space-y-6">
-                {flash.success && (
-                    <StatusMessage
-                        message={flash.success}
-                        type="success"
-                        autoHide
-                    />
-                )}
-                {flash.error && (
-                    <StatusMessage
-                        message={flash.error}
-                        type="error"
-                        autoHide
-                    />
-                )}
-
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <h1 className="text-3xl font-semibold tracking-tight">

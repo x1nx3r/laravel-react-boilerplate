@@ -7,6 +7,7 @@
  * - auth-simple-layout: Minimalist centered card design
  * - auth-card-layout: Card-based with muted background
  */
+import FlashToaster from '@/components/common/flash-toaster';
 import AuthLayoutTemplate from '@/layouts/auth/auth-enhanced-split-layout';
 
 export default function AuthLayout({
@@ -22,6 +23,7 @@ export default function AuthLayout({
     return (
         <AuthLayoutTemplate title={title} description={description} {...props}>
             {children}
+            <FlashToaster />
         </AuthLayoutTemplate>
     );
 }

@@ -1,9 +1,8 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AttendanceController from '@/actions/App/Http/Controllers/Attendance/AttendanceController';
 import LeavesSection from '@/components/attendance/leaves-section';
 import Heading from '@/components/common/heading';
-import StatusMessage from '@/components/common/status-message';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem, LeaveRequestPayload } from '@/types';
 
@@ -13,7 +12,6 @@ interface LeaveIndexProps {
 
 export default function LeaveIndex({ leaves }: LeaveIndexProps) {
     const { t } = useTranslation();
-    const { flash } = usePage().props;
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -27,21 +25,6 @@ export default function LeaveIndex({ leaves }: LeaveIndexProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('leaves.title')} />
             <div className="space-y-6">
-                {flash.success && (
-                    <StatusMessage
-                        message={flash.success}
-                        type="success"
-                        autoHide
-                    />
-                )}
-                {flash.error && (
-                    <StatusMessage
-                        message={flash.error}
-                        type="error"
-                        autoHide
-                    />
-                )}
-
                 <Heading
                     variant="small"
                     title={t('leaves.title')}

@@ -1,9 +1,8 @@
-import { Head, router, usePage } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LeaveRequestController from '@/actions/App/Http/Controllers/Attendance/LeaveRequestController';
 import Heading from '@/components/common/heading';
-import StatusMessage from '@/components/common/status-message';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -41,7 +40,6 @@ interface LeaveReviewProps {
 
 export default function LeaveReview({ pending }: LeaveReviewProps) {
     const { t } = useTranslation();
-    const { flash } = usePage().props;
     const [rejecting, setRejecting] = useState<LeaveRequestPayload | null>(
         null,
     );
@@ -82,21 +80,6 @@ export default function LeaveReview({ pending }: LeaveReviewProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={t('leaves.review.title')} />
             <div className="space-y-6">
-                {flash.success && (
-                    <StatusMessage
-                        message={flash.success}
-                        type="success"
-                        autoHide
-                    />
-                )}
-                {flash.error && (
-                    <StatusMessage
-                        message={flash.error}
-                        type="error"
-                        autoHide
-                    />
-                )}
-
                 <Heading
                     variant="small"
                     title={t('leaves.review.title')}

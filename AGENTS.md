@@ -58,6 +58,7 @@ boilerplate behind.
 | RBAC | `app/Support/Rbac.php`, policies under `app/Policies` |
 | Shared Inertia state | `app/Http/Middleware/HandleInertiaRequests.php` |
 | Pages and layouts | `resources/js/pages`, `resources/js/layouts` |
+| UI components | `resources/js/components/ui`, `docs/adr/0008-one-ui-primitive-layer.md` |
 | Navigation and permissions | `resources/js/config/navigation.ts` |
 | Localization | `lang/`, `resources/js/i18n/locales/` |
 | Tests | `tests/Feature`, `tests/Unit` |
@@ -65,6 +66,18 @@ boilerplate behind.
 
 Wayfinder files under `resources/js/{actions,routes,wayfinder}` are generated.
 Do not edit them by hand. Vite regenerates them during dev/build.
+
+## UI components
+
+The UI layer is shadcn/ui on the `radix-ui` package.
+
+- Build on the primitives in `resources/js/components/ui`.
+- Add a primitive with `npx shadcn add <name>`. Do not hand-roll one.
+- Do not add a second component library.
+- Put shared app behavior in `resources/js/components/common`.
+- Send backend flash messages to the global `FlashToaster`.
+
+Reasons live in `docs/adr/0008-one-ui-primitive-layer.md`.
 
 ## Environment and commands
 

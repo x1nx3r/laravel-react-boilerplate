@@ -7,7 +7,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import RegistrationSettingController from '@/actions/App/Http/Controllers/Admin/RegistrationSettingController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';
 import { Pagination } from '@/components/common/pagination';
-import StatusMessage from '@/components/common/status-message';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -20,7 +19,6 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -30,6 +28,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
 import {
     Table,
     TableBody,
@@ -64,7 +63,7 @@ export default function UsersIndex({
     filters,
 }: UsersIndexProps) {
     const { t } = useTranslation();
-    const { auth, flash } = usePage().props;
+    const { auth } = usePage().props;
     const [search, setSearch] = useState(filters.search ?? '');
     const [role, setRole] = useState(filters.role ?? 'all');
     const [approvalStatus, setApprovalStatus] = useState(
@@ -152,28 +151,13 @@ export default function UsersIndex({
             <Head title={t('users.title')} />
 
             <div className="space-y-4">
-                {flash.success && (
-                    <StatusMessage
-                        message={flash.success}
-                        type="success"
-                        autoHide
-                    />
-                )}
-                {flash.error && (
-                    <StatusMessage
-                        message={flash.error}
-                        type="error"
-                        autoHide
-                    />
-                )}
-
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <h1 className="text-3xl font-semibold tracking-tight">
                         {t('users.title')}
                     </h1>
                     <div className="flex flex-wrap items-center gap-3">
                         <div className="flex items-center gap-2 rounded-md border p-2">
-                            <Checkbox
+                            <Switch
                                 id="require-approval"
                                 checked={requireApproval}
                                 onCheckedChange={(checked) =>

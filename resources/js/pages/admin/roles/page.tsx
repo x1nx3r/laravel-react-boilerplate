@@ -1,4 +1,4 @@
-import { Head, router, useForm, usePage } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import {
     Loader2,
     Pencil,
@@ -14,7 +14,6 @@ import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
 import { Pagination } from '@/components/common/pagination';
-import StatusMessage from '@/components/common/status-message';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -238,7 +237,6 @@ export default function RolesIndex({
         null,
     );
     const { t } = useTranslation();
-    const { flash } = usePage().props;
 
     const handleSearch: FormEventHandler = (e) => {
         e.preventDefault();
@@ -272,21 +270,6 @@ export default function RolesIndex({
             <Head title={t('roles.title')} />
 
             <div className="space-y-4">
-                {flash.success && (
-                    <StatusMessage
-                        message={flash.success}
-                        type="success"
-                        autoHide
-                    />
-                )}
-                {flash.error && (
-                    <StatusMessage
-                        message={flash.error}
-                        type="error"
-                        autoHide
-                    />
-                )}
-
                 <div className="flex items-center justify-between">
                     <h1 className="text-3xl font-semibold tracking-tight">
                         {t('roles.title')}

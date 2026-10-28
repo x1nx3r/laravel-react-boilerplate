@@ -33,8 +33,9 @@ Browser ── GET /attendance ──► Laravel router
   live in `resources/js/types/global.d.ts`.
 - **Mutations** (POST/PUT/DELETE) redirect back (`back()->with('success'|'error', …)`);
   Inertia follows the redirect and re-fetches page props, so pages update
-  without manual state juggling. Flash messages are rendered by the
-  `StatusMessage` component.
+  without manual state juggling. Flash messages go to the global toaster
+  (`FlashToaster` in `resources/js/components/common/flash-toaster.tsx`).
+  `StatusMessage` stays for page-local status and field errors.
 
 ## 2. URL generation: Wayfinder
 
