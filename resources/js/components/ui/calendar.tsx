@@ -46,7 +46,7 @@ function Calendar({
         years_dropdown: "relative inline-flex",
         dropdown:
           "absolute inset-0 cursor-pointer appearance-none opacity-0",
-        caption_label: "flex items-center gap-1 text-sm font-medium",
+        caption_label: "flex items-center gap-1 text-sm font-normal",
         month_grid: "mx-auto mt-4 border-collapse",
         weekdays: "flex",
         weekday:
@@ -57,7 +57,7 @@ function Calendar({
           "size-full rounded-md p-0 text-sm font-normal text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
         selected:
           "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground",
-        today: "[&>button]:font-semibold",
+        today: "[&>button]:font-normal",
         outside:
           "text-muted-foreground opacity-50 [&>button]:text-muted-foreground",
         disabled: "text-muted-foreground opacity-50 [&>button]:text-muted-foreground",

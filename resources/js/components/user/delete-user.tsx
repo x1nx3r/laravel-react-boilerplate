@@ -52,7 +52,7 @@ export default function DeleteUser() {
             />
             <div className="space-y-4 rounded-xl border border-destructive/20 bg-destructive/5 p-4">
                 <div className="relative space-y-0.5 text-destructive">
-                    <p className="font-medium">Warning</p>
+                    <p className="font-normal">Warning</p>
                     <p className="text-sm">
                         Please proceed with caution, this cannot be undone.
                     </p>

@@ -16,16 +16,14 @@ export default function AuthEnhancedSplitLayout({
                     <span className="flex size-11 items-center justify-center rounded-xl bg-sidebar-primary text-sidebar-primary-foreground">
                         <AppLogoIcon className="size-7 fill-current" />
                     </span>
-                    <span className="text-lg font-semibold tracking-tight">
-                        {name}
-                    </span>
+                    <span className="text-lg tracking-tight">{name}</span>
                 </div>
 
                 <div className="relative z-10 max-w-md">
-                    <p className="mb-4 text-xs font-semibold tracking-[0.18em] text-sidebar-primary uppercase">
+                    <p className="mb-4 text-xs font-normal tracking-[0.18em] text-sidebar-primary uppercase">
                         Operations workspace
                     </p>
-                    <h1 className="text-4xl font-semibold tracking-tight">
+                    <h1 className="text-4xl tracking-tight">
                         People, attendance, and approvals in one place.
                     </h1>
                     <p className="mt-5 text-sm leading-7 text-sidebar-muted">
@@ -45,13 +43,11 @@ export default function AuthEnhancedSplitLayout({
                         <span className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                             <AppLogoIcon className="size-6 fill-current" />
                         </span>
-                        <span className="text-lg font-semibold">{name}</span>
+                        <span className="text-lg">{name}</span>
                     </div>
 
                     <div className="mb-8">
-                        <h2 className="text-3xl font-semibold tracking-tight">
-                            {title}
-                        </h2>
+                        <h2 className="text-3xl tracking-tight">{title}</h2>
                         {description && (
                             <p className="mt-2 text-sm text-muted-foreground">
                                 {description}

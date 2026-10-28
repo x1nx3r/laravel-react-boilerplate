@@ -125,7 +125,7 @@ export default function LeaveReview({ pending }: LeaveReviewProps) {
                                     pending.map((leave) => (
                                         <TableRow key={leave.id}>
                                             <TableCell>
-                                                <div className="font-medium">
+                                                <div className="font-normal">
                                                     {leave.userName}
                                                 </div>
                                             </TableCell>

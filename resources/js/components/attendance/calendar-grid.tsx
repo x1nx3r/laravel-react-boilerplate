@@ -88,7 +88,7 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
                 </div>
             </CardHeader>
             <CardContent className="space-y-3">
-                <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium text-muted-foreground">
+                <div className="grid grid-cols-7 gap-1 text-center text-xs font-normal text-muted-foreground">
                     {weekdayLabels(i18n.language).map((label) => (
                         <div key={label} className="py-1">
                             {label}

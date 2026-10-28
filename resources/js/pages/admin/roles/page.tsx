@@ -271,7 +271,7 @@ export default function RolesIndex({
 
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-3xl font-semibold tracking-tight">
+                    <h1 className="text-3xl tracking-tight">
                         {t('roles.title')}
                     </h1>
                     <Button onClick={() => setIsCreating(true)}>
@@ -346,7 +346,7 @@ export default function RolesIndex({
                             ) : (
                                 roles.data.map((role) => (
                                     <TableRow key={role.id}>
-                                        <TableCell className="align-top font-medium">
+                                        <TableCell className="align-top font-normal">
                                             <div className="mt-1 flex items-center gap-2">
                                                 <ShieldCheck className="h-4 w-4 shrink-0 text-primary" />
                                                 {role.name}

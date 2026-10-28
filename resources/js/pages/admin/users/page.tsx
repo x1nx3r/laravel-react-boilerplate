@@ -152,7 +152,7 @@ export default function UsersIndex({
 
             <div className="space-y-4">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                    <h1 className="text-3xl font-semibold tracking-tight">
+                    <h1 className="text-3xl tracking-tight">
                         {t('users.title')}
                     </h1>
                     <div className="flex flex-wrap items-center gap-3">
@@ -326,7 +326,7 @@ export default function UsersIndex({
                                 users.data.map((user) => (
                                     <TableRow key={user.id}>
                                         <TableCell>
-                                            <div className="font-medium">
+                                            <div className="font-normal">
                                                 {user.name}
                                             </div>
                                             <div className="text-xs text-muted-foreground">

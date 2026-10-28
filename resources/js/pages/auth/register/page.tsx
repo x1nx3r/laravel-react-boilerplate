@@ -65,7 +65,7 @@ export default function Register() {
                     >
                         <AppLogoIcon className="size-9 fill-current text-foreground" />
                     </Link>
-                    <h1 className="text-3xl font-semibold tracking-tight">
+                    <h1 className="text-3xl tracking-tight">
                         {t('auth.register.title')}
                     </h1>
                     <p className="text-sm text-muted-foreground">
@@ -566,10 +566,7 @@ export default function Register() {
 
                 <p className="text-center text-sm text-muted-foreground">
                     {t('auth.register.have_account')}{' '}
-                    <Link
-                        href="/login"
-                        className="font-medium text-foreground underline"
-                    >
+                    <Link href="/login" className="text-foreground underline">
                         {t('auth.register.login_link')}
                     </Link>
                 </p>

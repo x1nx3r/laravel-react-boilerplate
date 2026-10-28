@@ -116,11 +116,7 @@ export default function Login({ status, canRegister }: Props) {
                             {canRegister && (
                                 <p className="text-center text-sm text-muted-foreground">
                                     {t('auth.login.no_account')}{' '}
-                                    <TextLink
-                                        href="/register"
-                                        className="font-medium"
-                                        tabIndex={6}
-                                    >
+                                    <TextLink href="/register" tabIndex={6}>
                                         {t('auth.login.register')}
                                     </TextLink>
                                 </p>

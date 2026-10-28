@@ -20,9 +20,7 @@ export default function Create({ roles }: CreateProps) {
         >
             <Head title={t('users.create')} />
 
-            <h1 className="text-3xl font-semibold tracking-tight">
-                {t('users.create')}
-            </h1>
+            <h1 className="text-3xl tracking-tight">{t('users.create')}</h1>
 
             <Card>
                 <CardContent className="pt-6">

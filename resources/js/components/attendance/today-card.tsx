@@ -79,7 +79,7 @@ export default function TodayCard({ today }: { today: TodayState }) {
                                         {t('attendance.today.check_out')}
                                     </Button>
                                 ) : (
-                                    <p className="rounded-md bg-success/5 p-3 text-sm font-medium text-success">
+                                    <p className="rounded-md bg-success/5 p-3 text-sm font-normal text-success">
                                         {t('attendance.today.checked_out_at', {
                                             time: today.checkOut,
                                         })}

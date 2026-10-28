@@ -36,9 +36,7 @@ export default function ErrorPage({ status }: { status: number }) {
                     <Icon className="h-16 w-16 text-primary" />
                 </div>
 
-                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                    {title}
-                </h1>
+                <h1 className="text-3xl tracking-tight sm:text-4xl">{title}</h1>
 
                 <p className="text-lg text-muted-foreground">{description}</p>
 

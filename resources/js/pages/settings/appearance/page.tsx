@@ -63,7 +63,7 @@ export default function Appearance() {
                                         onClick={() => setLocale(code)}
                                         className={
                                             locale === code
-                                                ? 'rounded-md bg-card px-3.5 py-1.5 text-sm font-medium text-foreground shadow-xs'
+                                                ? 'rounded-md bg-card px-3.5 py-1.5 text-sm font-normal text-foreground shadow-xs'
                                                 : 'rounded-md px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-background hover:text-foreground'
                                         }
                                     >

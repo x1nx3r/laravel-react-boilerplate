@@ -12,10 +12,7 @@ export default function AuthSplitLayout({
     return (
         <div className="relative grid min-h-dvh flex-col bg-background lg:grid-cols-2">
             <aside className="hidden flex-col justify-between bg-sidebar p-10 text-sidebar-foreground lg:flex">
-                <Link
-                    href="/"
-                    className="flex items-center gap-2 text-lg font-semibold"
-                >
+                <Link href="/" className="flex items-center gap-2 text-lg">
                     <AppLogoIcon className="size-8 fill-current text-sidebar-primary" />
                     {name}
                 </Link>
@@ -33,12 +30,10 @@ export default function AuthSplitLayout({
                         className="flex items-center gap-2 lg:hidden"
                     >
                         <AppLogoIcon className="size-9 fill-current text-primary" />
-                        <span className="font-semibold">{name}</span>
+                        <span>{name}</span>
                     </Link>
                     <div className="space-y-2">
-                        <h1 className="text-3xl font-semibold tracking-tight">
-                            {title}
-                        </h1>
+                        <h1 className="text-3xl tracking-tight">{title}</h1>
                         <p className="text-sm text-muted-foreground">
                             {description}
                         </p>

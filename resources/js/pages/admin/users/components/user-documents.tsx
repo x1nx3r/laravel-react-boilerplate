@@ -86,9 +86,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
             <div className="rounded-xl border bg-card text-card-foreground shadow">
                 <div className="p-6">
                     <div className="mb-4 flex flex-col justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center sm:gap-0">
-                        <h3 className="text-lg font-semibold">
-                            Supporting documents
-                        </h3>
+                        <h3 className="text-lg">Supporting documents</h3>
                         <Button
                             onClick={() => setIsUploadModalOpen(true)}
                             size="sm"
@@ -138,7 +136,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                         <div className="flex flex-1 flex-col justify-between gap-3 p-3">
                                             <div>
                                                 <p
-                                                    className="line-clamp-1 text-sm font-medium"
+                                                    className="line-clamp-1 text-sm font-normal"
                                                     title={doc.original_name}
                                                 >
                                                     {doc.original_name}
@@ -152,7 +150,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                                                             <span>•</span>
                                                             <Badge
                                                                 variant="secondary"
-                                                                className="px-1.5 py-0 text-[10px] font-semibold uppercase"
+                                                                className="px-1.5 py-0 text-[10px] font-normal uppercase"
                                                             >
                                                                 {doc.category}
                                                             </Badge>
@@ -203,7 +201,7 @@ export function UserDocuments({ user }: UserDocumentsProps) {
                     ) : (
                         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-12 text-muted-foreground">
                             <FileText className="mb-4 h-12 w-12 text-muted-foreground/50" />
-                            <p className="text-sm font-medium">
+                            <p className="text-sm font-normal">
                                 No documents yet.
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">

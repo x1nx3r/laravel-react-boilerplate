@@ -71,7 +71,7 @@ export function Pagination({ meta }: PaginationProps) {
                             </span>
                         )}
                     </Button>
-                    <div className="w-[56px] text-center text-xs font-medium text-muted-foreground">
+                    <div className="w-[56px] text-center text-xs font-normal text-muted-foreground tabular-nums">
                         {meta.current_page}/{meta.last_page}
                     </div>
                     <Button
