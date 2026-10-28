@@ -40,3 +40,6 @@ dump.rdb
 *.sqlite
 *.sqlite-journal
 laravel_boilerplate
+
+# Manus session state (Postgres data, local runtime)
+/.manus/
