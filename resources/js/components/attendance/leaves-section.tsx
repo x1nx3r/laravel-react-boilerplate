@@ -91,7 +91,9 @@ export default function LeavesSection({
                                 onChange={(e) =>
                                     setData('reason', e.target.value)
                                 }
-                                placeholder={t('leaves.form.reason_placeholder')}
+                                placeholder={t(
+                                    'leaves.form.reason_placeholder',
+                                )}
                                 rows={3}
                                 required
                             />

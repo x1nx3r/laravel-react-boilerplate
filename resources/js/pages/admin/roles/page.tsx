@@ -288,7 +288,7 @@ export default function RolesIndex({
                 )}
 
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold tracking-tight">
+                    <h1 className="text-3xl font-semibold tracking-tight">
                         {t('roles.title')}
                     </h1>
                     <Button onClick={() => setIsCreating(true)}>

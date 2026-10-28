@@ -168,7 +168,7 @@ export default function UsersIndex({
                 )}
 
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                    <h1 className="text-2xl font-bold tracking-tight">
+                    <h1 className="text-3xl font-semibold tracking-tight">
                         {t('users.title')}
                     </h1>
                     <div className="flex flex-wrap items-center gap-3">
@@ -381,13 +381,13 @@ export default function UsersIndex({
                                         <TableCell>
                                             <div className="flex flex-wrap items-center gap-1">
                                                 {user.status === 'pending' ? (
-                                                    <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-950 dark:text-amber-300">
+                                                    <Badge variant="warning">
                                                         {t(
                                                             'users.badges.pending',
                                                         )}
                                                     </Badge>
                                                 ) : user.is_active ? (
-                                                    <Badge className="bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-950 dark:text-green-300">
+                                                    <Badge variant="success">
                                                         {t(
                                                             'users.badges.active',
                                                         )}

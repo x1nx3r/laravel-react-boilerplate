@@ -95,7 +95,7 @@ export default function Login({ status, canRegister }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+                                className="mt-4 w-full"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
@@ -131,7 +131,7 @@ export default function Login({ status, canRegister }: Props) {
             </Form>
 
             <div className="mt-8 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-muted-foreground">
                     © {new Date().getFullYear()} · All rights reserved.
                 </p>
             </div>

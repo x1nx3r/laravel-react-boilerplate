@@ -21,7 +21,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
             <Head title={t('auth.forgot.title')} />
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-orange-600">
+                <div className="mb-4 text-center text-sm font-medium text-warning">
                     {status}
                 </div>
             )}

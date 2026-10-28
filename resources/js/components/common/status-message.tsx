@@ -35,22 +35,19 @@ export default function StatusMessage({
     const variants = {
         error: {
             container:
-                'border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-200',
+                'border-destructive/20 bg-destructive/5 text-destructive',
             icon: XCircle,
         },
         success: {
-            container:
-                'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-200',
+            container: 'border-success/20 bg-success/5 text-success',
             icon: CheckCircle,
         },
         warning: {
-            container:
-                'border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-200',
+            container: 'border-warning/20 bg-warning/5 text-warning',
             icon: AlertCircle,
         },
         info: {
-            container:
-                'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200',
+            container: 'border-info/20 bg-info/5 text-info',
             icon: Info,
         },
     };

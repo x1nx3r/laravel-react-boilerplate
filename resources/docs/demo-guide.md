@@ -19,11 +19,11 @@ Make sure `.env` contains `APP_TIMEZONE=Asia/Jakarta`, then run
 
 ## 2. Accounts (password for all: `password`)
 
-| Account | Email | Role | Login outcome |
-|---------|-------|------|---------------|
-| Super Admin | superadmin@example.com | superadmin | Full access incl. role management |
-| HR Staff | hr@example.com | hr | Employee CRUD + attendance/leave review + dashboard |
-| Regular User | user@example.com | user | Own attendance + leaves only |
+| Account      | Email                  | Role       | Login outcome                                       |
+| ------------ | ---------------------- | ---------- | --------------------------------------------------- |
+| Super Admin  | superadmin@example.com | superadmin | Full access incl. role management                   |
+| HR Staff     | hr@example.com         | hr         | Employee CRUD + attendance/leave review + dashboard |
+| Regular User | user@example.com       | user       | Own attendance + leaves only                        |
 
 Seeded data highlights:
 
@@ -43,7 +43,7 @@ Seeded data highlights:
 1. Sidebar → **Administration → Employees** (`/admin/users`).
 2. **View**: show the list — search, filters (role, approval, state,
    department, contract), status badges, pagination.
-3. **Create**: *Create employee* — fill account section, employee data
+3. **Create**: _Create employee_ — fill account section, employee data
    (NIK, gender, birth date, **Pendidikan Terakhir** select, education,
    contract), optionally upload a document → save → flash "Employee
    created." and the list shows the new row.
@@ -55,9 +55,9 @@ Seeded data highlights:
 
 1. Sidebar → **Dashboard** (`/`).
 2. Show the total-employee card and the three bar charts:
-   - **By gender** — Laki-laki vs Perempuan counts,
-   - **By last education** — SMA…S3 distribution,
-   - **By age** — age-group buckets.
+    - **By gender** — Laki-laki vs Perempuan counts,
+    - **By last education** — SMA…S3 distribution,
+    - **By age** — age-group buckets.
 3. Switch language in the user menu (id ↔ en) — every label flips, charts
    included. Dark mode also restyles the charts.
 
@@ -65,11 +65,11 @@ Seeded data highlights:
 
 1. Sidebar → **Attendance** — today card shows the big **Check in** button.
 2. Click Check in → card flips to "Checked in at HH:MM", today's calendar
-   cell turns amber (*in progress*).
-3. Click **Check out** → cell turns green (*present*).
+   cell turns amber (_in progress_).
+3. Click **Check out** → cell turns green (_present_).
 4. Browse previous months with the chevrons — history, weekend shading,
    blue `leave` days from the approved request, red `absent` gaps.
-5. Submit a leave request for next week in the *Request leave* card
+5. Submit a leave request for next week in the _Request leave_ card
    (it must not overlap the existing pending one — that's the validation).
 
 ### D. Bonus: HR review (login as HR)

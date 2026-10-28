@@ -93,74 +93,68 @@ export default function Dashboard({ employeeStats }: DashboardProps) {
                     description={t('dashboard.stats.description')}
                 />
 
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardDescription className="flex items-center gap-2">
-                                    <Users className="size-4 text-primary" />
-                                    {t('dashboard.stats.total_employees')}
-                                </CardDescription>
-                                <CardTitle className="text-4xl tabular-nums">
-                                    {employeeStats.total}
-                                </CardTitle>
-                            </CardHeader>
-                        </Card>
+                <Card>
+                    <CardHeader className="pb-2">
+                        <CardDescription className="flex items-center gap-2">
+                            <Users className="size-4 text-primary" />
+                            {t('dashboard.stats.total_employees')}
+                        </CardDescription>
+                        <CardTitle className="text-4xl tabular-nums">
+                            {employeeStats.total}
+                        </CardTitle>
+                    </CardHeader>
+                </Card>
 
-                        <div className="grid gap-6 lg:grid-cols-3">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle className="text-base">
-                                        {t('dashboard.stats.gender_title')}
-                                    </CardTitle>
-                                    <CardDescription>
-                                        {t('dashboard.stats.gender_description')}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <StatsBarChart
-                                        data={employeeStats.gender.map(
-                                            (d) => ({
-                                                ...d,
-                                                label: t(
-                                                    `dashboard.stats.gender.${d.label}`,
-                                                ),
-                                            }),
-                                        )}
-                                    />
-                                </CardContent>
-                            </Card>
+                <div className="grid gap-6 lg:grid-cols-3">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-base">
+                                {t('dashboard.stats.gender_title')}
+                            </CardTitle>
+                            <CardDescription>
+                                {t('dashboard.stats.gender_description')}
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <StatsBarChart
+                                data={employeeStats.gender.map((d) => ({
+                                    ...d,
+                                    label: t(
+                                        `dashboard.stats.gender.${d.label}`,
+                                    ),
+                                }))}
+                            />
+                        </CardContent>
+                    </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle className="text-base">
-                                        {t('dashboard.stats.education_title')}
-                                    </CardTitle>
-                                    <CardDescription>
-                                        {t(
-                                            'dashboard.stats.education_description',
-                                        )}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <StatsBarChart
-                                        data={employeeStats.education}
-                                    />
-                                </CardContent>
-                            </Card>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-base">
+                                {t('dashboard.stats.education_title')}
+                            </CardTitle>
+                            <CardDescription>
+                                {t('dashboard.stats.education_description')}
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <StatsBarChart data={employeeStats.education} />
+                        </CardContent>
+                    </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle className="text-base">
-                                        {t('dashboard.stats.age_title')}
-                                    </CardTitle>
-                                    <CardDescription>
-                                        {t('dashboard.stats.age_description')}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <StatsBarChart data={employeeStats.ages} />
-                                </CardContent>
-                            </Card>
-                        </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-base">
+                                {t('dashboard.stats.age_title')}
+                            </CardTitle>
+                            <CardDescription>
+                                {t('dashboard.stats.age_description')}
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <StatsBarChart data={employeeStats.ages} />
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </AppLayout>
     );

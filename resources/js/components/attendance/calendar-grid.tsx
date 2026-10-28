@@ -7,21 +7,19 @@ import { cn } from '@/lib/utils';
 import type { AttendanceDayStatus, CalendarPayload } from '@/types';
 
 const cellStyles: Record<AttendanceDayStatus, string> = {
-    present:
-        'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
-    in_progress:
-        'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
-    leave: 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
+    present: 'bg-success/10 text-success',
+    in_progress: 'bg-warning/10 text-warning',
+    leave: 'bg-info/10 text-info',
     weekend: 'bg-muted/50 text-muted-foreground',
-    absent: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300',
+    absent: 'bg-destructive/10 text-destructive',
     upcoming: 'text-muted-foreground/60',
 };
 
 const legendItems: { status: AttendanceDayStatus; dot: string }[] = [
-    { status: 'present', dot: 'bg-green-500' },
-    { status: 'in_progress', dot: 'bg-amber-500' },
-    { status: 'leave', dot: 'bg-blue-500' },
-    { status: 'absent', dot: 'bg-red-400' },
+    { status: 'present', dot: 'bg-success' },
+    { status: 'in_progress', dot: 'bg-warning' },
+    { status: 'leave', dot: 'bg-info' },
+    { status: 'absent', dot: 'bg-destructive' },
     { status: 'weekend', dot: 'bg-muted-foreground/40' },
 ];
 
@@ -49,7 +47,8 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
 
     const daysInMonth = new Date(calendar.year, calendar.month, 0).getDate();
     // Monday-first offset of the 1st: Mon=0 ... Sun=6.
-    const leadingBlanks = (new Date(calendar.year, calendar.month - 1, 1).getDay() + 6) % 7;
+    const leadingBlanks =
+        (new Date(calendar.year, calendar.month - 1, 1).getDay() + 6) % 7;
 
     const cells: { key: string; day: number }[] = Array.from(
         { length: daysInMonth },
@@ -125,7 +124,10 @@ export default function CalendarGrid({ calendar, baseUrl }: CalendarGridProps) {
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 border-t pt-3 text-xs text-muted-foreground">
                     {legendItems.map(({ status, dot }) => (
-                        <span key={status} className="flex items-center gap-1.5">
+                        <span
+                            key={status}
+                            className="flex items-center gap-1.5"
+                        >
                             <span
                                 className={cn('size-2.5 rounded-full', dot)}
                             />

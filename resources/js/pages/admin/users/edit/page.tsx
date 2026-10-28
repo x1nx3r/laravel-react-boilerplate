@@ -23,7 +23,7 @@ export default function Edit({ user, roles }: EditProps) {
         >
             <Head title={`${t('users.edit_title')}: ${user.name}`} />
 
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="text-3xl font-semibold tracking-tight">
                 {t('users.edit_title')}
             </h1>
 

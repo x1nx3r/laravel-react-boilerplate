@@ -1,4 +1,9 @@
-import { CalendarDays, ClipboardCheck, LayoutGrid, ShieldCheck } from 'lucide-react';
+import {
+    CalendarDays,
+    ClipboardCheck,
+    LayoutGrid,
+    ShieldCheck,
+} from 'lucide-react';
 
 import RoleController from '@/actions/App/Http/Controllers/Admin/RoleController';
 import UserController from '@/actions/App/Http/Controllers/Admin/UserController';

@@ -42,7 +42,7 @@ export function UserMenuContent({ user }: Props) {
             <DropdownMenuGroup>
                 <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                        <Languages className="mr-2" />
+                        <Languages className="mr-2 size-4" />
                         {t('menu.language')}
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent>
@@ -50,8 +50,8 @@ export function UserMenuContent({ user }: Props) {
                             <Check
                                 className={
                                     locale === 'id'
-                                        ? 'mr-2 opacity-100'
-                                        : 'mr-2 opacity-0'
+                                        ? 'mr-2 size-4 opacity-100'
+                                        : 'mr-2 size-4 opacity-0'
                                 }
                             />
                             Bahasa Indonesia
@@ -75,7 +75,7 @@ export function UserMenuContent({ user }: Props) {
                         prefetch
                         onClick={cleanup}
                     >
-                        <Settings className="mr-2" />
+                        <Settings className="mr-2 size-4" />
                         {t('menu.settings')}
                     </Link>
                 </DropdownMenuItem>
@@ -89,7 +89,7 @@ export function UserMenuContent({ user }: Props) {
                     onClick={handleLogout}
                     data-test="logout-button"
                 >
-                    <LogOut className="mr-2" />
+                    <LogOut className="mr-2 size-4" />
                     {t('menu.logout')}
                 </Link>
             </DropdownMenuItem>

@@ -66,11 +66,11 @@ The "require registration approval" toggle is an HR-controlled setting
 `app/Support/Rbac.php` is the single source of truth. `DatabaseSeeder`
 derives the actual `Permission` / `Role` rows (spatie) from it.
 
-| Role       | Permissions                                              |
-|------------|----------------------------------------------------------|
+| Role       | Permissions                                                     |
+| ---------- | --------------------------------------------------------------- |
 | superadmin | `view_admin`, `manage_users`, `manage_roles`, `view_attendance` |
-| hr         | `view_admin`, `manage_users`, `view_attendance`          |
-| user       | (none)                                                   |
+| hr         | `view_admin`, `manage_users`, `view_attendance`                 |
+| user       | (none)                                                          |
 
 Permission semantics:
 
@@ -90,12 +90,12 @@ can log in.
 
 ## 6. Enforcement — four layers
 
-| Layer            | Where                                        | Example                                   |
-|------------------|----------------------------------------------|-------------------------------------------|
-| Route middleware | `routes/web.php` — `permission:view_admin`   | whole `/admin` group; `attendance/others`  |
-| Policies         | `app/Policies/*`, `$this->authorize()` in controllers | update/delete user, verify pending |
-| Controller logic | guard clauses before writes                  | cannot delete yourself; cannot edit a superadmin unless superadmin |
-| Frontend UI      | shared `auth.permissions`/`auth.roles` props | sidebar filtering; hiding actions/buttons  |
+| Layer            | Where                                                 | Example                                                            |
+| ---------------- | ----------------------------------------------------- | ------------------------------------------------------------------ |
+| Route middleware | `routes/web.php` — `permission:view_admin`            | whole `/admin` group; `attendance/others`                          |
+| Policies         | `app/Policies/*`, `$this->authorize()` in controllers | update/delete user, verify pending                                 |
+| Controller logic | guard clauses before writes                           | cannot delete yourself; cannot edit a superadmin unless superadmin |
+| Frontend UI      | shared `auth.permissions`/`auth.roles` props          | sidebar filtering; hiding actions/buttons                          |
 
 Frontend gating is UX only — the backend layers are the real security
 boundary. The shared props come from `HandleInertiaRequests`

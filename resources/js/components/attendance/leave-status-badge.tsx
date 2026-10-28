@@ -4,11 +4,9 @@ import { cn } from '@/lib/utils';
 import type { LeaveStatus } from '@/types';
 
 const statusStyles: Record<LeaveStatus, string> = {
-    pending: 'bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-950 dark:text-amber-300',
-    approved:
-        'bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-950 dark:text-green-300',
-    rejected:
-        'bg-red-100 text-red-700 hover:bg-red-100 dark:bg-red-950 dark:text-red-300',
+    pending: 'bg-warning/10 text-warning hover:bg-warning/15',
+    approved: 'bg-success/10 text-success hover:bg-success/15',
+    rejected: 'bg-destructive/10 text-destructive hover:bg-destructive/15',
 };
 
 export default function LeaveStatusBadge({ status }: { status: LeaveStatus }) {

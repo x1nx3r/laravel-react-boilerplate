@@ -39,7 +39,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     }
 
     return (
-        <div className="px-4 py-6">
+        <div className="py-2">
             <Heading
                 title={t('settings.title')}
                 description={t('settings.description')}
@@ -58,7 +58,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                 variant="ghost"
                                 asChild
                                 className={cn('w-full justify-start', {
-                                    'bg-muted': isCurrentUrl(item.href),
+                                    'bg-accent text-accent-foreground':
+                                        isCurrentUrl(item.href),
                                 })}
                             >
                                 <Link href={item.href}>

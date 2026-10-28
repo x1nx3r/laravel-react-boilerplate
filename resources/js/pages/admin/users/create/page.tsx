@@ -20,7 +20,7 @@ export default function Create({ roles }: CreateProps) {
         >
             <Head title={t('users.create')} />
 
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="text-3xl font-semibold tracking-tight">
                 {t('users.create')}
             </h1>
 

@@ -16,8 +16,7 @@ export default function TodayCard({ today }: { today: TodayState }) {
     const { t } = useTranslation();
     const form = useForm({});
 
-    const submit = (url: string) =>
-        form.post(url, { preserveScroll: true });
+    const submit = (url: string) => form.post(url, { preserveScroll: true });
 
     return (
         <Card>
@@ -32,7 +31,7 @@ export default function TodayCard({ today }: { today: TodayState }) {
             </CardHeader>
             <CardContent className="space-y-4">
                 {today.onLeave ? (
-                    <p className="rounded-md bg-blue-50 p-3 text-sm text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                    <p className="rounded-md bg-info/5 p-3 text-sm text-info">
                         {t('attendance.today.on_leave')}
                     </p>
                 ) : (
@@ -80,7 +79,7 @@ export default function TodayCard({ today }: { today: TodayState }) {
                                         {t('attendance.today.check_out')}
                                     </Button>
                                 ) : (
-                                    <p className="rounded-md bg-green-50 p-3 text-sm font-medium text-green-700 dark:bg-green-950 dark:text-green-300">
+                                    <p className="rounded-md bg-success/5 p-3 text-sm font-medium text-success">
                                         {t('attendance.today.checked_out_at', {
                                             time: today.checkOut,
                                         })}
